@@ -29,7 +29,7 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?php echo base_url()?>/assets/demo/demo.css" rel="stylesheet" />
 </head>
-<body class="">
+<body class="layout layout-header-fixed">
   <div class="wrapper ">
   <div class="sidebar  " data-color="purple"  >
       <!--

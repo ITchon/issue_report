@@ -14,8 +14,7 @@ class Model extends CI_Model
      }
 
      function givemeid($para){
-        $sql ="SELECT * FROM sys_menus 
-        WHERE link='$para'  ";
+        $sql ="SELECT * FROM sys_menu_groups WHERE link='$para' ";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;
