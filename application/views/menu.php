@@ -11,7 +11,6 @@ Coded by Creative Tim
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()?>/assets/img/apple-icon.png">
@@ -31,7 +30,7 @@ The above copyright notice and this permission notice shall be included in all c
 </head>
 <body class="">
   <div class="wrapper ">
-  <div class="sidebar  " data-color="purple"  >
+  <div class="sidebar  " data-color="green"  >
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -101,7 +100,7 @@ The above copyright notice and this permission notice shall be included in all c
     </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top ">
+      <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:;">Dashboard</a>
