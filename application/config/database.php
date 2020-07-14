@@ -75,12 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'port' => '1433',
-	'hostname' => 'Driver={SQL Server};Server=192.168.161.207;Database=tbkkfa_dev;',
-	'username' => 'sa',
-	'password' => 'Te@m1nw',
-	'database' => 'webpost',
-	'dbdriver' => 'odbc',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'issue_report',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
