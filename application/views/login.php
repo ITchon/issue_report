@@ -1,73 +1,141 @@
+<!--
+=========================================================
+Material Kit - v2.0.7
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-kit
+Copyright 2020 Creative Tim (https://www.creative-tim.com/)
+
+Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="<?php echo base_url('') ?>assets/img/logo.jpg" type="image/icon type">
-    <title>Drawing Center </title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <meta name="description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
-    <meta property="og:url" content="http://demo.madebytilde.com/elephant">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="The fastest way to build Modern Admin APPS for any platform, browser, or device.">
-    <meta property="og:description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
-    <meta property="og:image" content="http://demo.madebytilde.com/elephant.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@madebytilde">
-    <meta name="twitter:creator" content="@madebytilde">
-    <meta name="twitter:title" content="The fastest way to build Modern Admin APPS for any platform, browser, or device.">
-    <meta name="twitter:description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
-    <meta name="twitter:image" content="http://demo.madebytilde.com/elephant.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
 
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#0288d1">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Material Kit by Creative Tim
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="<?php echo base_url().'assets/css/material-kit.css?v=2.0.7'?>" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="<?php echo base_url().'assets/demo/demo.css'?>" rel="stylesheet" />
+</head>
 
-    <link rel="stylesheet" href="<?php echo base_url().'assets/css/vendor.min.css'; ?>">
-    <link rel="stylesheet" href="<?php echo base_url().'assets/css/elephant.min.css'; ?>">
-    <link rel="stylesheet" href="<?php echo base_url().'assets/css/login-3.min.css';?>">
-  </head>
-  <body>
-    <div class="login">
-      <div class="login-body">
-        <a class="login-brand" href="index.html">
-         
-        </a>
-        <h3 class="login-heading">Sign in</h3>
-        <div class="login-form">  
-        
-          <form data-toggle="md-validator" action="<?php echo base_url()?>Login/chklogin" method="post">
-          <?php echo $this->session->flashdata("success"); ?>            
-            <div class="md-form-group md-label-floating">
-              <input class="md-form-control" type="text" name="username" spellcheck="false" autocomplete="off" data-msg-required="Please enter your username." required>
-              <label class="md-control-label">Username</label>
-            </div>
-            <div class="md-form-group md-label-floating">
-              <input class="md-form-control" type="password" name="password" autocomplete="off" minlength="4" data-msg-minlength="Password must be 6 characters or more." data-msg-required="Please enter your password." required>
-              <label class="md-control-label">Password</label>
-            </div>
-            <div class="md-form-group md-custom-controls">
-            </div>
-            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
-          </form>
+<body class="login-page sidebar-collapse">
+
+  <div class="page-header header-filter" style="background-image: url('../assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <div class="card card-login">
+            <form class="form" action="<?php echo base_url()?>Login/chklogin" method="post" data-toggle="validator">
+              <div class="card-header card-header-primary text-center">
+                <h4 class="card-title">Login</h4>
+                <div class="social-line">
+                  <a href="#pablo" class="btn btn-just-icon btn-link">
+                    <i class="fa fa-facebook-square"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-just-icon btn-link">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-just-icon btn-link">
+                    <i class="fa fa-google-plus"></i>
+                  </a>
+                </div>
+              </div>
+              <p class="description text-center">Or Be Classical</p>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">face</i>
+                    </span>
+                  </div>
+                  <input type="text" name="username" class="form-control" placeholder="Username...">
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">lock_outline</i>
+                    </span>
+                  </div>
+                  <input type="password" name="password" class="form-control" placeholder="Password...">
+                </div>
+              </div>
+              <div class="footer text-center">
+                <button class="btn btn-rose" type="submit"><a href="#pablo" class="btn btn-white btn-link">Get Started</a></button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    <script src="<?php echo base_url().'assets/js/vendor.min.js'?>"></script>
-    <script src="<?php echo base_url().'assets/js/elephant.min.js'?>"></script>
-    <script>
-      console.log("55");
-        $(".hide-it").fadeOut(5000);
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-83990101-1', 'auto');
-      ga('send', 'pageview');
-      
-    </script>
-  </body>
+    <footer class="footer">
+      <div class="container">
+        <nav class="float-left">
+          <ul>
+            <li>
+              <a href="https://www.creative-tim.com/">
+                Creative Tim
+              </a>
+            </li>
+            <li>
+              <a href="https://www.creative-tim.com/presentation">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="https://www.creative-tim.com/blog">
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="https://www.creative-tim.com/license">
+                Licenses
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="copyright float-right">
+          &copy;
+          <script>
+            document.write(new Date().getFullYear())
+          </script>, made with <i class="material-icons">favorite</i> by
+          <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="<?php echo base_url().'assets/js/core/jquery.min.js'?>"></script>
+
+  <script src="<?php echo base_url().'assets/js/core/popper.min.js'?>"></script>
+
+  <script src="<?php echo base_url().'assets/js/core/bootstrap-material-design.min.js'?>"></script>
+
+  <script src="<?php echo base_url().'assets/js/plugins/moment.min.js'?>"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+
+  <script src="<?php echo base_url().'assets/js/plugins/bootstrap-datetimepicker.js'?>"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+
+  <script src="<?php echo base_url().'assets/js/plugins/nouislider.min.js'?>"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+
+  <script src="<?php echo base_url().'assets/js/material-kit.js?v=2.0.7'?>"></script>
+</body>
+
 </html>
