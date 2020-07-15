@@ -1,7 +1,15 @@
-<div class="content">
+<style>
+label{
+  color:#495057;
+  font-size:16px; 
+   font-weight: bold;
+}
+</style>
+  <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-3"></div>
+            <div class="col-md-6">
               <div class="card">
                 <div class="card-header card-header-rose">
                   <h2 class="card-title ">Add Group</h2>
@@ -9,29 +17,31 @@
                 </div>
               
 <hr>
-              
-            <form class="table form form-horizontal container" action="<?php echo base_url()?>usergroup/insert"  
-              method="post" class="text-center" >
+            <form class="table form form-horizontal container" action="<?php echo base_url()?>usergroup/insert" method="post" data-toggle="validator">
 
-                 
-              <div class="col-md-6">
+                  <?php echo $this->session->flashdata("error"); ?>
+
+
+                  <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"><h4><i class="fa fa-user"> Username</h4></i></label>
-                          <input type="text" class="form-control" name="username" required>
+                          <label class="bmd-label-floating"><b>GroupName</b> </label>
+                          <input type="text" class="form-control" name="gname" required>
                         </div>
                       </div>
 
-          </div>
-          <div class="form-group">
-                    <button type="submit" id="btn" class="btn btn-primary btn-block ">Save Changes</button>
+
+
+            
+              <div class="form-group">
+                    <button type="submit" id="btn" class="btn btn-primary btn-block">Save Changes</button>
                   </div>
                 </form>
-              </div>
             </div>
           </div>
          
         </div>
       </div>
+      
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script>
         $(document).ready(function() {

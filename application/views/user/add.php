@@ -85,7 +85,6 @@ label{
                   <?php
                    } ?>
                    </select>
-                   <h3><a href="" class="btn btn-default no_print" onclick="window.history.go(-1); return false;"> Back </a></h3>
 
                     </div>
                     </div>
