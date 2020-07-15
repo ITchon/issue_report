@@ -28,14 +28,12 @@ Tbkk
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?php echo base_url()?>/assets/demo/demo.css" rel="stylesheet" />
   <link href="<?php echo base_url()?>/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url()?>/assets/js/jquery-3.5.1.js"></script>
+  <script src="<?php echo base_url()?>/assets/js/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url()?>/assets/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url()?>/assets/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url()?>/assets/js/responsive.bootstrap4.min.js"></script>
 
 </head>
 <body class="layout layout-header-fixed">
@@ -94,10 +92,10 @@ Tbkk
 
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white">
+      <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white"  style="  position: sticky;" >
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;"><?php echo $mg[0]->name ?></a>
+            <a class="navbar-brand " href="javascript:;">Dash</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -158,3 +156,4 @@ Tbkk
           </div>
         </div>
       </nav>
+  
