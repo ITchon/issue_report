@@ -9431,7 +9431,6 @@ a.text-dark:focus {
 
 .btn {
   position: relative;
-  padding: 12px 30px;
   margin: 0.3125rem 1px;
   font-size: .75rem;
   font-weight: 400;
@@ -17551,7 +17550,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-rose,
 .card.card-rotate.bg-rose .front,
 .card.card-rotate.bg-rose .back {
-  background: linear-gradient(60deg, #ec407a, #d81b60);
+  background: linear-gradient(60deg, #f74782, #ff9bbd);
 }
 
 .card .card-header-primary .card-icon,

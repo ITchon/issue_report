@@ -52,6 +52,9 @@ Tbkk
     style="color:#495057;
     font-size:16px;
   }
+  i{
+    cursor: pointer;
+  }
 </style>
 
 <script>
