@@ -10,7 +10,7 @@ class Usergroup extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
-        //$this->model->CheckSession();
+        $this->model->CheckSession();
         $menu['menu'] = $this->model->showmenu();
         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
         $query = $this->db->query($sql); 
