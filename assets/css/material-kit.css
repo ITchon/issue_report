@@ -11425,8 +11425,7 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
 .btn.btn-just-icon {
   font-size: 24px;
   height: 41px;
-  min-width: 41px;
-  width: 41px;
+
   padding: 0;
   overflow: hidden;
   position: relative;
@@ -17373,7 +17372,7 @@ footer .pull-center {
 }
 
 .card-login .form {
-  min-height: 420px;
+  min-height: 380px;
 }
 
 .card-login .social-line {

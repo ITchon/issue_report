@@ -44,17 +44,11 @@ The above copyright notice and this permission notice shall be included in all c
                 <h4 class="card-title">Login</h4>
                 <div class="social-line">
                   <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-facebook-square"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-google-plus"></i>
+                   <h4>ISSUE REPORT</h4>
                   </a>
                 </div>
               </div>
-              <p class="description text-center">Or Be Classical</p>
+              <p class="description text-center" style="padding-top:10px"></p>
               <div class="card-body">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -74,14 +68,17 @@ The above copyright notice and this permission notice shall be included in all c
                   <input type="password" name="password" class="form-control" placeholder="Password...">
                 </div>
               </div>
-              <div class="footer text-center">
-                <button class="btn btn-rose" type="submit"><a href="#pablo" class="btn btn-white btn-link">Get Started</a></button>
+              <div class="footer text-center" style="padding-bottom:20px">
+                <button class="btn btn-rose " type="submit"><a href="#pablo" class="text-white">Get Started</a></button>
               </div>
             </form>
           </div>
         </div>
+        
       </div>
+      
     </div>
+    
     <footer class="footer">
       <div class="container">
         <nav class="float-left">
