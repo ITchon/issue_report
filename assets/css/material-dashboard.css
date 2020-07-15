@@ -3509,7 +3509,7 @@ fieldset:disabled a.btn {
 
 .btn-sm,
 .btn-group-sm>.btn {
-  padding: 0.40625rem 1.25rem;
+  padding: 0.3rem 0.8rem;
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.1875rem;

@@ -40,7 +40,7 @@ The above copyright notice and this permission notice shall be included in all c
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
           <div class="card card-login">
             <form class="form" action="<?php echo base_url()?>Login/chklogin" method="post" data-toggle="validator">
-              <div class="card-header card-header-primary text-center">
+              <div class="card-header card-header-success text-center">
                 <h4 class="card-title">Login</h4>
                 <div class="social-line">
                   <a href="#pablo" class="btn btn-just-icon btn-link">

@@ -14,7 +14,7 @@
                 <div class="card-body">
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
-                  <table id="example" class="table">
+                  <table id="example" class="table ">
                   <thead>
                     <tr>
                       <th>Username</th>
@@ -62,7 +62,7 @@
                 echo base_url() . 'user/edit_u/' . $r->su_id;
                 ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>
                 <?php 
-                echo "<a type='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."user/deleteuser/".$r->su_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i class='btn-default btn-sm fa fa-trash'></i></a></td>";  
+                echo "<a type='button' class='btn-danger btn-sm fa fa-trash' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."user/deleteuser/".$r->su_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i></i></a></td>";  
            
             echo "</tr>";
         }
