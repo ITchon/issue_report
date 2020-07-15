@@ -542,11 +542,11 @@ return false;
 
  function insert($fname,$lname,$username,$password,$gender,$email,$sug_id)
  {
+$password = base64_encode(trim($password));
+  $num= $this->db->query("SELECT * FROM sys_users where username = '$username'"); 
+  $chk= $num->result();
 
-
-  $num= $this->db->query("SELECT COUNT(`username`) FROM sys_users where username = '$username'"); 
-  $chk= $num->num_rows();
- if($chk!=1){
+ if($chk==null){
     $sql1 ="INSERT INTO sys_users (sug_id, username, password, firstname, lastname, gender, email, enable, date_created, date_updated,delete_flag) VALUES ( '$sug_id', '$username', '$password', '$fname', '$lname', '$gender', '$email', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1' )";
   $query= $this->db->query($sql1); 
   if($query){
