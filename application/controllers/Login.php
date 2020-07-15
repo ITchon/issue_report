@@ -27,6 +27,7 @@ class Login extends CI_Controller {
              $this->session->set_userdata($arrData);
              $this->session->set_userdata('gg',"55");
              $username = $this->session->userdata('username');
+
              if($data['u_enable'] != 1){
                $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
                <span> Your account has been disable </span>

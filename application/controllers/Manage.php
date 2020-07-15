@@ -10,7 +10,7 @@ class Manage extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
-        //$this->model->CheckSession();
+        $this->model->CheckSession();
         $menu['menu'] = $this->model->showmenu();
         $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
          $menu['mg']= $this->model->givemeid($url);
