@@ -16,7 +16,6 @@ class Permissiongroup extends CI_Controller {
          $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
          $query = $this->db->query($sql); 
          $menu['submenu']= $query->result(); 
-         $this->load->view('header');
          $this->load->view('menu',$menu);
          $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
     }

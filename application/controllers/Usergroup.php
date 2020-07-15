@@ -7,15 +7,20 @@ class Usergroup extends CI_Controller {
     
         parent::__construct(); 
         $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
-
-        
+        //$this->model->CheckSession();
+        $menu['menu'] = $this->model->showmenu();
+        $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
+        $query = $this->db->query($sql); 
+        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
+         $menu['mg']= $this->model->givemeid($url);
+         $menu['submenu']= $query->result(); 
+         //$this->load->view('header');
+         $this->load->view('menu',$menu);
+       
     }
-	public function index()
-  {	
-
-	}
 
     
 	public function manage()

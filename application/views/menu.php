@@ -37,17 +37,18 @@ The above copyright notice and this permission notice shall be included in all c
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+          โอ้แม่นี้มีบุญคุณอันใหญ่หลวง
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
+
 
 
         <?php foreach($menu as $r){ 
                 ?>
     
                  <li class="nav-item <?php echo($r->mg == $mg[0]->mg_id)? " active open":"" ?>" >
-                  <a class="nav-link" aria-haspopup="true" href="<?php echo base_url()?>manage/index<?php ?>">
+                  <a class="nav-link" aria-haspopup="true" href="<?php echo base_url()?><?php echo $r->link ?>">
                     <i class="sidenav-icon fa  <?php echo $r->icon_menu ?>"></i>
                     <p><?php echo $r->g_name ?></p>
                   </a>
@@ -57,23 +58,36 @@ The above copyright notice and this permission notice shall be included in all c
           
                  <?php
                 }
-                ?>             
-                 
+                ?> 
+  
+      <li class="nav-item">
+      <div class="bg-danger">
+            <a class="nav-link" href="<?php echo base_url()?>Logout/index">
+              <i class="material-icons">unarchive</i>
+              <p>Logout</p>
+            </a>
+          </li>
+          
+
           <li class="nav-item active-pro ">
             <a class="nav-link" href="./upgrade.html">
               <i class="material-icons">unarchive</i>
               <p>Upgrade to PRO</p>
             </a>
           </li>
+
+          
+
         </ul>
       </div>
     </div>
+
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dashboard</a>
+            <a class="navbar-brand" href="javascript:;"><?php echo $mg[0]->name ?></a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
