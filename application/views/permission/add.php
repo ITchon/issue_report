@@ -1,15 +1,14 @@
-<div class="layout-content">
-        <div class="layout-content-body">
-          <div class="title-bar">
-       
-           
-          </div>
-          <div class="row gutter-xs">
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
             <div class="col-md-12">
-              <div class="demo-form-wrapper card" style="padding-top:8px">
-              <h2 class=" text-center text-primary">
-            ADD PERMISSION
-            </h2><hr>
+              <div class="card">
+                <div class="card-header card-header-rose">
+                  <h2 class="card-title ">Add Permisson</h2>
+                  <p class="card-category"><h1></h1></p>
+                </div>
+              
+<hr>
               
             <form class="table form form-horizontal container" action="<?php echo base_url()?>permission/insert" method="post" data-toggle="validator">
                  

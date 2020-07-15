@@ -2,13 +2,16 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
+            <div align="right">
+            <a href="<?php echo base_url()?>permission/add"><button class="btn btn-warning">+</button></a>
+            </div>
               <div class="card">
                 <div class="card-header card-header-rose">
                   <h4 class="card-title ">Simple Table</h4>
                   <p class="card-category"><h1></h1></p>
                 </div>
                 <div class="card-body">
-                  <table class="table">
+                  <table id="example" class="table">
                   <thead>
                       <tr>
                         <th>Permission name</th>
@@ -95,5 +98,10 @@
     });
 
 
+</script>
+<script>
+$(document).ready(function() {
+$('#example').DataTable();
+} );
 </script>
     

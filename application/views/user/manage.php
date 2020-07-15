@@ -14,7 +14,7 @@
                 <div class="card-body">
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
-                  <table id="dtBasicExample" class="table">
+                  <table id="example" class="table">
                   <thead>
                     <tr>
                       <th>Username</th>
@@ -97,5 +97,11 @@
   });
 });
 
+</script>
+
+<script>
+$(document).ready(function() {
+$('#example').DataTable();
+} );
 </script>
     
