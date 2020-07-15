@@ -38,7 +38,7 @@ Tbkk
   <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
 
 </head>
-<body class="">
+<body class="layout layout-header-fixed">
   <div class="wrapper ">
   <div class="sidebar  " data-color="green"  >
       <!--
