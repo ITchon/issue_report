@@ -29,8 +29,6 @@ Tbkk
   <link href="<?php echo base_url()?>/assets/demo/demo.css" rel="stylesheet" />
   <link href="<?php echo base_url()?>/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-  <link href="<?php echo base_url()?>/assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
-
 
 
   
