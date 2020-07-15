@@ -2325,7 +2325,7 @@ pre code {
   padding: 0.4375rem 0;
   font-size: 1rem;
   line-height: 1.5;
-  color: #495057;
+  color: #e73774;
   background-color: rgba(0, 0, 0, 0);
   background-clip: padding-box;
   border: 1px solid #d2d2d2;
@@ -11868,7 +11868,7 @@ form {
   padding-left: 0;
   padding-right: 0;
   border-radius: 0;
-  font-size: 14px;
+
 }
 
 .form-control:focus,

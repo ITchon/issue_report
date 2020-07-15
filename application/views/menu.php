@@ -47,6 +47,12 @@ Tbkk
   <script src="<?php echo base_url()?>/assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
 
 </head>
+<style>
+  .bmd-label-floating {
+    style="color:#495057;
+    font-size:16px;
+  }
+</style>
 <body class="layout layout-header-fixed">
   <div class="wrapper ">
   <div class="sidebar  " data-color="green"  >
