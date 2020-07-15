@@ -35,9 +35,14 @@
       </footer>
     </div>
   </div>
-  
+
+
+
+
+
+
   <!--   Core JS Files   -->
-  <script src="<?php echo base_url()?>/assets/js/core/jquery.min.js"></script>
+
   <script src="<?php echo base_url()?>/assets/js/core/popper.min.js"></script>
   <script src="<?php echo base_url()?>/assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="<?php echo base_url()?>/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
