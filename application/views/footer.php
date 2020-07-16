@@ -42,11 +42,7 @@
 
 
   <!--   Core JS Files   -->
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+
   <script src="<?php echo base_url()?>/assets/js/core/popper.min.js"></script>
   <script src="<?php echo base_url()?>/assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="<?php echo base_url()?>/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -71,7 +67,7 @@
   <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
   <script src="<?php echo base_url()?>/assets/js/plugins/fullcalendar.min.js"></script>
   <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="<?php echo base_url()?>/assets/js/plugins/jquery-jvectormap.js"></script>
+  <!-- <script src="<?php echo base_url()?>/assets/js/plugins/jquery-jvectormap.js"></script> -->
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
   <script src="<?php echo base_url()?>/assets/js/plugins/nouislider.min.js"></script>
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
@@ -79,7 +75,7 @@
   <!-- Library for adding dinamically elements -->
   <script src="<?php echo base_url()?>/assets/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
   <!-- Chartist JS -->
   <script src="<?php echo base_url()?>/assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -103,12 +99,6 @@
 
         fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
 
-        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
-          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
-            $('.fixed-plugin .dropdown').addClass('open');
-          }
-
-        }
 
         $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
@@ -259,13 +249,11 @@
       });
     });
   </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
 
-    });
-  </script>
 </body>
 
 </html>
+
+
+
+

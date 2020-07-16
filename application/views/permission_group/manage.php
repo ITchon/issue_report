@@ -3,19 +3,19 @@
           <div class="row">
             <div class="col-md-12">
             <div align="right">
-            <a href="<?php echo base_url()?>permissiongroup/add"><button class="btn btn-warning">+</button></a>
+            
             </div>
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">Simple Table</h4>
+                  <h4 class="card-title ">Simple Table <a href="<?php echo base_url()?>permissiongroup/add"><button class="btn btn-success">ADD</button></a></h4>
                   <p class="card-category"><h1></h1></p>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">
                   <thead>
-                      <tr>
-                        <th>Group name</th>
-                        <th class="text-center">Status</th>
+                  <tr class="table-dark text-dark" >
+                        <th  style="font-weight: bold;">Group name</th>
+                        <th class="text-center"  style="font-weight: bold;">Status</th>
                        
                       </tr>
                     </thead>

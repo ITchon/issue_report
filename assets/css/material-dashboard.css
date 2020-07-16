@@ -2189,7 +2189,7 @@ pre code {
 .table-dark,
 .table-dark>th,
 .table-dark>td {
-  background-color: #c6c8ca;
+  background-color: #e6e6e6;
 }
 
 .table-hover .table-dark:hover {
@@ -4180,7 +4180,7 @@ tbody.collapse.show {
   height: calc(2.125rem + 2px);
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
-  font-size: 75%;
+  font-size: 100%;
 }
 
 .custom-select-lg {
@@ -17550,7 +17550,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-rose,
 .card.card-rotate.bg-rose .front,
 .card.card-rotate.bg-rose .back {
-  background: linear-gradient(60deg, #f74782, #ff9bbd);
+  background: linear-gradient(60deg, #f53b79, #ff9bbd);
 }
 
 .card .card-header-primary .card-icon,
