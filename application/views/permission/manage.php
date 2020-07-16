@@ -13,9 +13,9 @@
                 <div class="card-body">
                   <table id="example" class="table">
                   <thead>
-                      <tr>
-                        <th>Permission name</th>
-                        <th class="text-center" width="30%">Manage</th>
+                  <tr class="table-dark text-dark" >
+                        <th  style="font-weight: bold;">Permission name</th>
+                        <th class="text-center"  style="font-weight: bold;" width="30%">Manage</th>
                       </tr>
                     </thead>
                     <tbody>
