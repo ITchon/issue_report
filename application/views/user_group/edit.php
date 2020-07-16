@@ -25,6 +25,7 @@ label{
                           <input type="text" class="form-control" name="username" value="<?php echo $result[0]->sug_name?>" required>
                         </div>
                       </div>
+                      
                       <div class="form-group">
                     <button type="submit" id="btn" class="btn btn-primary btn-block">Save Changes</button>
                   </div>

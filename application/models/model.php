@@ -556,75 +556,10 @@ $password = base64_encode(trim($password));
   }
  }
  return false;
-
    
  }
 
 
-
- function insert_bom($bm)
- {
-  $sql ="INSERT INTO bom (b_master,unit,date_created,delete_flag) VALUES ($bm,'pcs',CURRENT_TIMESTAMP,1);";
-    $query = $this->db->query($sql);  
-    $insert_id = $this->db->insert_id($query );
-   if($query){
-    return  $insert_id;
-   }
-   else{
-     return false;
-   }  
- }
-
- function insert_sub_part($bm,$m,$p,$origin)
- {
-  $sql ="INSERT INTO sub_part (b_id,m_id,p_id,origin,unit,date_created,delete_flag) VALUES ($bm,$m,$p,$origin,'pcs',CURRENT_TIMESTAMP,1);";
-  $query = $this->db->query($sql);  
-  $insert_id = $this->db->insert_id($query);
-  if($query){
-    return  $insert_id;
-  }
-  else{
-    return false;
-  }  
-}
-
-
- function insert_part($p_no,$p_name,$d_id,$master )
- {
-
-$num= $this->db->query("SELECT * FROM part where p_no = '$p_no'"); 
-  $chk= $num->num_rows();
-
- if($chk < 1){
-    $sql ="INSERT INTO part (p_no,p_name,d_id,enable,date_created,delete_flag) VALUES ( '$p_no', '$p_name', '$d_id'
-  ,'1',CURRENT_TIMESTAMP,'1');";
-  $sql1 ="INSERT INTO sub_part (m_id,p_id) VALUES ( '$master','$p_no' );";
-    $query = $this->db->query($sql);  
-  if($query){
-    $query = $this->db->query($sql1);  
-      return true;
-  }
- }else{
-    return false;
- }
- }
-
- function insert_part1($p_no,$p_name,$d_id)
- {
-    $num= $this->db->query("SELECT * FROM part where p_no = '$p_no'"); 
-  $chk= $num->num_rows();
-
- if($chk < 1){
-    $sql ="INSERT INTO part (p_no,p_name,d_id,enable,date_created,delete_flag) VALUES ( '$p_no', '$p_name', '$d_id'
-  ,'1',CURRENT_TIMESTAMP,'1');";
-    $query = $this->db->query($sql);  
-  if($query){
-      return true;
-  }
- }else{
-    return false;
- }
- }
  function insert_group($gname)
  {
   $num= $this->db->query("SELECT * FROM sys_user_groups where name = '$gname'"); 
@@ -642,63 +577,30 @@ $num= $this->db->query("SELECT * FROM part where p_no = '$p_no'");
   return false;
  }
 
- function insert_drawing($d_no, $dcn_id,$path_file,$file_name,$code)
+ function insert_project($pj_name,$pj_des,$status)
  {
-    
-       $path_file = quotemeta($path_file);
-  $sql ="INSERT INTO drawing (d_no,enable, dcn_id, date_created,delete_flag,path_file,file_name,file_code,version) VALUES 
-  ( '$d_no', '1', '$dcn_id', CURRENT_TIMESTAMP,  '1','$path_file','$file_name','$code','00');";
-    $query = $this->db->query($sql);  
-    $last_id = $this->db->insert_id();
+
+  $num= $this->db->query("SELECT * FROM sys_projects where pj_name = '$pj_name'"); 
+  $chk= $num->result();
+
+ if($chk==null){
+    $sql1 ="INSERT INTO sys_projects ( pj_name, pj_des, enable, date_created, date_updated,delete_flag) VALUES ( '$pj_name', '$pj_des', '$status', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1' )";
+  $query= $this->db->query($sql1); 
   if($query){
-      return $last_id;
+      return true;
   }else{
-    return false;
+    return 3;
+  }
  }
+ return false;
+   
  }
+
  
 
 
-  function select_version($d_id)
- {
-  $sql ="SELECT * FROM drawing WHERE d_id = $d_id ;";
-  $query = $this->db->query($sql);
-  $data = $query->result();
 
-  $d_id =  $data[0]->d_id;
-  $version =  $data[0]->version;
-  $file_name =  $data[0]->file_name;
-  $path_file =  $data[0]->path_file;
-  $d_no =  $data[0]->d_no;
-  $dcn_id =  $data[0]->dcn_id;
-  $file_code =  $data[0]->file_code;
-  $path_file = quotemeta($path_file);
 
-  $gg ="INSERT INTO version (d_id, d_no, dcn_id, enable, date_created, delete_flag, path_file, file_name,file_code, version) VALUES ( '$d_id', '$d_no', '$dcn_id', '0',
-   CURRENT_TIMESTAMP, '1', '$path_file', '$file_name','$file_code', '$version');";
-  $query = $this->db->query($gg); 
-if($query){
-     return true;
-   }
-   else{
-     return false;
-   }
-
- }
-
- function update_version($d_id, $d_no, $dcn_id, $version, $file_name, $path_file,$code)
- {
-  $v = $version+1;
-$path_file = quotemeta($path_file);
-  $sql ="UPDATE drawing SET d_no = '$d_no' , date_updated=CURRENT_TIMESTAMP, dcn_id = '$dcn_id', version = '$v', path_file = '$path_file', file_name = '$file_name', file_code = '$code',enable = 1 WHERE d_id = '$d_id'";
-    $query = $this->db->query($sql);  
-   if($query){
-     return true;
-   }
-   else{
-     return false;
-   }
- }
 
 
  function insert_permission($gname, $controller, $spg_id)

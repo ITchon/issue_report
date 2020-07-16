@@ -28,6 +28,12 @@ Tbkk
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?php echo base_url()?>/assets/demo/demo.css" rel="stylesheet" />
   <link href="<?php echo base_url()?>/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.css' type='text/css' rel='stylesheet'>
+  <link href='<?= base_url() ?>/assets/resources/dropzone.css' type='text/css' rel='stylesheet'>
+
+
+  <script src='<?= base_url() ?>/assets/resources/dropzone.js' type='text/javascript'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js' type='text/javascript'></script>
   <script src="<?php echo base_url()?>/assets/js/jquery-3.5.1.js"></script>
   <script src="<?php echo base_url()?>/assets/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url()?>/assets/js/dataTables.bootstrap4.min.js"></script>
