@@ -9458,8 +9458,8 @@ a.text-dark:focus {
 
 .btn.btn-primary {
   color: #fff;
-  background-color: #529aff;
-  border-color: #529aff;
+  background-color: #9124a3;
+  border-color: #701c7e;
   box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
 }
 
@@ -13611,7 +13611,7 @@ select.form-control {
 .form-group {
   padding-bottom: 10px;
   position: relative;
-  margin: 8px 0 0;
+
 }
 
 .form-group .bmd-label-static {
@@ -15869,10 +15869,11 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .fixed-plugin .btn.btn-primary {
   color: #fff;
-  background-color: #529aff;
-  border-color: #529aff;
+  background-color: #9124a3;
+  border-color: #701c7e;
   box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
 }
+
 
 .fixed-plugin .btn.btn-primary:hover {
   color: #fff;
