@@ -168,6 +168,7 @@ $password = base64_encode(trim($password));
   ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
     $query = $this->db->query($sql);  
     $last_id = $this->db->insert_id();
+    $this->session->set_userdata('is_id',$last_id);
    if($query){
      return $last_id;
    }
@@ -177,9 +178,10 @@ $password = base64_encode(trim($password));
  }
 
 
- function insert_img($is_id,$file,$c)
+ function insert_img($file,$c)
  {
-  $sql ="INSERT INTO issue_img (is_id,file_n,file_code) VALUES ('$is_id', '$file','$c')";
+  $is_id = $this->session->userdata('is_id');
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code) VALUES ('$is_id'+1, '$file','$c')";
     $query = $this->db->query($sql);  
    if($query){
      return true;
@@ -541,16 +543,14 @@ public function disablePermission_Group($key=''){
  public function upload($uploadData,$id){
  foreach($uploadData as $r){
   $file_name = $r['filedata'];
-    $sql  = "INSERT INTO `image`(`i_id`, `is_id`, `file_name`) 
-    VALUES ('',$id,'$file_name')";
+    $sql  = "INSERT INTO issue_img(is_id, file_n) VALUES  ('$id','$file_name')";
   $query= $this->db->query($sql); 
  }
 
   }
  public function test(){
-
-    $sql  = "INSERT INTO `sys_issue`(`is_id`, `file`) 
-    VALUES ('','test')";
+    $sql  = "INSERT INTO `sys_issue`(`is_id`) 
+    VALUES ('')";
   $query= $this->db->query($sql); 
   $lasted_id= $this->db->insert_id(); 
   return $lasted_id;

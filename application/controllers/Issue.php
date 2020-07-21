@@ -17,6 +17,7 @@ class Issue extends CI_Controller {
         $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
          $menu['mg']= $this->model->givemeid($url);
          $menu['submenu']= $query->result();
+         
          $this->load->view('menu',$menu);
        
     }
@@ -85,15 +86,12 @@ class Issue extends CI_Controller {
         $config['encrypt_name'] = TRUE;
 
           if($plant != null){
-        $last_id = $this->model->insert_issue($plant,$pj_id,$date_iden,$is_des,
+            $last_id = $this->model->insert_issue($plant,$pj_id,$date_iden,$is_des,
         $priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,
         $frr,$note,$fname);
-        $is_id = $last_id;
-        $this->session->set_flashdata('is_id',$is_id);
           }
-          $is_id = $this->session->flashdata('is_id');
+          
             //Load upload library
-          $config['is_id'] = $is_id;
           $this->load->library('upload',$config); 
           $this->upload->initialize($config);
 
@@ -102,12 +100,8 @@ class Issue extends CI_Controller {
  }else{
     $uploaded = $this->upload->data();
     $code = array('filename'  => $uploaded['file_name']);
-    $is_id = array('is_id'  => $uploaded['is_id']);
-    foreach ($is_id as $is) {
-      $is_id = $is;
-    }
   foreach ($code as $c) {
-  $this->model->insert_img($is_id,$file,$c);
+  $this->model->insert_img($file,$c);
    }
  }
           redirect('issue/add','refresh');   

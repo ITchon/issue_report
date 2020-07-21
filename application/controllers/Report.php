@@ -65,7 +65,7 @@ class Report extends CI_Controller {
           $_FILES['file']['tmp_name'] = $_FILES['filename']['tmp_name'][$i];
           $_FILES['file']['error']    = $_FILES['filename']['error'][$i];
           $_FILES['file']['size']     = $_FILES['filename']['size'][$i];
-          $config['upload_path'] = './upload/'; 
+          $config['upload_path'] = 'upload/'; 
           $config['allowed_types'] = 'jpg|jpeg|png|JPEG|JPG|PNG';
           $this->load->library('upload', $config);
           $this->upload->initialize($config);
