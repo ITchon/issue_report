@@ -136,6 +136,19 @@ class User extends CI_Controller {
        redirect('user/manage','refresh');
         }
     }
+    
+	public function checkall_enable(){
+
+
+		$uid = $this->input->post('chk_uid');
+		
+		$this->model->num_enableUser($uid);
+        $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
+        <span>  Enable data success</span>
+      </div> ');
+		redirect('user/manage');
+
+	}
 
     public function disable($uid){
 
@@ -153,6 +166,18 @@ class User extends CI_Controller {
 
         }
     }
+    public function checkall_disable(){
+		
+
+		$uid = $this->input->post('chk_uid');
+
+		$this->model->num_disableUser($uid);
+        $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
+        <span>  Disable data success</span>
+      </div> ');
+		redirect('user/manage');
+
+	}
 
     public function deleteuser()
     {
@@ -164,6 +189,19 @@ class User extends CI_Controller {
       </div> ');
         redirect('user/manage');
     }
+
+    public function checkall_delete(){
+
+
+		$uid = $this->input->post('chk_uid');
+		
+		$this->model->num_deleteUser($uid);
+        $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
+        <span>  Delete data success</span>
+      </div> ');;
+		redirect('user/manage');
+
+	}
 
     public function save_user_permission()
     {

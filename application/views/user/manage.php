@@ -6,21 +6,34 @@
               <div class="card">
                 <div class="card-header card-header-rose">
                   <h4 class="card-title ">User Table  <a href="<?php echo base_url()?>user/add"><button class="btn btn-success ">ADD</button></a></h4>
-                  
-                  <p class="card-category"><h1></h1></p>
+
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
-                  <table id="example" class="table ">
+                <?php echo form_open('#', array('id' => 'frm_usermanagement', 'name'=>'frm_usermanagement', 'class'=>'form-horizontal'));?>
+                  <table id="dynamic-table" class="table ">
                   <thead>
                     <tr>
-                      <th>Username</th>
-                      <th>Name</th>
-                        <th>Gender</th>
-                        <th>Group</th>
-                        <th>Email</th>
-                        <th class="text-center" width="20%">Manage</th>
+								    	<td colspan="7">
+									    	<div id="btn_enable" class="btn  btn-success"><span class="fa fa-check"></span></div>
+									    	<div id="btn_disable" class="btn  btn-danger"><span class="fa fa-times"></span></div>
+									    	<div id="btn_delete" class="btn btn-dark"><span class="fa fa-trash-o"></span></div>
+								    	</td>
+								    </tr>	
+                    <tr class="table-dark text-dark">
+                    <th class="text-center">
+															<label class="pos-rel">
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+                      <th  style="font-weight: bold;">Username</th>
+                      <th  style="font-weight: bold;">Name</th>
+                        <th  style="font-weight: bold;">Gender</th>
+                        <th  style="font-weight: bold;">Group</th>
+                        <th  style="font-weight: bold;">Email</th>
+                        <th  style="font-weight: bold;" class="text-center" width="20%">Manage</th>
                        
                       </tr>
                     </thead>
@@ -29,20 +42,26 @@
                     <?php
                     foreach($result as $r){
                  echo "<tr>";
+                 echo "<td style='text-align:center;'>
+                 <label class='pos-rel'>
+                     <input type='checkbox' class='ace' name='chk_uid[]' value='$r->su_id'/>
+                     <span class='lbl'></span>
+                   </label>
+               </td>";
                 echo "<td>".$r->username."</td>";
                 echo "<td>".$r->firstname." ".$r->lastname."</td>";
                 echo "<td>".$r->gender."</td>"; 
                 echo "<td>".$r->name."</td>";
                 echo "<td>".$r->email."</td>";
                 if($r->enable!=1 ){?>
-                  <!-- <td><a href='".base_url()."index.php/user/permission/".$r->user_id."' class='btn btn-danger'>Disable</a>"; -->
+               
                   <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
                   echo base_url() . 'user/enable/' . $r->su_id;
                   ?>';"><i class='btn-danger btn-sm fa fa-times'></i></a>
                   <?php
                 }
                 else{?>
-                  <!-- echo "<td><a href='".base_url()."index.php/user/permission/".$r->user_id."' class='btn btn-success'>Enable</a>"; -->
+        
                   <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ปิดการใช้งาน</h5>'  data-original-title='Rule' onclick="javascript:window.location='<?php
                   echo base_url() . 'user/disable/' . $r->su_id;
                   ?>';"><i class='btn-success btn-sm fa fa-check'></i></a>                      
@@ -51,21 +70,23 @@
                 ?> 
 
 
-                <a class='btn-primary' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขสิทธิ์</h5>' onclick="javascript:window.location='<?php
+                <a class='btn-primary' data-toggle='tooltip'  onclick="javascript:window.location='<?php
                 echo base_url() . 'user/rule/' . $r->su_id;
                 ?>';"><i class='btn-info btn-sm fa fa-gear'> </i></a>
 
 
-                <a type ='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' class=' ' data-original-title='Rule' onclick="javascript:window.location='<?php
+                <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
                 echo base_url() . 'user/edit_u/' . $r->su_id;
                 ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>
-                <?php 
-                echo "<a type='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."user/deleteuser/".$r->su_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i class='btn-danger btn-sm fa fa-trash'></i></a></td>";  
-           
+
+                  <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
+                echo base_url() . 'user/deleteuser/' . $r->su_id;
+                ?>';"><i class='btn-dark btn-sm fa fa-trash'></i></a>
+                <?php  
             echo "</tr>";
         }
     ?>
-                  
+                  	<?php echo form_close();?>
                     </tbody>
                   </table>
                 </div>
@@ -76,30 +97,14 @@
       </div>
 
             <script type="text/javascript">
-      
-      $(document).ready(function() {
-        
-        $('#table').DataTable({
-          dom: 'Bfrtip',
-        buttons: [
-            'colvis'
-        ]
-       
-    });  
-    });
-    
+
     $(document).ready(function () {
   //Pagination numbers
   $('#paginationSimpleNumbers').DataTable({
     "pagingType": "simple_numbers"
   });
-});
 
-</script>
-
-<script>
-$(document).ready(function() {
-$('#example').DataTable();
+ 
 } );
 </script>
     

@@ -13,40 +13,41 @@ The above copyright notice and this permission notice shall be included in all c
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()?>/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="<?php echo base_url()?>/assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()?>assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="<?php echo base_url()?>assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-Tbkk
+TBKK
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
+  <!--     Fonts and icons     -->  
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="<?php echo base_url()?>assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="<?php echo base_url()?>/assets/demo/demo.css" rel="stylesheet" />
-  <link href="<?php echo base_url()?>/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="<?php echo base_url()?>assets/demo/demo.css" rel="stylesheet" />
+  <link href="<?php echo base_url()?>assets/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.css' type='text/css' rel='stylesheet'>
-  <link href='<?= base_url() ?>/assets/resources/dropzone.css' type='text/css' rel='stylesheet'>
+  <link href='<?= base_url() ?>assets/resources/dropzone.css' type='text/css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css' type='text/css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css' type='text/css' rel='stylesheet'>
 
-
-  <script src='<?= base_url() ?>/assets/resources/dropzone.js' type='text/javascript'></script>
+  <script src='<?= base_url() ?>assets/resources/dropzone.js' type='text/javascript'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js' type='text/javascript'></script>
   <script src="<?php echo base_url()?>/assets/js/jquery-3.5.1.js"></script>
   <!-- <script src="<?php echo base_url()?>assets/js/responsive.bootstrap4.min.js"></script> -->
-  <script src="<?php echo base_url()?>/assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url()?>/assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url()?>/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url()?>/assets/js/plugins/moment.min.js"></script>
+  <script src="<?php echo base_url()?>assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url()?>assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url()?>assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url()?>assets/js/plugins/moment.min.js"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="<?php echo base_url()?>/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url()?>assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="<?php echo base_url()?>/assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
-
+  <script src="<?php echo base_url()?>assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
 </head>
+
 <style>
   .bmd-label-floating {
     style="color:#495057;
@@ -57,6 +58,9 @@ Tbkk
   }
   .table tr:hover {
     background-color: #efefef;
+  }
+  .select-info{
+    padding-left:20px;
   }
   .logo {
   text-shadow: 2px 2px #c7bdbd;

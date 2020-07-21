@@ -8,7 +8,6 @@
               <div class="card">
                 <div class="card-header card-header-rose">
                   <h4 class="card-title ">Simple Table</h4>
-                  <p class="card-category"><h1></h1></p>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">
