@@ -65,7 +65,9 @@ class Model extends CI_Model
 
   public function getuser($user,$pass) {  
     $pass = base64_encode(trim($pass));
-    $sql ="SELECT u.su_id as su_id , u.enable as u_enable ,ug.enable as sug_enable ,u.username as username,u.password as password, ug.sug_id  FROM sys_users as u
+    $sql ="SELECT u.su_id as su_id , u.enable as u_enable ,ug.enable as sug_enable ,
+    u.username as username,u.password as password, ug.sug_id,u.firstname as firstname
+    FROM sys_users as u
     inner join sys_user_groups ug on u.sug_id = ug.sug_id
     
     WHERE username='$user' and password='$pass' ";
@@ -153,6 +155,41 @@ $password = base64_encode(trim($password));
  return false;
    
  }
+
+ function insert_issue($plant,$pj_id,$date_iden,$is_des,
+ $priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,
+ $frr,$note,$fname)
+ {
+  $sql ="INSERT INTO sys_issue (pj_id,plant,date_identified,is_des,priority,owner_id,date_er,
+  escalation_required,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
+  date_updated,delete_flag) 
+  VALUES ( '$pj_id', '$plant', '$date_iden', '$is_des', '$priority','$owner_id','$date_er'
+  ,'$er','$imp_sum','$act_step','$is_type','$cur_st','$frr','$note','$fname'
+  ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
+    $query = $this->db->query($sql);  
+    $last_id = $this->db->insert_id();
+   if($query){
+     return $last_id;
+   }
+   else{
+     return false;
+   }
+ }
+
+
+ function insert_img($is_id,$file,$c)
+ {
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code) VALUES ('$is_id', '$file','$c')";
+    $query = $this->db->query($sql);  
+   if($query){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+
+
 
  function insert_permission($gname, $controller, $spg_id)
  {
