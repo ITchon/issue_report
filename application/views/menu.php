@@ -50,7 +50,7 @@ TBKK
 
 <style>
   .bmd-label-floating {
-    style="color:#495057;
+    color:#495057;
     font-size:16px;
   }
   i{
