@@ -14,7 +14,7 @@ label{
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h2 class="card-title ">Add Issue</h2>
+                  <h2 class="card-title ">Add Project</h2>
                   <p class="card-category"><h1></h1></p>
                 </div>
               
@@ -27,16 +27,16 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Plant</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <input type="radio" name="plant" value="Phase 10" > Phase 10 &nbsp; &nbsp; &nbsp;
-                   <input type="radio" name="plant" value="Phase 8" > Phase 8
+                   <input type="radio" name="plant" value="Phase 10"> Phase 10 &nbsp; &nbsp; &nbsp;
+                   <input type="radio" name="plant" value="Phase 8"> Phase 8
                     </div>
                     </div>
 
                     <div class="form-group">
                       <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b>Project</b></label>      
-                        
+          
                       <div class="col-sm-6 col-md-6">
-                   <select name="pj_id" class="form-control select2"  >
+                   <select name="pj_id" class="form-control select2"  required>
                     <option value=""> - - - Select Project - - - </option>
                     <?php foreach ($result_p as $r) {
                         ?>
@@ -51,15 +51,15 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b>Date Identified</b> </label>
-                          <input type="date" class="form-control" name="date_iden"  >
+                          <input type="date" class="form-control" name="date_iden" required>
                         </div>
                       </div>
 
 
                   <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"><b>Issue Description</b><font color="red" size="1"> *This column is  the information.</font> </label>
-                          <textarea name="is_des" class="form-control" cols="30" rows="5" ></textarea>
+                          <label class="bmd-label-floating"><b>Issue Description</b><font color="red" size="1"> *This column is required the information.</font> </label>
+                          <textarea name="is_des" class="form-control" cols="30" rows="5" require></textarea>
                         </div>
                       </div>
 
@@ -67,7 +67,7 @@ label{
                       <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b>Priority</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="priority" class="form-control"  >
+                   <select name="priority" class="form-control" required>
                     <option value="">- - - Select Priority - - - </option>
                       <option value="Critical">Critical</option>
                       <option value="High">High</option>
@@ -80,10 +80,10 @@ label{
 
                     
                     <div class="form-group">
-                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Assigned To Owner</b><font color="red" size="1"> *This column is  the information.</font></label>      
+                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Assigned To Owner</b><font color="red" size="1"> *This column is required the information.</font></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="owner_id" class="form-control select2"  >
+                   <select name="owener_id" class="form-control select2"  required>
                     <option value=""> - - - Select Owner - - - </option>
                     <?php foreach ($result_own as $r) {
                         ?>
@@ -99,17 +99,17 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b>Expected Resolution Date</b> </label>
-                          <input type="date" class="form-control" name="date_er"  >
+                          <input type="date" class="form-control" name="date_er" required>
                         </div>
                       </div>
 
 
                       <div class="form-group">
-                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation  </b></label>      
+                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation Required </b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <input type="radio" name="er" value="Yes" > Yes &nbsp; &nbsp; &nbsp;
-                   <input type="radio" name="er" value="No" > No
+                   <input type="radio" name="er" value="Yes"> Yes &nbsp; &nbsp; &nbsp;
+                   <input type="radio" name="er" value="No"> No
                     </div>
                     </div>
 
@@ -117,15 +117,15 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Impact Summary</b> </label>
-                          <textarea name="imp_sum" class="form-control" cols="30" rows="5" ></textarea>
+                          <textarea name="imp_sum" class="form-control" cols="30" rows="5" require></textarea>
                         </div>
                       </div>
 
 
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"><b>Action Step</b><font color="red" size="1"> *This column is  the information.</font> </label>
-                          <textarea name="act_step" class="form-control" cols="30" rows="5" ></textarea>
+                          <label class="bmd-label-floating"><b>Action Step</b><font color="red" size="1"> *This column is required the information.</font> </label>
+                          <textarea name="act_step" class="form-control" cols="30" rows="5" require></textarea>
                         </div>
                       </div>
 
@@ -134,7 +134,7 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Issue Type</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="is_type" class="form-control"  >
+                   <select name="is_type" class="form-control" required>
                     <option value="">- - - Select Issue Type - - - </option>
                       <option value="Informational">Informational</option>
                       <option value="Procedural">Procedural</option>
@@ -150,7 +150,7 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Current Status</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="cur_st" class="form-control"  >
+                   <select name="cur_st" class="form-control" required>
                     <option value="">- - - Select Status - - - </option>
                       <option value="Open">Open</option>
                       <option value="Work In Progress">Work In Progress</option>
@@ -163,7 +163,7 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Final Resolution&Rationale</b></label>
-                          <textarea name="frr" class="form-control" cols="30" rows="5" ></textarea>
+                          <textarea name="act_step" class="form-control" cols="30" rows="5" require></textarea>
                         </div>
                       </div>
 
@@ -172,7 +172,7 @@ label{
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Note</b> </label>
-                          <textarea name="note" class="form-control" cols="30" rows="5"></textarea>
+                          <textarea name="note" class="form-control" cols="30" rows="5" require></textarea>
                         </div>
                       </div>
                   
@@ -182,15 +182,16 @@ label{
                           <label class=""><b> Attach file</b></label>
                         </div>
                       </div>
-                      <div multiple name="file" action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
-                      
+                      <div action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
+
+<button id="submit-files">Upload</button>
     </div> 
 
 
-    <div class="form-group">
-                      <button class="btn btn-primary btn-block" type="submit" id='uploadfiles' value='Upload Files'>Sub Pay Sub Ta</button>
-                    </div>
-              
+            
+              <div class="form-group">
+                    <button type="submit" id="submit-files" class="btn btn-primary btn-block">Save Changes</button>
+                  </div>
                   
                 </form>
                 
@@ -211,18 +212,26 @@ label{
     $('.select2').select2();
 });
       </script>
-    <script type='text/javascript'>
-  
-  Dropzone.autoDiscover = false;
-  var myDropzone = new Dropzone(".dropzone", { 
-      autoProcessQueue: false,
-      parallelUploads: 10 // Number of files process at a time (default 2)
-  });
- 
-  $('#uploadfiles').click(function(){
-      myDropzone.processQueue();
-  });
-  </script>
+          <script>
+    // Init dropzone instance
+    Dropzone.autoDiscover = false
+    const myDropzone = new Dropzone('#my-awesome-dropzone', {
+      autoProcessQueue: false
+    })
+
+    // Submit
+    const $button = document.getElementById('submit-files')
+    $button.addEventListener('click', function () {
+      // Retrieve selected files
+      autoProcessQueue: true
+      const acceptedFiles = myDropzone.getAcceptedFiles()
+      for (let i = 0; i < acceptedFiles.length; i++) {
+        setTimeout(function () {
+          myDropzone.processFile(acceptedFiles[i])
+        }, i * 2000)
+      }
+    })
+    </script>
 
 
       <!--<script type="text/javascript">
