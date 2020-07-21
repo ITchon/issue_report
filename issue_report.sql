@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2020 at 03:22 AM
+-- Generation Time: Jul 21, 2020 at 08:43 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `issue_report`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `issue_img`
+--
+
+CREATE TABLE `issue_img` (
+  `img_id` int(11) NOT NULL,
+  `is_id` int(11) NOT NULL,
+  `file_n` varchar(255) NOT NULL,
+  `file_code` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `issue_img`
+--
+
+INSERT INTO `issue_img` (`img_id`, `is_id`, `file_n`, `file_code`) VALUES
+(26, 18, 'dFQROr7oWzulq5FZUECpkdj6ZGFynWStAOiq4RO7nWZMSTo9gWgQtHny3D6wmDYehyX.jpg', '44b849ccfa074ada5a671f8290099aef.jpg');
 
 -- --------------------------------------------------------
 
@@ -47,9 +67,15 @@ CREATE TABLE `sys_issue` (
   `entered_by` varchar(255) NOT NULL,
   `date_created` datetime NOT NULL,
   `date_updated` datetime NOT NULL,
-  `delete_flag` varchar(1) NOT NULL,
-  `file` varchar(255) NOT NULL
+  `delete_flag` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sys_issue`
+--
+
+INSERT INTO `sys_issue` (`is_id`, `pj_id`, `plant`, `date_identified`, `is_des`, `priority`, `owner_id`, `date_er`, `escalation_required`, `imp_sum`, `act_step`, `is_type`, `cur_st`, `final_rs`, `is_note`, `entered_by`, `date_created`, `date_updated`, `delete_flag`) VALUES
+(17, 4, 'Phase 10', '2020-07-08 00:00:00', 'เกิดจากฝนตกหนักต่อเนื่องกันเป็นเวลานาน บางครั้งทำให้เกิดแผ่นดินถล่ม อาจมีสาเหตุจากพายุหมุนเขตร้อนลมมรสุมมีกำลังแรง มีกำลังแรง ร่องความกดอากาศต่ำมีกำลังแรง อากาศแปรปรวน น้ำทะเลหนุนแผ่นดินไหว เขื่อนพัง ทำให้เกิดอุทกภัยได้เสมอ', 'Critical', 1, '2020-07-24 00:00:00', 'Yes', '1. อันตรายและความเสียหายต่อชีวิต ทรัพย์สิน อาคาร บ้านเรือน โดยตรง เกิดน้ำท่วมในบ้านเมือง โรงงาน คลังพัสดุ โกดังสินค้า บ้านเรือนไม่แข็งแรง อาจถูกกระแสน้ำไหลเชี่ยวพังทลาย หรือคลื่นซัดลงไปทะเลไปได้ ผู้คน สัตว์พาหนะ สัตว์เลี้ยง อาจจมน้ำตาย หรือถูกพัดพาไปกับกร', '1. ติดตามสภาวะอากาศ ฟังคำเตือนจากกรมอุตุนิยมวิทยา\r\n\r\n2. ฝึกซ้อมการป้องกันภัยพิบัติ เตรียมพร้อมรับมือและวางแผนอพยพหากจำเป็น\r\n\r\n3. เตรียมน้ำดื่ม เครื่องอุปโภค บริโภค ไฟฉาย แบตเตอรี่ วิทยุกระเป๋าหิ้วติดตามข่าวสาร\r\n\r\n4. ซ่อมแซมอาคารให้แข็งแรง เตรียมป้องกันภัย', 'Informational', 'Open', 'รอการระบาย', 'นะจ๊ะ', 'Talerngsak', '2020-07-21 13:15:09', '2020-07-21 13:15:09', '1');
 
 -- --------------------------------------------------------
 
@@ -89,6 +115,7 @@ INSERT INTO `sys_menus` (`m_id`, `mg_id`, `name`, `method`, `link`, `enable`, `o
 ('33', '6', 'Manage Project', 'projects/manage', 'projects/manage', '1', '7', NULL),
 ('34', '6', 'Add Projects', 'projects/add', 'projects/add', '1', '0', NULL),
 ('35', '7', 'Add Issue', 'issue/add', 'issue/add', '1', '0', NULL),
+('36', '8', 'Manage Report', 'report/manage', 'report/manage', '1', '0', NULL),
 ('4', '12', 'Permission Group', 'permissiongroup/manage', 'permissiongroup/manage', '1', '2', '20/3/2015 00:00:00'),
 ('5', '2', 'Add User', 'user/add', 'user/add', '1', '1', '20/3/2015 00:00:00'),
 ('6', '2', 'Manage User', 'user/manage', 'user/manage', '1', '2', '20/3/2015 00:00:00'),
@@ -123,6 +150,7 @@ INSERT INTO `sys_menu_groups` (`mg_id`, `name`, `link`, `icon_menu`, `enable`, `
 (5, 'Groups', 'usergroup/manage', 'fa-group', '1', 4, '2015-03-20 00:00:00'),
 (6, 'Projects', 'projects/manage', 'fa fa-check-square-o', '1', 7, NULL),
 (7, 'Issue', 'issue/manage', 'fa fa-check-square-o', '1', 8, NULL),
+(8, 'Report', 'report/manage', ' fa-wrench\r\n', '1', 9, NULL),
 (12, 'Permissions Groups', 'permissiongroup/manage', ' fa-wrench\n', '1', 6, '2020-06-22 15:16:15');
 
 -- --------------------------------------------------------
@@ -243,7 +271,8 @@ CREATE TABLE `sys_projects` (
 --
 
 INSERT INTO `sys_projects` (`pj_id`, `pj_name`, `pj_des`, `enable`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Project01', 'เทสๆ', '1', '1', '2020-07-16 09:06:24', '2020-07-16 09:06:24');
+(4, 'น้ำท่วม', 'รอการระบาย', '1', '1', '2020-07-21 09:50:31', '2020-07-21 09:50:31'),
+(5, 'ประชาชนชุมนุม', 'เป็นภัยต่อความมั่นคงระดับชาติ', '1', '1', '2020-07-21 09:51:11', '2020-07-21 09:51:11');
 
 -- --------------------------------------------------------
 
@@ -275,7 +304,7 @@ CREATE TABLE `sys_users` (
 INSERT INTO `sys_users` (`su_id`, `sug_id`, `username`, `password`, `firstname`, `lastname`, `gender`, `email`, `enable`, `last_access`, `date_created`, `date_updated`, `delete_flag`, `date_deleted`) VALUES
 (1, 1, 'sadmin', 'dGVhbWludw==', 'Talerngsak', 'Klangsatorn', 'male', 'talerngsak@tbkk.co.th', '1', '2019-01-23 09:16:00', '2019-01-23 09:16:00', '2020-07-16 09:07:08', '1', NULL),
 (2, 2, 'talerngsak', 'YWExMjM0NTY=', 'Talerngsak', 'Klangsatorn', 'male', 'talerngsak@tbkk.co.th', '1', NULL, '2020-02-05 15:20:48', '2020-04-09 16:52:29', '1', NULL),
-(3, 3, 'samart', 'YWExMjM0NTY=', 'Samart', 'Thanomchart', 'male', 'samart@tbkk.co.th', '1', NULL, '2020-02-05 15:21:44', '2020-04-09 16:52:22', '1', '2020-03-03 13:34:16'),
+(3, 3, 'samart', 'YWExMjM0NTY=', 'Samart', 'Thanomchart', 'male', 'samart@tbkk.co.th', '1', NULL, '2020-02-05 15:21:44', '2020-07-21 08:07:10', '1', '2020-03-03 13:34:16'),
 (4, 3, 'ABC', 'YWExMjM0NTY=', 'Aksarapak', 'Daotaisong', 'female', 'aksarapak@tbkk.co.th', '1', NULL, '2020-02-05 15:22:19', '2020-07-15 13:14:11', '1', '2020-06-29 09:44:54'),
 (5, 3, 'sawanant', 'YWExMjM0NTY=', 'Sawanant', 'Siritipchintana', 'male', 'sawanant@tbkk.co.th', '1', NULL, '2020-02-05 15:23:29', '2020-07-03 08:27:39', '1', NULL),
 (6, 1, 'TEST', 'YWExMjM0NTY=', 'TEST', 'TEST', 'female', 'TEST@tbkk.co.th', '1', NULL, '2020-02-05 15:24:13', '2020-05-27 11:39:30', '1', NULL),
@@ -451,6 +480,12 @@ INSERT INTO `sys_user_groups` (`sug_id`, `name`, `enable`, `date_created`, `dele
 --
 
 --
+-- Indexes for table `issue_img`
+--
+ALTER TABLE `issue_img`
+  ADD PRIMARY KEY (`img_id`);
+
+--
 -- Indexes for table `sys_issue`
 --
 ALTER TABLE `sys_issue`
@@ -521,10 +556,16 @@ ALTER TABLE `sys_user_groups`
 --
 
 --
+-- AUTO_INCREMENT for table `issue_img`
+--
+ALTER TABLE `issue_img`
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `sys_issue`
 --
 ALTER TABLE `sys_issue`
-  MODIFY `is_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `is_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `sys_owner`
@@ -548,7 +589,7 @@ ALTER TABLE `sys_permission_groups`
 -- AUTO_INCREMENT for table `sys_projects`
 --
 ALTER TABLE `sys_projects`
-  MODIFY `pj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sys_users`
