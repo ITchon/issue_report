@@ -25,7 +25,9 @@ class Issue extends CI_Controller {
     {   
         //$this->model->CheckPermission($this->session->userdata('su_id'));
         //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $sql =  'SELECT * FROM sys_issue  AS sis 
+        $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.date_identified,
+        sis.date_er,sis.date_er,sis.date_updated,sis.delete_flag
+        FROM sys_issue  AS sis 
         inner join sys_projects as sj on sj.pj_id = sis.pj_id 
     where sis.delete_flag != 0 ';
         $query = $this->db->query($sql); 
@@ -61,9 +63,6 @@ class Issue extends CI_Controller {
 
     public function upload(){
 
-          if(redirect('issue/add','refresh')){
-            $this->session->set_userdata('is_id','');
-          }
         $plant =  $this->input->post('plant');
         $pj_id  =  $this->input->post('pj_id');
         $date_iden =  $this->input->post('date_iden');
@@ -79,7 +78,6 @@ class Issue extends CI_Controller {
         $frr =  $this->input->post('frr');
         $note =  $this->input->post('note');
         $file = $_FILES['file']['name'];
-        $this->session->set_flashdata('file',$file);
         $fname = $this->session->userdata('firstname');
 
         $config['upload_path'] = 'uploads/'; 
@@ -88,24 +86,27 @@ class Issue extends CI_Controller {
         $config['encrypt_name'] = TRUE;
 
           if($plant != null){
-            $last_id = $this->model->insert_issue($plant,$pj_id,$date_iden,$is_des,
+        $last_id = $this->model->insert_issue($plant,$pj_id,$date_iden,$is_des,
         $priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,
         $frr,$note,$fname);
         $is_id = $last_id;
-        $this->session->set_userdata('is_id',$is_id);
+        $this->session->set_flashdata('is_id',$is_id);
           }
+          $is_id = $this->session->flashdata('is_id');
             //Load upload library
+          $config['is_id'] = $is_id;
           $this->load->library('upload',$config); 
           $this->upload->initialize($config);
 
-          if ($this->upload->do_upload('file')) {
-            $uploaded = $this->upload->data();
+          if(!$this->upload->do_upload('file')) {
+            redirect('issue/add','refresh');   
+ }else{
+    $uploaded = $this->upload->data();
     $code = array('filename'  => $uploaded['file_name']);
-    $this->session->set_flashdata('code',$code);
-    $is_id = $this->session->userdata('is_id');
-    $code = $this->session->flashdata('code');
-    $file = $this->session->flashdata('file');
-  
+    $is_id = array('is_id'  => $uploaded['is_id']);
+    foreach ($is_id as $is) {
+      $is_id = $is;
+    }
   foreach ($code as $c) {
   $this->model->insert_img($is_id,$file,$c);
    }
@@ -115,82 +116,6 @@ class Issue extends CI_Controller {
         
      
       }
-      public function uploadlol()
-    {       
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = '*';
-            $config['encrypt_name'] = TRUE;
-        $d_no =  $this->input->post('d_no');
-        $dcn_id =  $this->input->post('dcn_id');
-        $p_no =  $this->input->post('p_no');
-        $p_name =  $this->input->post('p_name');
-        $path =  $this->input->post('path');
-        $file = $_FILES['file_name']['name'];
-        
-
-
-      $num= $this->db->query("SELECT * FROM drawing where d_no = '$d_no'"); 
-  $chk= $num->num_rows();
- if($chk != 0){
-    $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-          <span> ชื่อนี้ถูกใช้เเล้วd</span>
-        </div> ');
-        $this->session->set_flashdata('d_no',$d_no);
-      
- }else if($chk != 1){
-    $num= $this->db->query("SELECT * FROM part where p_no = '$p_no'"); 
-  $chk= $num->num_rows();
-  if($chk>=1){
-    $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-          <span> ชื่อนี้ถูกใช้เเล้วp</span>
-        </div> ');
-        $this->session->set_flashdata('p_no',$p_no);
-     
- }else{
-      $this->load->library('upload', $config);
-      $this->upload->initialize($config);
-          if ( ! $this->upload->do_upload('file_name'))
-          {
-          echo "<script>";
-          echo 'alert(" File Failed ");';
-          echo 'history.go(-1);';
-          echo '</script>';
-          exit();
-          redirect('drawing/add','refresh');   
-          }
-          else
-          {
-      if($p_no != null || $p_name != null){
-        $uploaded = $this->upload->data();
-    $code = array('filename'  => $uploaded['file_name']);
-    foreach ($code as $c) {
-      $last_id = $this->model->insert_drawing($d_no, $dcn_id, $path, $file,$c);
-      $d_id = $last_id;
-      $result = $this->model->insert_part1($p_no,$p_name,$d_id);
-  }
-      $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
-        <span> เพิ่มข้อมูลเรียบร้อยเเล้ว </span>
-      </div> ');
-  }else{
-    $uploaded = $this->upload->data();
-    $code = array('filename'  => $uploaded['file_name']);
-    foreach ($code as $c) {
-        $last_id = $this->model->insert_drawing($d_no, $dcn_id, $path, $file, $c);
-    }  
-      $this->session->set_flashdata('success','<div class="alert alert-success hide-it">
-        <span> เพิ่มข้อมูลเรียบร้อยเเล้ว </span>
-      </div> ');
-  } 
-
-          }
-  
-}
-    
-}     redirect('drawing/add','refresh');    
-
-
-
-}
 
     
     
