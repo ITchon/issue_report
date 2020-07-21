@@ -53,28 +53,34 @@ class Report extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function upload(){
+    public function multiple_upload(){
 
-        if(!empty($_FILES['file']['name'])){
-     
-          // Set preference
-          $config['upload_path'] = 'uploads/'; 
-          $config['allowed_types'] = '*';
-          $config['max_size'] = '102400'; // max_size in kb
-          $config['file_name'] = $_FILES['file']['name'];
-     
-          //Load upload library
-          $this->load->library('upload',$config); 
-     
-          // File upload
-          if($this->upload->do_upload('file')){
-            // Get data about the file
-            $uploadData = $this->upload->data();
-          }
-          
-        }
-        redirect('issue/add','refresh'); 
-     
+      $is_id = $this->model->test();
+      if(isset($_FILES['filename']) && !empty($_FILES['filename']['name'])) 
+        {
+          $filesCount = count($_FILES['filename']['name']);
+          for($i = 0; $i < $filesCount; $i++){
+          $_FILES['file']['name']  = $_FILES['filename']['name'][$i];
+          $_FILES['file']['type']  = $_FILES['filename']['type'][$i];
+          $_FILES['file']['tmp_name'] = $_FILES['filename']['tmp_name'][$i];
+          $_FILES['file']['error']    = $_FILES['filename']['error'][$i];
+          $_FILES['file']['size']     = $_FILES['filename']['size'][$i];
+          $config['upload_path'] = './upload/'; 
+          $config['allowed_types'] = 'jpg|jpeg|png|JPEG|JPG|PNG';
+          $this->load->library('upload', $config);
+          $this->upload->initialize($config);
+               if($this->upload->do_upload('file')){
+                   $fileData = $this->upload->data();
+                   $uploadData[$i]['filedata'] = $fileData['file_name'];
+              }
+           }
+           if(!empty($uploadData)){
+
+                $result = $this->model->upload($uploadData,$is_id);
+                echo "Files uploaded successfully.";
+           }
+           
+         }
       }
 
     

@@ -17184,7 +17184,7 @@ footer .pull-center {
 .card.bg-success,
 .card.card-rotate.bg-success .front,
 .card.card-rotate.bg-success .back {
-  background: linear-gradient(60deg, #66bb6a, #388e3c);
+  background: linear-gradient(60deg, rgb(0 0 0 / 0.95), rgb(0 0 0 / 0.95));
 }
 
 .card .card-header-warning,
@@ -17229,7 +17229,8 @@ footer .pull-center {
 }
 
 .card .card-header-success {
-  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgba(76, 175, 80, 0.6);
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.2), 0 13px 24px -11px rgb(0 0 0 / 60%);
+
 }
 
 .card [class*="header-"],

@@ -17,7 +17,6 @@ class Issue extends CI_Controller {
         $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
          $menu['mg']= $this->model->givemeid($url);
          $menu['submenu']= $query->result();
-         
          $this->load->view('menu',$menu);
        
     }

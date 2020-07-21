@@ -500,7 +500,25 @@ public function disablePermission_Group($key=''){
     return false;
  }
  }
+ 
+ public function upload($uploadData,$id){
+ foreach($uploadData as $r){
+  $file_name = $r['filedata'];
+    $sql  = "INSERT INTO `image`(`i_id`, `is_id`, `file_name`) 
+    VALUES ('',$id,'$file_name')";
+  $query= $this->db->query($sql); 
+ }
 
+  }
+ public function test(){
+
+    $sql  = "INSERT INTO `sys_issue`(`is_id`, `file`) 
+    VALUES ('','test')";
+  $query= $this->db->query($sql); 
+  $lasted_id= $this->db->insert_id(); 
+  return $lasted_id;
+
+  }
   
 }
 
