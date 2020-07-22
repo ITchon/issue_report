@@ -29,10 +29,11 @@ class Issue extends CI_Controller {
         sis.date_er,sis.date_er,sis.date_updated,sis.delete_flag
         FROM sys_issue  AS sis 
         inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-    where sis.delete_flag != 0 ';
+         where sis.delete_flag != 0 ';
         $query = $this->db->query($sql); 
        $data['result'] = $query->result(); 
         $this->load->view('issue/manage',$data);//bring $data to user_data 
+        $this->load->view('issue/img_modal');//bring $data to user_data 
         $this->load->view('footer');
     }
 
