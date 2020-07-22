@@ -10,6 +10,7 @@ public function __construct()
         parent::__construct();
      $this->load->helper('url');
         $this->load->model('model');
+        $this->load->model('model_issue');
     }
  
  
@@ -20,12 +21,25 @@ public function __construct()
         $id = $this->input->post('id');
          
         $data = $this->model->get_by_id($id);
-          
+        
         $arr = array('success' => false, 'data' => '');
         if($data){
         $arr = array('success' => true, 'data' => $data);
         }
         echo json_encode($arr);
+      
+    }
+ 
+    public function edit_issue()
+    {
+        $id = $this->input->post('id');
+        $data = $this->model_issue->issue_by_id($id);
+        $arr = array('success' => false, 'data' => '');
+        if($data){
+            $arr = array('success' => true, 'data' => $data);
+            }
+        echo json_encode($arr);
+
     }
  
     public function store()
