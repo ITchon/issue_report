@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2020 at 08:43 AM
+-- Generation Time: Jul 22, 2020 at 09:42 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -40,7 +40,44 @@ CREATE TABLE `issue_img` (
 --
 
 INSERT INTO `issue_img` (`img_id`, `is_id`, `file_n`, `file_code`) VALUES
-(26, 18, 'dFQROr7oWzulq5FZUECpkdj6ZGFynWStAOiq4RO7nWZMSTo9gWgQtHny3D6wmDYehyX.jpg', '44b849ccfa074ada5a671f8290099aef.jpg');
+(26, 18, 'dFQROr7oWzulq5FZUECpkdj6ZGFynWStAOiq4RO7nWZMSTo9gWgQtHny3D6wmDYehyX.jpg', '44b849ccfa074ada5a671f8290099aef.jpg'),
+(27, 18, 'dFQROr7oWzulq5FZUECpkdj6ZGFynWStAOiq4RO7nWZMSTo9gWgQtHny3D6wmDYehyX.jpg', '9ede2899ff78cda5a111c65f90f80d03.jpg'),
+(28, 20, 'dFQROr7oWzulq5FZUECpkdj6ZGFynWStAOiq4RO7nWZMSTo9gWgQtHny3D6wmDYehyX.jpg', '1c2c638f6b96c726bdcd43374a09d4c4.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prdsales`
+--
+
+CREATE TABLE `prdsales` (
+  `s_id` int(11) NOT NULL,
+  `totals` float(10,2) NOT NULL,
+  `datesave` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `prdsales`
+--
+
+INSERT INTO `prdsales` (`s_id`, `totals`, `datesave`) VALUES
+(1, 22.00, '2018-06-13'),
+(3, 33.00, '2016-06-13'),
+(4, 111.00, '2017-06-30'),
+(5, 90.00, '2017-07-15'),
+(6, 30000.00, '2018-01-05'),
+(7, 200000.00, '2017-06-16'),
+(8, 25500.00, '2017-06-07'),
+(9, 4800.00, '2017-06-29'),
+(10, 9999.00, '2017-06-16'),
+(11, 5200.00, '2017-06-27'),
+(12, 100000.00, '2016-07-03'),
+(13, 50000.00, '2018-01-10'),
+(14, 8500.00, '2018-01-09'),
+(15, 70000.00, '2015-01-01'),
+(16, 98000.00, '2015-01-01'),
+(17, 50000.00, '2019-01-31'),
+(18, 20000.00, '2019-01-31');
 
 -- --------------------------------------------------------
 
@@ -75,7 +112,11 @@ CREATE TABLE `sys_issue` (
 --
 
 INSERT INTO `sys_issue` (`is_id`, `pj_id`, `plant`, `date_identified`, `is_des`, `priority`, `owner_id`, `date_er`, `escalation_required`, `imp_sum`, `act_step`, `is_type`, `cur_st`, `final_rs`, `is_note`, `entered_by`, `date_created`, `date_updated`, `delete_flag`) VALUES
-(17, 4, 'Phase 10', '2020-07-08 00:00:00', 'เกิดจากฝนตกหนักต่อเนื่องกันเป็นเวลานาน บางครั้งทำให้เกิดแผ่นดินถล่ม อาจมีสาเหตุจากพายุหมุนเขตร้อนลมมรสุมมีกำลังแรง มีกำลังแรง ร่องความกดอากาศต่ำมีกำลังแรง อากาศแปรปรวน น้ำทะเลหนุนแผ่นดินไหว เขื่อนพัง ทำให้เกิดอุทกภัยได้เสมอ', 'Critical', 1, '2020-07-24 00:00:00', 'Yes', '1. อันตรายและความเสียหายต่อชีวิต ทรัพย์สิน อาคาร บ้านเรือน โดยตรง เกิดน้ำท่วมในบ้านเมือง โรงงาน คลังพัสดุ โกดังสินค้า บ้านเรือนไม่แข็งแรง อาจถูกกระแสน้ำไหลเชี่ยวพังทลาย หรือคลื่นซัดลงไปทะเลไปได้ ผู้คน สัตว์พาหนะ สัตว์เลี้ยง อาจจมน้ำตาย หรือถูกพัดพาไปกับกร', '1. ติดตามสภาวะอากาศ ฟังคำเตือนจากกรมอุตุนิยมวิทยา\r\n\r\n2. ฝึกซ้อมการป้องกันภัยพิบัติ เตรียมพร้อมรับมือและวางแผนอพยพหากจำเป็น\r\n\r\n3. เตรียมน้ำดื่ม เครื่องอุปโภค บริโภค ไฟฉาย แบตเตอรี่ วิทยุกระเป๋าหิ้วติดตามข่าวสาร\r\n\r\n4. ซ่อมแซมอาคารให้แข็งแรง เตรียมป้องกันภัย', 'Informational', 'Open', 'รอการระบาย', 'นะจ๊ะ', 'Talerngsak', '2020-07-21 13:15:09', '2020-07-21 13:15:09', '1');
+(17, 4, 'Phase 10', '2020-07-08 00:00:00', 'เกิดจากฝนตกหนักต่อเนื่องกันเป็นเวลานาน บางครั้งทำให้เกิดแผ่นดินถล่ม อาจมีสาเหตุจากพายุหมุนเขตร้อนลมมรสุมมีกำลังแรง มีกำลังแรง ร่องความกดอากาศต่ำมีกำลังแรง อากาศแปรปรวน น้ำทะเลหนุนแผ่นดินไหว เขื่อนพัง ทำให้เกิดอุทกภัยได้เสมอ', 'Critical', 1, '2020-07-24 00:00:00', 'Yes', '1. อันตรายและความเสียหายต่อชีวิต ทรัพย์สิน อาคาร บ้านเรือน โดยตรง เกิดน้ำท่วมในบ้านเมือง โรงงาน คลังพัสดุ โกดังสินค้า บ้านเรือนไม่แข็งแรง อาจถูกกระแสน้ำไหลเชี่ยวพังทลาย หรือคลื่นซัดลงไปทะเลไปได้ ผู้คน สัตว์พาหนะ สัตว์เลี้ยง อาจจมน้ำตาย หรือถูกพัดพาไปกับกร', '1. ติดตามสภาวะอากาศ ฟังคำเตือนจากกรมอุตุนิยมวิทยา\r\n\r\n2. ฝึกซ้อมการป้องกันภัยพิบัติ เตรียมพร้อมรับมือและวางแผนอพยพหากจำเป็น\r\n\r\n3. เตรียมน้ำดื่ม เครื่องอุปโภค บริโภค ไฟฉาย แบตเตอรี่ วิทยุกระเป๋าหิ้วติดตามข่าวสาร\r\n\r\n4. ซ่อมแซมอาคารให้แข็งแรง เตรียมป้องกันภัย', 'Informational', 'Open', 'รอการระบาย', 'นะจ๊ะ', 'Talerngsak', '2019-09-01 15:55:12', '2020-07-21 13:15:09', '1'),
+(18, 5, 'Phase 10', '2020-07-15 00:00:00', 'หฟกหฟกหฟก', 'Critical', 1, '2020-07-24 00:00:00', 'No', 'หฟดหกดหดกหฟดฟดกหฟด', 'กฟหดฟหดหฟดหกฟดหกฟ', 'Informational', 'Closed', 'ดกดกดก', 'หกดหกดกหดกกหหกกหกหดกหก', 'Talerngsak', '2020-01-04 11:56:15', '2020-07-21 14:09:50', '1'),
+(19, 4, 'Phase 8', '2020-07-02 00:00:00', 'ฟหกหฟกฟหกฟหก', 'High', 1, '2020-07-22 00:00:00', 'Yes', 'ฟห', 'หกฟหกฟหกฟ', 'System', 'Open', 'หกฟหกฟ', 'หกฟหกฟ', 'Talerngsak', '2020-06-06 14:13:53', '2020-07-21 14:13:53', '1'),
+(20, 2, 'Phase 8', '2020-07-02 00:00:00', 'ฟหกหฟกฟหกฟหก', 'High', 1, '2020-07-22 00:00:00', 'Yes', 'ฟห', 'หกฟหกฟหกฟ', 'System', 'Open', 'หกฟหกฟ', 'หกฟหกฟ', 'Talerngsak', '2020-07-21 11:46:00', '2020-06-21 14:13:53', '1'),
+(21, 3, 'Phase 8', '2020-07-02 00:00:00', 'ฟหกหฟกasdaaaaaaaaaaaaaa', 'High', 1, '2020-07-22 00:00:00', 'Yes', 'ฟห', 'หกฟหกฟหกฟ', 'System', 'Work In Progress', 'หกฟหกฟ', 'หกฟหกฟ', 'Talerngsak', '2020-07-21 14:13:53', '2020-07-21 14:13:53', '1');
 
 -- --------------------------------------------------------
 
@@ -486,6 +527,12 @@ ALTER TABLE `issue_img`
   ADD PRIMARY KEY (`img_id`);
 
 --
+-- Indexes for table `prdsales`
+--
+ALTER TABLE `prdsales`
+  ADD PRIMARY KEY (`s_id`);
+
+--
 -- Indexes for table `sys_issue`
 --
 ALTER TABLE `sys_issue`
@@ -559,13 +606,19 @@ ALTER TABLE `sys_user_groups`
 -- AUTO_INCREMENT for table `issue_img`
 --
 ALTER TABLE `issue_img`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `prdsales`
+--
+ALTER TABLE `prdsales`
+  MODIFY `s_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `sys_issue`
 --
 ALTER TABLE `sys_issue`
-  MODIFY `is_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `is_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `sys_owner`
