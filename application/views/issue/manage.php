@@ -24,7 +24,7 @@
                         <th>Date Identifiled</th>
                         <th>Date Expect Solution</th>
                         <th>Date Entered</th>
-                        <th class="text-center" width="20%">Manage</th>
+                        <th class="text-center" width="15%">Manage</th>
                        
                       </tr>
                     </thead>

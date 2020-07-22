@@ -7,22 +7,32 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-
               <div class="card">
                 <div class="card-header card-header-rose">
                   <h4 class="card-title ">User Table  <a href="<?php echo base_url()?>user/add"><button class="btn btn-success ">ADD</button></a></h4>
+                    
+                    <?php 
+                    $month = array("01","02","03","04","05","06","07","08","09","10","11","12");
+                    $total = array();
 
+                    foreach($resulty as $r){
+                      array_push($total, $r->total);
+                    }
+                  
+                  
+                    echo "<br>";
+                    print_r($total);
+                    $totol = implode(",", $total); 
+                    
+                    
+                    ?>
                 </div>
            <div class="col-md-12">
            <div class="row py-2">
-           <form method="post" enctype="multipart/form-data" action="<?php echo   base_url('report/multiple_upload'); ?>">
-    <input type="file" name="filename[]"  multiple="true">
-    <button type="submit">Upload</button>
-</form>
            <div class="col-md-12 py-1">
               <div class="card" >
               <div class="card-header ">
-              Monthly Issue Bar Chart Report ( Year : 2020 )
+              Monthly Issue Bar Chart Report ( Year : <?php echo date("Y", strtotime('today'));?> )
                 </div>
                 <div class="card-body ">
                   <canvas id="chBar" width="800px" height="150px" style="min-height:auto;min-width:auto"></canvas>
@@ -34,7 +44,7 @@
             <div class="card">
                 <div class="card-body">
                 <div class="card-header ">
-                Issue Donut Graph ( Month : Jul )
+                Issue Donut Graph ( Month : <?php echo date("F", strtotime('today'));?> )
                 </div>
                   <canvas id="chDonut1" ></canvas>
                 </div>
@@ -44,7 +54,7 @@
             <div class="card">
                 <div class="card-body ">
                 <div class="card-header ">
-                Issue Donut Graph ( Day : 21 )
+                Issue Donut Graph ( Day : <?php echo date("d", strtotime('today'));?> ) 
                 </div>
                     <canvas id="chDonut2"></canvas>
                 </div>
@@ -82,12 +92,16 @@ var donutOptions = {
 
 // donut 1
 var chDonutData1 = {
-    labels: ['Bootstrap', 'Popper', 'Other'],
+    labels: ['Total', 'Open', 'Closed','Work in progress'],
     datasets: [
       {
         backgroundColor: colors.slice(0,3),
         borderWidth: 0,
-        data: [74, 11, 40]
+        data: [<?php echo $resultm[0]->total ?>,
+        <?php echo $resultm_open[0]->total ?>,
+        <?php echo $resultm_close[0]->total ?>,
+        <?php echo $resultm_work[0]->total ?>
+      ]
       }
     ]
 };
@@ -102,12 +116,16 @@ if (chDonut1) {
 }
 
 var chDonutData2 = {
-    labels: ['Wips', 'Pops', 'Dags'],
+    labels: ['Total', 'Open', 'Closed','Work in progress'],
     datasets: [
       {
         backgroundColor: colors.slice(0,3),
         borderWidth: 0,
-        data: [40, 45, 30]
+        data: [<?php echo $resultd[0]->total ?>,
+        <?php echo $resultd_open[0]->total ?>,
+        <?php echo $resultd_close[0]->total ?>,
+        <?php echo $resultd_work[0]->total ?>
+      ]
       }
     ]
 };
@@ -119,24 +137,22 @@ if (chDonut2) {
       options: donutOptions
   });
 }
-
 // chart colors
 var colors = ['#007bff','#28a745','#444444','#c3e6cb','#dc3545','#6c757d'];
-
 var chBar = document.getElementById("chBar");
 var chartData = {
-  labels: ["S", "M", "T", "W", "T", "F", "S"],
+  labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
   datasets: [
   {
-    data: [209, 245, 383, 403, 589, 692, 580],
+    data: [<?php echo $totol;?>],
     backgroundColor: colors[1]
   },
   {
-    data: [489, 135, 483, 290, 189, 603, 600],
+    data: [<?php echo $totol;?>],
     backgroundColor: colors[2]
   },
   {
-    data: [639, 465, 493, 478, 589, 632, 674],
+    data: [<?php echo $totol;?>],
     backgroundColor: colors[4]
   }]
 };
@@ -153,7 +169,7 @@ if (chBar) {
       }],
       yAxes: [{
         ticks: {
-          beginAtZero: false
+          beginAtZero: true
         }
       }]
     },

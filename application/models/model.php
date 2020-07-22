@@ -556,6 +556,174 @@ public function disablePermission_Group($key=''){
   return $lasted_id;
 
   }
+
+
+  public function issue_totalD()
+  {
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE DATE(`date_created`) = CURRENT_DATE()";
+  $query= $this->db->query($sql);
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_openD()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND DATE(`date_created`) = CURRENT_DATE()";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_closedD()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND DATE(`date_created`) = CURRENT_DATE()";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_workD()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND DATE(`date_created`) = CURRENT_DATE()";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+  public function issue_totalM()
+  {
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE month(`date_created`) = month(now())";
+  $query= $this->db->query($sql);
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_openM()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND month(`date_created`) = month(now())";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_closedM()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND month(`date_created`) = month(now())";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+
+ public function issue_workM()
+  {
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND month(`date_created`) = month(now())";
+  $query = $this->db->query($sql); 
+  $total = $query->result(); 
+  if($query){
+      return $total;
+  }else{
+    return false;
+ }
+ }
+
+ 
+ public function issue_totalY()
+ {
+   $sql="SELECT COUNT(is_id) AS total
+   FROM sys_issue 
+   WHERE year(`date_created`) = year(now())
+   GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+ $query= $this->db->query($sql);
+ $total = $query->result(); 
+ if($query){
+     return $total;
+ }else{
+   return false;
+}
+}
+
+
+public function issue_openY()
+ {
+  $sql="SELECT COUNT(is_id) AS total
+  FROM sys_issue 
+  WHERE cur_st = 'Open' AND year(`date_created`) = year(now())
+  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+ $query = $this->db->query($sql); 
+ $total = $query->result(); 
+ if($query){
+     return $total;
+ }else{
+   return false;
+}
+}
+
+
+public function issue_closedY()
+ {
+  $sql="SELECT COUNT(is_id) AS total
+  FROM sys_issue 
+  WHERE cur_st = 'Closed' AND year(`date_created`) = year(now())
+  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+ $query = $this->db->query($sql); 
+ $total = $query->result(); 
+ if($query){
+     return $total;
+ }else{
+   return false;
+}
+}
+
+
+public function issue_workY()
+ {
+  $sql="SELECT COUNT(is_id) AS total
+  FROM sys_issue 
+  WHERE cur_st = 'Work In Progress' AND year(`date_created`) = year(now())
+  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+ $query = $this->db->query($sql); 
+ $total = $query->result(); 
+ if($query){
+     return $total;
+ }else{
+   return false;
+}
+}
   
 }
 
