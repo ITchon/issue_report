@@ -23,7 +23,7 @@
                
                 <h3 class="modal-title">Attacth File</h3>
             </div>
-            <div class="modal-body form">
+            <div class="modal-body form text-center">
          
                                 <div id="show_data" ></div>
           

@@ -45,7 +45,7 @@
                         <th>Date Identifiled</th>
                         <th>Date Expect Solution</th>
                         <th>Date Entered</th>
-                        <th class="text-center" width="20%">Manage</th>
+                        <th class="text-center" width="auto">Manage</th>
                        
                       </tr>
                     </thead>
@@ -53,6 +53,21 @@
                       
                     <?php
                     foreach($result as $r){
+                      $color = null;
+                      switch ($r->priority) {
+                        case "Critical":
+                          $color = "text-danger";
+                          break;
+                        case "High":
+                          $color = "text-warning";
+                          break;
+                        case "Medium":
+                          $color = "text-primary";
+                          break;
+                        default:
+                          $color = "text-default";
+                      }
+               
                  echo "<tr>";
                  echo "<td style='text-align:center;'>
                  <label class='pos-rel'>
@@ -64,8 +79,8 @@
                echo "<td>".$r->pj_name."</td>";
                echo "<td>".$r->plant."</td>"; 
                echo "<td>".$r->cur_st."</td>";
-               echo "<td class='show-read-more'> ".$r->is_des."</td>";
-               echo "<td>".$r->priority."</td>";
+               echo "<td class='show-read-more' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>".$r->is_des."</h5>'  data-original-title='Rule'><span > ".$r->is_des."</span></td>";
+               echo "<td class=".$color.">".$r->priority."</td>";
                echo "<td>".$r->date_identified."</td>";
                echo "<td>".$r->date_er."</td>";
                echo "<td>".$r->date_updated."</td>";
@@ -149,14 +164,11 @@ $('body').on('click', '.view_img', function () {
 			var newStr = myStr.substring(0, maxLength);
 			var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
 			$(this).empty().html(newStr);
-			$(this).append(' <a href="javascript:void(0);"class="read-more">read more...</a>');
+			$(this).append(' <a class="read-more">.....</a>');
 			$(this).append('<span class="more-text">'+removedStr+'</span>');
 		}
 	});
-	$(".read-more").click(function(){
-		$(this).siblings(".more-text").contents().unwrap();
-		$(this).remove();
-  });
+
   
 
         $('#table').DataTable({
