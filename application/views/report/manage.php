@@ -2,6 +2,13 @@
   .card{
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
+  .chart-container {
+  position: relative;
+  margin: 20px;
+  height: 30vh;
+
+}
+
 </style>
 <div class="content">
         <div class="container-fluid">
@@ -19,8 +26,8 @@
               <div class="card-header ">
               Yearly Issue Report <b>( Year : <?php echo date("Y", strtotime('today'));?> )</b>
                 </div>
-                <div class="card-body ">
-                  <canvas id="chBar" width="800px" height="150px" style="min-height:auto;min-width:auto"></canvas>
+                <div class="chart-container" >
+                  <canvas id="chBar" ></canvas>
                 </div>
               </div>
             </div>
@@ -31,7 +38,7 @@
                 <div class="card-header ">
                 Monthly Issue Graph <b>( Month : <?php echo date("F", strtotime('today'));?> )</b> 
                 </div>
-                  <canvas id="chDonut1" ></canvas>
+                  <canvas id="chMonth" ></canvas>
                 </div>
             </div>
           </div>
@@ -41,7 +48,7 @@
                 <div class="card-header ">
                 Daily Issue Graph  <b>( Day : <?php echo date("d", strtotime('today'));?> ) </b>
                 </div>
-                    <canvas id="chDonut2"></canvas>
+                    <canvas id="chDay" ></canvas>
                 </div>
             </div>
         </div>
@@ -78,11 +85,11 @@ var colors = [$red,$blue,$yellow,$green];
 /* 3 donut charts */
 var donutOptions = {
   cutoutPercentage: 85, 
-  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}}
+  legend: {position:'bottom', padding:5}
 };
 
 // donut 1
-var chDonutData1 = {
+var chMonthData = {
     labels: ['Total', 'Open','Work in progress','Closed'],
     datasets: [
       {
@@ -93,16 +100,16 @@ var chDonutData1 = {
     ]
 };
 
-var chDonut1 = document.getElementById("chDonut1");
-if (chDonut1) {
-  new Chart(chDonut1, {
+var chMonth = document.getElementById("chMonth");
+if (chMonth) {
+  new Chart(chMonth, {
       type: 'pie',
-      data: chDonutData1,
+      data: chMonthData,
       options: donutOptions
   });
 }
 
-var chDonutData2 = {
+var chDayData = {
     labels: ['Total', 'Open','Work in progress' ,'Closed'],
     datasets: [
       {
@@ -112,11 +119,11 @@ var chDonutData2 = {
       }
     ]
 };
-var chDonut2 = document.getElementById("chDonut2");
-if (chDonut2) {
-  new Chart(chDonut2, {
+var chDay = document.getElementById("chDay");
+if (chDay) {
+  new Chart(chDay, {
       type: 'pie',
-      data: chDonutData2,
+      data: chDayData,
       options: donutOptions
   });
 }
@@ -145,7 +152,7 @@ var chartData = {
     label: 'Work in progress',
     data: <?php echo $wip ?>,
     backgroundColor: colors[2]
-  },
+  },  
   {
     label: 'Closed',
     data:<?php echo $close ?>,
@@ -158,6 +165,8 @@ if (chBar) {
   type: 'bar',
   data: chartData,
   options: {
+    maintainAspectRatio: false,
+        responsive: true, 
     scales: {
       xAxes: [{
         barPercentage: 0.5,
@@ -171,6 +180,7 @@ if (chBar) {
     },
     legend: {
       display: true, 
+      
     }
   }
   
