@@ -11,7 +11,6 @@
                 <div class="card-header card-header-rose">
                   <h4 class="card-title "> Issue Graph Report </h4>
                     
-
                 </div>
            <div class="col-md-12">
            <div class="row py-2">
