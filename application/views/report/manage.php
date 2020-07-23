@@ -9,30 +9,16 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">User Table  <a href="<?php echo base_url()?>user/add"><button class="btn btn-success ">ADD</button></a></h4>
+                  <h4 class="card-title "> Issue Graph Report </h4>
                     
-                    <?php 
-                    $month = array("01","02","03","04","05","06","07","08","09","10","11","12");
-                    $total = array();
 
-                    foreach($resulty as $r){
-                      array_push($total, $r->total);
-                    }
-                  
-                  
-                    echo "<br>";
-                    print_r($total);
-                    $totol = implode(",", $total); 
-                    
-                    
-                    ?>
                 </div>
            <div class="col-md-12">
            <div class="row py-2">
            <div class="col-md-12 py-1">
               <div class="card" >
               <div class="card-header ">
-              Monthly Issue Bar Chart Report ( Year : <?php echo date("Y", strtotime('today'));?> )
+              Yearly Issue Report <b>( Year : <?php echo date("Y", strtotime('today'));?> )</b>
                 </div>
                 <div class="card-body ">
                   <canvas id="chBar" width="800px" height="150px" style="min-height:auto;min-width:auto"></canvas>
@@ -44,7 +30,7 @@
             <div class="card">
                 <div class="card-body">
                 <div class="card-header ">
-                Issue Donut Graph ( Month : <?php echo date("F", strtotime('today'));?> )
+                Monthly Issue Graph <b>( Month : <?php echo date("F", strtotime('today'));?> )</b> 
                 </div>
                   <canvas id="chDonut1" ></canvas>
                 </div>
@@ -54,7 +40,7 @@
             <div class="card">
                 <div class="card-body ">
                 <div class="card-header ">
-                Issue Donut Graph ( Day : <?php echo date("d", strtotime('today'));?> ) 
+                Daily Issue Graph  <b>( Day : <?php echo date("d", strtotime('today'));?> ) </b>
                 </div>
                     <canvas id="chDonut2"></canvas>
                 </div>
@@ -82,7 +68,13 @@
 /* chart.js chart examples */
 
 // chart colors
-var colors = ['#dc3545','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+$red = '#dc3545';
+$green = '#28a745';
+$blue = '#007bff';
+$yellow = '#ffc800';
+
+var colors = [$red,$blue,$yellow,$green];
+
 
 /* 3 donut charts */
 var donutOptions = {
@@ -92,16 +84,12 @@ var donutOptions = {
 
 // donut 1
 var chDonutData1 = {
-    labels: ['Total', 'Open', 'Closed','Work in progress'],
+    labels: ['Total', 'Open','Work in progress','Closed'],
     datasets: [
       {
-        backgroundColor: colors.slice(0,3),
+        backgroundColor: colors.slice(0,4),
         borderWidth: 0,
-        data: [<?php echo $resultm[0]->total ?>,
-        <?php echo $resultm_open[0]->total ?>,
-        <?php echo $resultm_close[0]->total ?>,
-        <?php echo $resultm_work[0]->total ?>
-      ]
+        data: <?php echo $month_data; ?>
       }
     ]
 };
@@ -116,16 +104,12 @@ if (chDonut1) {
 }
 
 var chDonutData2 = {
-    labels: ['Total', 'Open', 'Closed','Work in progress'],
+    labels: ['Total', 'Open','Work in progress' ,'Closed'],
     datasets: [
       {
-        backgroundColor: colors.slice(0,3),
+        backgroundColor: colors.slice(0,4),
         borderWidth: 0,
-        data: [<?php echo $resultd[0]->total ?>,
-        <?php echo $resultd_open[0]->total ?>,
-        <?php echo $resultd_close[0]->total ?>,
-        <?php echo $resultd_work[0]->total ?>
-      ]
+        data:<?php echo $day_data; ?>
       }
     ]
 };
@@ -138,22 +122,35 @@ if (chDonut2) {
   });
 }
 // chart colors
-var colors = ['#007bff','#28a745','#444444','#c3e6cb','#dc3545','#6c757d'];
+$red = '#dc3545';
+$green = '#28a745';
+$blue = '#007bff';
+$yellow = '#ffc800';
+
+var colors = [$red,$blue,$yellow,$green];
 var chBar = document.getElementById("chBar");
 var chartData = {
   labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
   datasets: [
   {
-    data: [<?php echo $totol;?>],
+    label: 'Total',
+    data:<?php echo $total ?>,
+    backgroundColor: colors[0]
+  },
+  {
+    label: 'Open',
+    data: <?php echo $open ?>,
     backgroundColor: colors[1]
   },
   {
-    data: [<?php echo $totol;?>],
+    label: 'Work in progress',
+    data: <?php echo $wip ?>,
     backgroundColor: colors[2]
   },
   {
-    data: [<?php echo $totol;?>],
-    backgroundColor: colors[4]
+    label: 'Closed',
+    data:<?php echo $close ?>,
+    backgroundColor: colors[3]
   }]
 };
 
@@ -164,8 +161,8 @@ if (chBar) {
   options: {
     scales: {
       xAxes: [{
-        barPercentage: 0.4,
-        categoryPercentage: 0.5
+        barPercentage: 0.5,
+        categoryPercentage: 1
       }],
       yAxes: [{
         ticks: {
@@ -174,7 +171,7 @@ if (chBar) {
       }]
     },
     legend: {
-      display: false
+      display: true, 
     }
   }
   

@@ -10,6 +10,7 @@ class Report extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
+        $this->load->model('model_issue');
         $this->model->CheckSession();
         $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
@@ -17,41 +18,37 @@ class Report extends CI_Controller {
         $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
         $menu['mg']= $this->model->givemeid($url);
         $menu['submenu']= $query->result();
-         
          $this->load->view('menu',$menu);
        
     }
     public function manage()
     { 
+      $this->load->model('model_issue');
       $totalD = $this->model->issue_totalD();
-      $data['resultd'] = $totalD; 
       $openD = $this->model->issue_openD();
-      $data['resultd_open'] = $openD; 
       $closedD = $this->model->issue_closedD();
-      $data['resultd_close'] = $closedD; 
       $workD = $this->model->issue_workD();
-      $data['resultd_work'] = $workD;
+      $day = array( $totalD[0]->total, $openD[0]->total,$workD[0]->total, $closedD[0]->total);
+      $data['day_data'] = json_encode($day);
+
 
       $totalM = $this->model->issue_totalM();
-      $data['resultm'] = $totalM; 
       $openM = $this->model->issue_openM();
-      $data['resultm_open'] = $openM; 
       $closedM = $this->model->issue_closedM();
-      $data['resultm_close'] = $closedM; 
       $workM = $this->model->issue_workM();
-      $data['resultm_work'] = $workM; 
+      $month = array( $totalM[0]->total, $openM[0]->total, $workM[0]->total, $closedM[0]->total);
+      $data['month_data'] = json_encode($month);
 
+      
       $totalY = $this->model->issue_totalY();
-      $data['resulty'] = $totalY; 
       $openY = $this->model->issue_openY();
-      $data['resulty_open'] = $openY; 
       $closedY = $this->model->issue_closedY();
-      $data['resulty_close'] = $closedY; 
       $workY = $this->model->issue_workY();
-      $data['resulty_work'] = $workY;
 
-
-
+        $data['total'] = json_encode($this->model_issue->sort_month($totalY));
+        $data['open'] = json_encode($this->model_issue->sort_month($openY));
+        $data['close'] = json_encode($this->model_issue->sort_month($closedY));
+        $data['wip'] = json_encode($this->model_issue->sort_month($workY));
         $this->load->view('report/manage',$data);//bring $data to user_data 
         $this->load->view('footer');
     }
@@ -68,7 +65,6 @@ class Report extends CI_Controller {
         $query = $this->db->query($sql); 
         $data['result'] = $query->result(); 
 
-        
         $sqlSelG = "SELECT * FROM sys_projects WHERE delete_flag != 0";
         $query = $this->db->query($sqlSelG); 
         $data['result_p'] = $query->result(); 
