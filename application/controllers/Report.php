@@ -28,23 +28,25 @@ class Report extends CI_Controller {
       $openD = $this->model->issue_openD();
       $closedD = $this->model->issue_closedD();
       $workD = $this->model->issue_workD();
-      $day = array( $totalD[0]->total, $openD[0]->total,$workD[0]->total, $closedD[0]->total);
+      $day = array(  $openD[0]->total,$workD[0]->total, $closedD[0]->total);
       $data['day_data'] = json_encode($day);
+      $data['total_day'] = $totalD[0]->total;
 
 
       $totalM = $this->model->issue_totalM();
       $openM = $this->model->issue_openM();
       $closedM = $this->model->issue_closedM();
       $workM = $this->model->issue_workM();
-      $month = array( $totalM[0]->total, $openM[0]->total, $workM[0]->total, $closedM[0]->total);
+      $month = array( $openM[0]->total, $workM[0]->total, $closedM[0]->total);
       $data['month_data'] = json_encode($month);
-
+      $data['total_month'] = $totalM[0]->total;
       
       $totalY = $this->model->issue_totalY();
       $openY = $this->model->issue_openY();
       $closedY = $this->model->issue_closedY();
       $workY = $this->model->issue_workY();
 
+        $data['maxvalue'] =  (max(array_column($totalY, 'total')));
         $data['total'] = json_encode($this->model_issue->sort_month($totalY));
         $data['open'] = json_encode($this->model_issue->sort_month($openY));
         $data['close'] = json_encode($this->model_issue->sort_month($closedY));
