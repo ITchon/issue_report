@@ -46,9 +46,9 @@
             <div class="card">
                 <div class="card-body ">
                 <div class="card-header ">
-                Daily Issue Graph  <b>( Day : <?php echo date("d", strtotime('today'));?> ) </b>
+                Daily Issue Graph  <b>( Today : <?php echo date("d", strtotime('today'));?> ) </b>
                 </div>
-                    <canvas id="chDay" ></canvas>
+                    <canvas class="text-danger" id="chDay" ></canvas>
                 </div>
             </div>
         </div>
@@ -68,7 +68,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <script type="text/javascript">
 /* chart.js chart examples */
 /* chart.js chart examples */
@@ -77,7 +78,7 @@
 $red = '#dc3545';
 $green = '#28a745';
 $blue = '#007bff';
-$yellow = '#ffc800';
+$yellow = '#e2b820';
 
 var colors = [$red,$blue,$yellow,$green];
 
@@ -85,7 +86,27 @@ var colors = [$red,$blue,$yellow,$green];
 /* 3 donut charts */
 var donutOptions = {
   cutoutPercentage: 85, 
-  legend: {position:'bottom', padding:5}
+  plugins: {
+      datalabels: {
+        color: "#ffffff",
+        font: {
+          size: 14,
+        },
+      
+      }
+    },
+  legend: {
+    position:'bottom',
+     padding:5,
+     filter: function(legendItem, chartData) {
+                if (legendItem.datasetIndex === 0) {
+                  return false;
+                }
+               return true;
+               }
+            
+     },
+  
 };
 
 // donut 1
@@ -131,10 +152,11 @@ if (chDay) {
 $red = '#dc3545';
 $green = '#28a745';
 $blue = '#007bff';
-$yellow = '#ffc800';
+$yellow = '#e2b820';
 
 var colors = [$red,$blue,$yellow,$green];
 var chBar = document.getElementById("chBar");
+
 var chartData = {
   labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
   datasets: [
@@ -147,12 +169,13 @@ var chartData = {
     label: 'Open',
     data: <?php echo $open ?>,
     backgroundColor: colors[1]
-  },
+  }, 
   {
     label: 'Work in progress',
     data: <?php echo $wip ?>,
     backgroundColor: colors[2]
-  },  
+  },   
+
   {
     label: 'Closed',
     data:<?php echo $close ?>,
@@ -163,8 +186,25 @@ var chartData = {
 if (chBar) {
   new Chart(chBar, {
   type: 'bar',
+  
   data: chartData,
   options: {
+
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        formatter: Math.round,
+        font: {
+          weight: 'bold'
+        },
+        display: function(context) {
+          var index = context.dataIndex;
+          var value = context.dataset.data[index];
+          return value > 0; // display labels with a value greater than 0
+        }
+      }
+    },
     maintainAspectRatio: false,
         responsive: true, 
     scales: {
@@ -174,18 +214,32 @@ if (chBar) {
       }],
       yAxes: [{
         ticks: {
-          beginAtZero: true
+          
+          beginAtZero: true,
+          // userCallback: function(label, index, labels) {
+          //            // when the floored value is the same as the value we have a whole number
+          //            if (Math.floor(label) === label) {  
+          //                return label;
+          //            }
+
+          //        },
+                  //  max:10 
+                  suggestedMax: 11
+     
+               
         }
       }]
     },
+    
     legend: {
       display: true, 
-      
-    }
-  }
+      position:'top'
+     },
+   }
   
   });
 }
+
 
 
 </script>
