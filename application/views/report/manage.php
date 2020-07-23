@@ -14,12 +14,38 @@
                     <?php 
                     $month = array("01","02","03","04","05","06","07","08","09","10","11","12");
                     $total = array();
+                    print_r($month);
 
                     foreach($resulty as $r){
-                      array_push($total, $r->total);
+                      $rm =  $r->month;
+                      $rt = $r->total;
+                      echo $rm." : ";
+                      echo $rt."<br> ";
+                    }
+                    
+                    foreach($month as $m){
+                   //  if (in_array($m, $rm))
+                   //  {
+                   //    array_push($total, $rt);
+                   //  }
+                   //else
+                   //  {
+                   //    array_push($total, '0');
+                   //  }
+                   //}
+
+                   //if ($m == $rm)
+                   //   {
+                   //     array_push($total, $rt);
+                   //   }
+                   // else
+                   //   {
+                   //     array_push($total, '0');
+                   //   }
                     }
                   
-                  
+          
+                      
                     echo "<br>";
                     print_r($total);
                     $totol = implode(",", $total); 
