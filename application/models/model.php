@@ -546,7 +546,7 @@ public function disablePermission_Group($key=''){
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
-      return $total;
+      return $total[0]->total;
   }else{
     return false;
  }
@@ -559,7 +559,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }
@@ -572,7 +576,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }
@@ -585,7 +593,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }
@@ -598,7 +610,9 @@ public function disablePermission_Group($key=''){
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
-      return $total;
+
+      return $total[0]->total;
+    
   }else{
     return false;
  }
@@ -611,7 +625,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }
@@ -624,7 +642,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }
@@ -637,7 +659,11 @@ public function disablePermission_Group($key=''){
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
-      return $total;
+    if($total[0]->total == 0){
+      return null;
+    }else{
+      return $total[0]->total;
+    }
   }else{
     return false;
  }

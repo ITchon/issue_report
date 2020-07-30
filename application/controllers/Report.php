@@ -29,19 +29,19 @@ class Report extends CI_Controller {
       $openD = $this->model->issue_openD();
       $closedD = $this->model->issue_closedD();
       $workD = $this->model->issue_workD();
-      $day = array(  $openD[0]->total,$workD[0]->total, $closedD[0]->total);
+      $day = array( $openD,$workD, $closedD);
       $data['day_data'] = json_encode($day);
-      $data['total_day'] = $totalD[0]->total;
+      $data['total_day'] = $totalD;
 
 
       $totalM = $this->model->issue_totalM();
       $openM = $this->model->issue_openM();
       $closedM = $this->model->issue_closedM();
       $workM = $this->model->issue_workM();
-      $month = array( $openM[0]->total, $workM[0]->total, $closedM[0]->total);
+      $month = array( $openM, $workM, $closedM);
       $data['month_data'] = json_encode($month);
-      $data['total_month'] = $totalM[0]->total;
-      
+      $data['total_month'] = $totalM;
+
       $totalY = $this->model->issue_totalY();
       $openY = $this->model->issue_openY();
       $closedY = $this->model->issue_closedY();
