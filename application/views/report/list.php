@@ -21,7 +21,7 @@
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo form_open('#', array('id' => 'frm_usermanagement', 'name'=>'frm_usermanagement', 'class'=>'form-horizontal'));?>
-                  <table id="table" class="table ">
+                  <table id="dynamic-table" class="table ">
                   <thead>
                     <tr>
 								    	<td colspan="12">
@@ -29,7 +29,7 @@
 									    	<div id="btn_delete" class="btn btn-dark"><span class="fa fa-trash-o"></span></div>
 								    	</td>
 								    </tr>	
-                    <tr class="text-dark">
+                    <tr class="table-dark text-dark">
                         <th class="text-center">
 															<label class="pos-rel">
 																<input type="checkbox" class="ace" />
@@ -52,9 +52,7 @@
                     <tbody>
                       
                     <?php
-                    $i = 1 ;
                     foreach($result as $r){
-      
                       $color = null;
                       switch ($r->priority) {
                         case "Critical":
@@ -91,7 +89,7 @@
                      <span class='lbl'></span>
                    </label>
                </td>";
-               echo "<td>".$i."</td>";
+               echo "<td>"."$r->is_id"."</td>";
                echo "<td>".$r->pj_name."</td>";
                echo "<td>".$r->plant."</td>"; 
                echo "<td class=".$color2.">".$r->cur_st."</td>";
@@ -111,15 +109,14 @@
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
-                echo base_url() . 'issue/edit/' . $r->is_id;
+                echo base_url() . 'user/edit_u/' . $r->is_id;
                 ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>
 
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
-                echo base_url() . 'issue/delete/' . $r->is_id;
+                echo base_url() . 'user/deleteuser/' . $r->is_id;
                 ?>';"><i class='btn-dark btn-sm fa fa-trash'></i></a>
                 <?php  
             echo "</tr>";
-            $i++;    
         }
     ?>
                   	<?php echo form_close();?>
@@ -134,70 +131,7 @@
       <script type="text/javascript">
       
       $(document).ready(function() {
-        var myTable = 
-				$('#table')
-				//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-				.DataTable( {
-          "order": [[ 1, "desc" ]],
-					bAutoWidth: false,
-					// "aoColumns": [
-					//   { "bSortable": false },
-					//   null, null,null, null, null,
-					//   { "bSortable": false }
-					// ],
-					"aaSorting": [],
-					
-					
-					//"bProcessing": true,
-			        //"bServerSide": true,
-			        //"sAjaxSource": "http://127.0.0.1/table.php"	,
-			
-					//,
-					//"sScrollY": "200px",
-					//"bPaginate": false,
-			
-					//"sScrollX": "100%",
-					//"sScrollXInner": "120%",
-					//"bScrollCollapse": true,
-					//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-					//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-			
-					//"iDisplayLength": 50
-			
-			
-					select: {
-						style: 'multi'
-					}
-			    } );
-          		
-				myTable.on( 'select', function ( e, dt, type, index ) {
-					if ( type === 'row' ) {
-						$( myTable.row( index ).node() ).find('input:checkbox').prop('checked', true);
-					}
-				} );
-				myTable.on( 'deselect', function ( e, dt, type, index ) {
-					if ( type === 'row' ) {
-						$( myTable.row( index ).node() ).find('input:checkbox').prop('checked', false);
-					}
-				} );
-			
 
-    $('#dynamic-table > thead > tr > th input[type=checkbox], #dynamic-table_wrapper input[type=checkbox]').eq(0).on('click', function(){
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$('#dynamic-table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) myTable.row(row).select();
-						else  myTable.row(row).deselect();
-					});
-				});
-				
-				//select/deselect a row when the checkbox is checked/unchecked
-				$('#dynamic-table').on('click', 'td input[type=checkbox]' , function(){
-					var row = $(this).closest('tr').get(0);
-					if(this.checked) myTable.row(row).deselect();
-					else myTable.row(row).select();
-        });
 $('body').on('click', '.view_img', function () {
  
  var id = $(this).data("id");
@@ -248,11 +182,30 @@ $('body').on('click', '.view_img', function () {
 			$(this).append('<span class="more-text">'+removedStr+'</span>');
 		}
 	});
- 
+
+  
+
+        $('#table').DataTable({
+          dom: 'Bfrtip',
+        buttons: [
+            'colvis'
+        ]
+       
+      });  
     });
     
+  $(document).ready(function () {
+  //Pagination numbers
+  $('#paginationSimpleNumbers').DataTable({
+    "pagingType": "simple_numbers"
+  });
+});
 
 </script>
 
-
+<script>
+$(document).ready(function() {
+$('#example').DataTable();
+} );
+</script>
     

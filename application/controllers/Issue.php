@@ -10,6 +10,7 @@ class Issue extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
+        $this->load->model('model_issue');
         $this->model->CheckSession();
         $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
@@ -25,13 +26,9 @@ class Issue extends CI_Controller {
     {   
         //$this->model->CheckPermission($this->session->userdata('su_id'));
         //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.date_identified,
-        sis.date_er,sis.date_er,sis.date_updated,sis.delete_flag
-        FROM sys_issue  AS sis 
-        inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-         where sis.delete_flag != 0 ';
-        $query = $this->db->query($sql); 
-       $data['result'] = $query->result(); 
+
+         $result = $this->model_issue->select_issue();
+       $data['result'] = $result; 
         $this->load->view('issue/manage',$data);//bring $data to user_data 
         $this->load->view('issue/img_modal');//bring $data to user_data 
         $this->load->view('footer');
@@ -110,6 +107,34 @@ class Issue extends CI_Controller {
         
      
       }
+
+
+      public function edit()
+    {
+        $id = $this->uri->segment('3');
+        $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.pj_id,
+  DATE_FORMAT(sis.date_identified, "%Y-%m-%d") AS date_identified,
+  DATE_FORMAT(sis.date_er, "%Y-%m-%d") AS date_er,
+  DATE_FORMAT(sis.date_updated, "%Y-%m-%d") AS date_updated,
+  sis.delete_flag
+    
+    FROM sys_issue  AS sis 
+    inner join sys_projects as sj on sj.pj_id = sis.pj_id 
+     where sis.delete_flag != 0';
+        $query = $this->db->query($sql); 
+        $data['result'] = $query->result(); 
+        
+
+        $pj_id =  $data['result'][0]->pj_id ;
+
+        $sql="SELECT * FROM sys_projects ;";
+        $query = $this->db->query($sql); 
+        $data['result_pj'] = $query->result(); 
+
+        $this->load->view('issue/edit',$data);//bring $data to user_data 
+        $this->load->view('footer');
+  
+    }
 
     
     

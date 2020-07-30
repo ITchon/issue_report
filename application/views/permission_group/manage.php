@@ -7,7 +7,7 @@
             </div>
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">Simple Table <a href="<?php echo base_url()?>permissiongroup/add"><button class="btn btn-success">ADD</button></a></h4>
+                  <h4 class="card-title ">List Permission Group <a href="<?php echo base_url()?>permissiongroup/add"><button class="btn btn-success">ADD</button></a></h4>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">
