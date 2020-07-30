@@ -40,9 +40,22 @@
                   <?php
                 }
                 echo "<td class=''>".$r->date_created."</td>";
-                ?> 
+                if($r->enable!=1 ){?>
+                  
+                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                  echo base_url() . 'permission/enable/' . $r->pj_id;
+                  ?>';"><i class='btn-danger btn-sm fa fa-times'></i></a>
+                  <?php
+                }
+                else{?>
 
-                <td class="text-center">
+                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ปิดการใช้งาน</h5>'  data-original-title='Rule' onclick="javascript:window.location='<?php
+                  echo base_url() . 'permission/disable/' . $r->pj_id;
+                  ?>';"><i class='btn-success btn-sm fa fa-check'></i></a>                      
+                  <?php
+                }
+                ?>
+                
                 <a type ='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' class=' ' data-original-title='Rule' onclick="javascript:window.location='<?php
                 echo base_url() . 'projects/edit/' . $r->pj_id;
                 ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>

@@ -72,7 +72,6 @@ public function delete_project($id)
   DATE_FORMAT(sis.date_er, "%Y-%m-%d") AS date_er,
   DATE_FORMAT(sis.date_updated, "%Y-%m-%d") AS date_updated,
   sis.delete_flag
-    
     FROM sys_issue  AS sis 
     inner join sys_projects as sj on sj.pj_id = sis.pj_id 
      where sis.delete_flag != 0 ORDER BY `sis`.`is_id`  ASC';

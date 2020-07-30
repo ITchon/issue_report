@@ -105,7 +105,7 @@ label{
 
 
                       <div class="form-group">
-                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation  </b></label>      
+                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation Required? </b><small>( “Yes” if the program/project manager feels an issue needs to be escalated and “No” if escalation is not needed to resolve the issue.)</small></label>      
           
                       <div class="col-sm-6 col-md-6">
                    <input type="radio" name="er" value="Yes" > Yes &nbsp; &nbsp; &nbsp;

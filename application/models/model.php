@@ -143,7 +143,7 @@ $password = base64_encode(trim($password));
  $frr,$note,$fname)
  {
   $sql ="INSERT INTO sys_issue (pj_id,plant,date_identified,is_des,priority,owner_id,date_er,
-  escalation_required,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
+  esc_req,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
   date_updated,delete_flag) 
   VALUES ( '$pj_id', '$plant', '$date_iden', '$is_des', '$priority','$owner_id','$date_er'
   ,'$er','$imp_sum','$act_step','$is_type','$cur_st','$frr','$note','$fname'

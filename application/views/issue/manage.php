@@ -239,7 +239,7 @@ $('body').on('click', '.view_img', function () {
         if(res.success != false){
 
           for(i=0; i<res.data.length; i++){
-                          html += '<div >'+'<img src="<?php echo base_url();?>upload/'+res.data[i].file_code+' " class="zoom img-responsive responsive" style="height:250px;max-width: 100%;" />'+'</div>';
+                          html += '<div >'+'<img src="<?php echo base_url();?>uploads/'+res.data[i].file_code+' " class="zoom img-responsive responsive" style="height:250px;max-width: 100%;" />'+'</div>';
                       }
           $('[name="img_code"]').val(res.data[0].file_code);
           $('#show_data').html(html);
