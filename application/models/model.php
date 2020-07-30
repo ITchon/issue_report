@@ -163,7 +163,7 @@ $password = base64_encode(trim($password));
  function insert_img($file,$c)
  {
   $is_id = $this->session->userdata('is_id');
-  $sql ="INSERT INTO issue_img (is_id,file_n,file_code) VALUES ('$is_id'+1, '$file','$c')";
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id'+1, '$file','$c','1')";
     $query = $this->db->query($sql);  
    if($query){
      return true;

@@ -5,7 +5,7 @@ class Model_issue extends CI_Model
 public function issue_by_id($id)
 {
         $sql ="SELECT `file_code`  FROM issue_img 
-        WHERE is_id='$id'  ";
+        WHERE is_id='$id' AND delete_flag != 0  ";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;
@@ -103,4 +103,50 @@ public function delete_project($id)
 
       return $array;
        }
+
+  public function save_issue($data,$is_id)
+ {
+  $this->session->set_userdata('is_id',$is_id);
+$this->db->where('is_id', $is_id);
+$this->db->update('sys_issue', $data);
+
+    $last_id = $this->db->insert_id();
+ }
+
+ function insert_img($file,$c)
+ {
+  $is_id = $this->session->userdata('is_id');
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id', '$file','$c','1')";
+    $query = $this->db->query($sql);  
+   if($query){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+
+ public function del_img($img)
+ {
+  $sql ="UPDATE issue_img SET delete_flag = '0' , date_deleted=CURRENT_TIMESTAMP WHERE img_id = '$img'";
+    $query = $this->db->query($sql);  
+   if($query){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+
+ public function delete_issue($id) {
+  $sql ="UPDATE sys_issue SET delete_flag = '0' , date_deleted=CURRENT_TIMESTAMP WHERE is_id = '$id'";
+  $query = $this->db->query($sql);
+     if ($query) { 
+        return true; 
+     } 
+     else{
+    return false;
+   }
+  }
+ 
 }

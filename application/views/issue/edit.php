@@ -19,8 +19,8 @@ label{
                 </div>
               
 <hr>
-            <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/upload" method="post" enctype="multipart/form-data" data-toggle="validator">
-  <input type="text" hidden value="<?php echo $result[0]->is_id ?>">
+            <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
+  <input type="text" hidden name="is_id" value="<?php echo $result[0]->is_id ?>">
                   <?php echo $this->session->flashdata("error"); ?>
 
                   <div class="form-group">
@@ -185,13 +185,14 @@ label{
                           <label class=""><b> Attach file</b></label>
                         </div>
                       </div>
-                      <div multiple name="file" action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
+                      <div multiple name="file" action="<?= base_url()?>issue/save_edit" class="dropzone" id="my-awesome-dropzone">
+                      <input type="file" name="file" hidden>
+                      </div>
                       <br>
 
                       <div class="col-md-12">
                         <div class="form-group">
-                      <label class="bmd-label-floating"><b>Delete File</b></label>
-                      
+            
                       <table id="dynamic-table" class="table text-center">
                       <thead>
                       <tr>
@@ -205,7 +206,7 @@ label{
                       <tbody>
                       <td style='text-align:center;'>
                  <label class='pos-rel'>
-                     <input type='checkbox' class='ace' name='chk_uid[]' value='$result[0]->is_id'/>
+                     <input type='checkbox' name='chk_uid[]' value='<?php echo $r->img_id ?>'/>
                      <span class='lbl'></span>
                    </label>
                </td>
@@ -214,7 +215,7 @@ label{
                   <?php
                       }
                        ?>
-                       <input type="checkbox" id="chkall">lol
+                       <input type="button" class="btn btn-danger" id="toggle" value="delete all" onClick="do_this()" />
                       </tbody>
                       </table>
                       </div>
@@ -241,6 +242,25 @@ label{
       
       
       <script>
+
+function do_this(){
+
+var checkboxes = document.getElementsByName('chk_uid[]');
+var button = document.getElementById('toggle');
+
+if(button.value == 'delete all'){
+    for (var i in checkboxes){
+        checkboxes[i].checked = 'FALSE';
+    }
+    button.value = 'undelete all'
+}else{
+    for (var i in checkboxes){
+        checkboxes[i].checked = '';
+    }
+    button.value = 'delete all';
+}
+}
+
       document.getElementById('pr').value = "<?php echo $result[0]->priority ?>";
       document.getElementById('pj').value = "<?php echo $result[0]->pj_id ?>";
       document.getElementById('ato').value = "<?php echo $result[0]->owner_id  ?>";

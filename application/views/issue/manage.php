@@ -18,12 +18,6 @@
 
                 </div>
                 <div class="card-body">
-                <input type="checkbox" name="approve[]" value="1" />
-<input type="checkbox" name="approve[]" value="2" />
-<input type="checkbox" name="approve[]" value="3" />
-
-<input type="button" id="toggle" value="select" onClick="do_this()" />
-
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo form_open('#', array('id' => 'frm_usermanagement', 'name'=>'frm_usermanagement', 'class'=>'form-horizontal'));?>
@@ -112,7 +106,7 @@
                 <td class="text-center">
                 <a href="javascript:void(0)"  data-id="<?php echo $r->is_id;?>" class="  view_img"><i class='btn-success btn-sm fa fa-search'> </i></a>
                 <a class='btn-primary ' data-toggle='tooltip'  onclick="javascript:window.location='<?php
-                echo base_url() . 'user/rule/' . $r->is_id;
+                echo base_url() . 'issue/view/' . $r->is_id;
                 ?>';"><i class='btn-info btn-sm fa fa-gear'> </i></a>
 
 

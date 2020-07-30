@@ -112,6 +112,7 @@ class Issue extends CI_Controller {
       public function edit()
     {
         $id = $this->uri->segment('3');
+        
         $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,
         sis.priority,sis.pj_id,sis.owner_id,sow.owner_name,sis.imp_sum,sis.act_step,sis.is_type,
         sis.final_rs,sis.is_note,sis.esc_req,
@@ -139,7 +140,7 @@ class Issue extends CI_Controller {
         $query = $this->db->query($sqlSelG); 
         $data['result_own'] = $query->result();
         
-        $sqlSelG = "SELECT * FROM issue_img as smg WHERE smg.is_id = $is_id";
+        $sqlSelG = "SELECT * FROM issue_img as smg WHERE smg.is_id = $is_id AND smg.delete_flag != 0";
         $query = $this->db->query($sqlSelG); 
         $data['result_img'] = $query->result(); 
 
@@ -148,10 +149,91 @@ class Issue extends CI_Controller {
   
     }
 
-    public function delete_img()
+
+
+    public function save_edit()
     {
-      $id = $this->uri->segment('3');
+      $is_id  =  $this->input->post('is_id');
+      $plant =  $this->input->post('plant');
+      $pj_id  =  $this->input->post('pj_id');
+      $date_iden =  $this->input->post('date_iden');
+      $is_des =  $this->input->post('is_des');
+      $priority =  $this->input->post('priority');
+      $owner_id =  $this->input->post('owner_id');
+      $date_er =  $this->input->post('date_er');
+      $er =  $this->input->post('er');
+      $imp_sum =  $this->input->post('imp_sum');
+      $act_step =  $this->input->post('act_step');
+      $is_type =  $this->input->post('is_type');
+      $cur_st =  $this->input->post('cur_st');
+      $frr =  $this->input->post('frr');
+      $note =  $this->input->post('note');
+      $file = $_FILES['file']['name'];
+      $fname = $this->session->userdata('firstname');
+
+      $config['upload_path'] = 'uploads/'; 
+      $config['allowed_types'] = '*';
+      $config['max_size'] = '102400'; // max_size in kb
+      $config['encrypt_name'] = TRUE;
+
+        if($plant != null){
+          $data = array(
+            'pj_id' => $pj_id,
+            'plant' => $plant,
+            'date_identified' => $date_iden,
+            'is_des' => $is_des,
+            'priority' => $priority,
+            'owner_id' => $owner_id,
+            'date_er' => $date_er,
+            'esc_req' => $er,
+            'imp_sum' => $imp_sum,
+            'act_step' => $act_step,
+            'is_type' => $is_type,
+            'cur_st' => $cur_st,
+            'final_rs' => $frr,
+            'is_note' => $note,
+            'entered_by' => $fname,
+            'date_created' => 'CURRENT_TIMESTAMP',
+            'date_updated' => 'CURRENT_TIMESTAMP',
+            'delete_flag' => 1,
+            'date_deleted' => ''
+      );
+        $this->model_issue->save_issue($data,$is_id);
+          if($this->input->post('chk_uid') != null){
+            $img_id =  $this->input->post('chk_uid');
+            foreach($img_id as $img){
+              $this->model_issue->del_img($img);
+            }
+          }
+        }
+        
+          //Load upload library
+        $this->load->library('upload',$config); 
+        $this->upload->initialize($config);
+
+        if(!$this->upload->do_upload('file')) {
+
+        redirect('issue/manage','refresh');   
+}else{
+  $uploaded = $this->upload->data();
+  $code = array('filename'  => $uploaded['file_name']);
+foreach ($code as $c) {
+$this->model_issue->insert_img($file,$c);
+ }
+}
+        redirect('issue/manage','refresh');   
       
+
+    
+  }
+
+  public function delete()
+    {
+        $this->model_issue->delete_issue($this->uri->segment('3'));
+        $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
+        <span>  Delete Success</span>
+      </div> ');
+        redirect('issue/manage');
     }
 
     
