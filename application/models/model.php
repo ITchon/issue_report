@@ -662,7 +662,7 @@ public function disablePermission_Group($key=''){
 
 public function issue_openY()
  {
-  $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%M') AS month
+  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
   FROM sys_issue 
   WHERE cur_st = 'Open' AND year(`date_created`) = year(now())
   GROUP BY DATE_FORMAT(`date_created`, '%M%')";
@@ -678,7 +678,7 @@ public function issue_openY()
 
 public function issue_closedY()
  {
-  $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%M') AS month
+  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
   FROM sys_issue 
   WHERE cur_st = 'Closed' AND year(`date_created`) = year(now())
   GROUP BY DATE_FORMAT(`date_created`, '%M%')";
@@ -694,7 +694,7 @@ public function issue_closedY()
 
 public function issue_workY()
  {
-  $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%M') AS month
+  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
   FROM sys_issue 
   WHERE cur_st = 'Work In Progress' AND year(`date_created`) = year(now())
   GROUP BY DATE_FORMAT(`date_created`, '%M%')";
