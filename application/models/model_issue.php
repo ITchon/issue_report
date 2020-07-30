@@ -64,7 +64,7 @@ public function delete_project($id)
     return false;
    }
   }
-
+  
   public function select_issue()
 {
   $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,
@@ -75,7 +75,7 @@ public function delete_project($id)
     
     FROM sys_issue  AS sis 
     inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-     where sis.delete_flag != 0';
+     where sis.delete_flag != 0 ORDER BY `sis`.`is_id`  ASC';
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;

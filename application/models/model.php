@@ -646,7 +646,7 @@ public function disablePermission_Group($key=''){
  
  public function issue_totalY()
  {
-   $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%M') AS month
+   $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%c') AS month
    FROM sys_issue 
    WHERE year(`date_created`) = year(now())
    GROUP BY DATE_FORMAT(`date_created`, '%M%')";

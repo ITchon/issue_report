@@ -18,10 +18,16 @@
 
                 </div>
                 <div class="card-body">
+                <input type="checkbox" name="approve[]" value="1" />
+<input type="checkbox" name="approve[]" value="2" />
+<input type="checkbox" name="approve[]" value="3" />
+
+<input type="button" id="toggle" value="select" onClick="do_this()" />
+
                   <div class="table-responsive">
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo form_open('#', array('id' => 'frm_usermanagement', 'name'=>'frm_usermanagement', 'class'=>'form-horizontal'));?>
-                  <table id="table" class="table ">
+                  <table id="dynamic-table" class="table ">
                   <thead>
                     <tr>
 								    	<td colspan="12">
@@ -30,7 +36,7 @@
 								    	</td>
 								    </tr>	
                     <tr class="text-dark">
-                        <th class="text-center">
+                    <th class="text-center">
 															<label class="pos-rel">
 																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>
@@ -72,7 +78,7 @@
 
                       switch ($r->cur_st) {
                         case "Open":
-                          $color2 = "text-danger";
+                          $color2 = "text-primary";
                           break;
                         case "Work In Progress":
                           $color2 = "text-warning";
@@ -132,7 +138,23 @@
         </div>
       </div>
       <script type="text/javascript">
-      
+        function do_this(){
+
+var checkboxes = document.getElementsByName('approve[]');
+var button = document.getElementById('toggle');
+
+if(button.value == 'select'){
+    for (var i in checkboxes){
+        checkboxes[i].checked = 'FALSE';
+    }
+    button.value = 'deselect'
+}else{
+    for (var i in checkboxes){
+        checkboxes[i].checked = '';
+    }
+    button.value = 'select';
+}
+}
       $(document).ready(function() {
         var myTable = 
 				$('#table')
