@@ -112,28 +112,46 @@ class Issue extends CI_Controller {
       public function edit()
     {
         $id = $this->uri->segment('3');
-        $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.pj_id,
-  DATE_FORMAT(sis.date_identified, "%Y-%m-%d") AS date_identified,
-  DATE_FORMAT(sis.date_er, "%Y-%m-%d") AS date_er,
-  DATE_FORMAT(sis.date_updated, "%Y-%m-%d") AS date_updated,
+        $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,
+        sis.priority,sis.pj_id,sis.owner_id,sow.owner_name,sis.imp_sum,sis.act_step,sis.is_type,
+        sis.final_rs,sis.is_note,sis.esc_req,
+  DATE_FORMAT(sis.date_identified, '%Y-%m-%d') AS date_identified,
+  DATE_FORMAT(sis.date_er, '%Y-%m-%d') AS date_er,
+  DATE_FORMAT(sis.date_updated, '%Y-%m-%d') AS date_updated,
   sis.delete_flag
     
     FROM sys_issue  AS sis 
-    inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-     where sis.delete_flag != 0';
+    inner join sys_projects as sj on sj.pj_id = sis.pj_id
+    inner join sys_owner as sow on sow.owner_id = sis.owner_id 
+     where sis.delete_flag != 0 AND sis.is_id = $id ";
         $query = $this->db->query($sql); 
         $data['result'] = $query->result(); 
         
 
-        $pj_id =  $data['result'][0]->pj_id ;
+        $is_id =  $data['result'][0]->is_id ;
+        $owner_id =  $data['result'][0]->owner_id ;
 
         $sql="SELECT * FROM sys_projects ;";
         $query = $this->db->query($sql); 
         $data['result_pj'] = $query->result(); 
 
+        $sqlSelG = "SELECT * FROM sys_owner";
+        $query = $this->db->query($sqlSelG); 
+        $data['result_own'] = $query->result();
+        
+        $sqlSelG = "SELECT * FROM issue_img as smg WHERE smg.is_id = $is_id";
+        $query = $this->db->query($sqlSelG); 
+        $data['result_img'] = $query->result(); 
+
         $this->load->view('issue/edit',$data);//bring $data to user_data 
         $this->load->view('footer');
   
+    }
+
+    public function delete_img()
+    {
+      $id = $this->uri->segment('3');
+      
     }
 
     

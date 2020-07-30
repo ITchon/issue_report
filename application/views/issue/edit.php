@@ -20,25 +20,25 @@ label{
               
 <hr>
             <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/upload" method="post" enctype="multipart/form-data" data-toggle="validator">
-
+  <input type="text" hidden value="<?php echo $result[0]->is_id ?>">
                   <?php echo $this->session->flashdata("error"); ?>
 
                   <div class="form-group">
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Plant</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <input type="radio" name="plant" value="Phase 10" > Phase 10 &nbsp; &nbsp; &nbsp;
-                   <input type="radio" name="plant" value="Phase 8" > Phase 8
+                   <input type="radio" name="plant" <?php if ($result[0]->plant == 'Phase 10') echo "checked='checked'"; ?> value="Phase 10" > Phase 10 &nbsp; &nbsp; &nbsp;
+                   <input type="radio" name="plant" <?php if ($result[0]->plant == 'Phase 8') echo "checked='checked'"; ?> value="Phase 8" > Phase 8
                     </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b>Project</b></label>      
+                      <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b>Projects</b></label>      
                         
                       <div class="col-sm-6 col-md-6">
 
-                   <select id="select" name="pj_id" id="" class="form-control select2" required>
-             <option value="<?php echo $result[0]->pj_id ?>" hidden> <?php echo $result[0]->pj_name ?> </option>
+                   <select id="pj" name="pj_id" id="" class="form-control select2" required>
+                   <option disabled value="">- - - Select Projects- - - </option>
                   <?php 
               foreach($result_pj as $r){?>
                <option value="<?php  echo $r->pj_id ?>"><?php echo $r->pj_name ?></option>
@@ -69,8 +69,8 @@ label{
                       <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b>Priority</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="priority" class="form-control"  >
-                    <option value="">- - - Select Priority - - - </option>
+                   <select id="pr" name="priority" class="form-control"  >
+                   <option disabled value="">- - - Select Priority- - - </option>
                       <option value="Critical">Critical</option>
                       <option value="High">High</option>
                       <option value="Medium">Medium</option>
@@ -85,8 +85,9 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Assigned To Owner</b><font color="red" size="1"> *This column is  the information.</font></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="owner_id" class="form-control select2"  >
-                    <option value=""> - - - Select Owner - - - </option>
+                   <select id="ato" name="owner_id" class="form-control select2"  >
+                   <option disabled value="">- - - Select Owner- - - </option>
+
                     <?php foreach ($result_own as $r) {
                         ?>
                        <option value="<?php echo $r->owner_id ?>"><?php echo $r->owner_name ?></option>
@@ -101,17 +102,17 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b>Expected Resolution Date</b> </label>
-                          <input type="date" class="form-control" name="date_er"  >
+                          <input type="date" class="form-control" name="date_er" value="<?php echo $result[0]->date_er ?>" >
                         </div>
                       </div>
 
 
                       <div class="form-group">
-                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation  </b></label>      
+                      <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Escalation Required? </b><small>( “Yes” if the program/project manager feels an issue needs to be escalated and “No” if escalation is not needed to resolve the issue.)</small></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <input type="radio" name="er" value="Yes" > Yes &nbsp; &nbsp; &nbsp;
-                   <input type="radio" name="er" value="No" > No
+                   <input type="radio" name="er" <?php if ($result[0]->esc_req == 'Yes') echo "checked='checked'"; ?> value="Yes" > Yes &nbsp; &nbsp; &nbsp;
+                   <input type="radio" name="er" <?php if ($result[0]->esc_req == 'No') echo "checked='checked'"; ?> value="No" > No
                     </div>
                     </div>
 
@@ -119,7 +120,7 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Impact Summary</b> </label>
-                          <textarea name="imp_sum" class="form-control" cols="30" rows="5" ></textarea>
+                          <textarea name="imp_sum" class="form-control" cols="30" rows="5"><?php echo $result[0]->imp_sum ?></textarea>
                         </div>
                       </div>
 
@@ -127,7 +128,7 @@ label{
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Action Step</b><font color="red" size="1"> *This column is  the information.</font> </label>
-                          <textarea name="act_step" class="form-control" cols="30" rows="5" ></textarea>
+                          <textarea name="act_step" class="form-control" cols="30" rows="5" ><?php echo $result[0]->act_step ?></textarea>
                         </div>
                       </div>
 
@@ -136,8 +137,8 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Issue Type</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="is_type" class="form-control"  >
-                    <option value="">- - - Select Issue Type - - - </option>
+                   <select id="ist" name="is_type" class="form-control"  >
+                    <option disabled value="">- - - Select Issue Type - - - </option>
                       <option value="Informational">Informational</option>
                       <option value="Procedural">Procedural</option>
                       <option value="System">System</option>
@@ -152,8 +153,8 @@ label{
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Current Status</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="cur_st" class="form-control"  >
-                    <option value="">- - - Select Status - - - </option>
+                   <select id="cur" name="cur_st" class="form-control" >
+                    <option disabled value="">- - - Select Status - - - </option>
                       <option value="Open">Open</option>
                       <option value="Work In Progress">Work In Progress</option>
                       <option value="Closed">Closed</option>
@@ -165,7 +166,7 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Final Resolution&Rationale</b></label>
-                          <textarea name="frr" class="form-control" cols="30" rows="5" ></textarea>
+                          <textarea name="frr" class="form-control" cols="30" rows="5" ><?php echo $result[0]->final_rs ?></textarea>
                         </div>
                       </div>
 
@@ -174,7 +175,7 @@ label{
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Note</b> </label>
-                          <textarea name="note" class="form-control" cols="30" rows="5"></textarea>
+                          <textarea name="note" class="form-control" cols="30" rows="5"><?php echo $result[0]->is_note ?></textarea>
                         </div>
                       </div>
                   
@@ -185,6 +186,39 @@ label{
                         </div>
                       </div>
                       <div multiple name="file" action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
+                      <br>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                      <label class="bmd-label-floating"><b>Delete File</b></label>
+                      
+                      <table id="dynamic-table" class="table text-center">
+                      <thead>
+                      <tr>
+                      
+                      </tr>
+                      </thead>
+                      
+                      
+                      <?php 
+                      foreach($result_img as $r){ ?>
+                      <tbody>
+                      <td style='text-align:center;'>
+                 <label class='pos-rel'>
+                     <input type='checkbox' class='ace' name='chk_uid[]' value='$result[0]->is_id'/>
+                     <span class='lbl'></span>
+                   </label>
+               </td>
+                      <td><?php echo $r->file_n ?></td>
+                      <td><div class="text-center"><img width="150" height="100" src="<?php echo base_url();?>uploads/<?php echo $r->file_code ?>"></div></td>
+                  <?php
+                      }
+                       ?>
+                       <input type="checkbox" id="chkall">lol
+                      </tbody>
+                      </table>
+                      </div>
+                      </div>
                       
     </div> 
 
@@ -207,9 +241,11 @@ label{
       
       
       <script>
-        <?php if($result[0]->gender == null){
-        } ?>
-      document.getElementById('select').value = "<?php echo $result[0]->pj_id ?>";
+      document.getElementById('pr').value = "<?php echo $result[0]->priority ?>";
+      document.getElementById('pj').value = "<?php echo $result[0]->pj_id ?>";
+      document.getElementById('ato').value = "<?php echo $result[0]->owner_id  ?>";
+      document.getElementById('ist').value = "<?php echo $result[0]->is_type ?>";
+      document.getElementById('cur').value = "<?php echo $result[0]->cur_st ?>";
 </script>
       
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -229,6 +265,7 @@ label{
   $('#uploadfiles').click(function(){
       myDropzone.processQueue();
   });
+  
   </script>
 
 
