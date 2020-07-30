@@ -137,24 +137,6 @@ $password = base64_encode(trim($password));
   return false;
  }
 
- function insert_project($pj_name,$pj_des,$status)
- {
-
-  $num= $this->db->query("SELECT * FROM sys_projects where pj_name = '$pj_name'"); 
-  $chk= $num->result();
-
- if($chk==null){
-    $sql1 ="INSERT INTO sys_projects ( pj_name, pj_des, enable, date_created, date_updated,delete_flag) VALUES ( '$pj_name', '$pj_des', '$status', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1' )";
-  $query= $this->db->query($sql1); 
-  if($query){
-      return true;
-  }else{
-    return 3;
-  }
- }
- return false;
-   
- }
 
  function insert_issue($plant,$pj_id,$date_iden,$is_des,
  $priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,
@@ -664,7 +646,7 @@ public function disablePermission_Group($key=''){
  
  public function issue_totalY()
  {
-   $sql="SELECT COUNT(is_id) AS total
+   $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%M') AS month
    FROM sys_issue 
    WHERE year(`date_created`) = year(now())
    GROUP BY DATE_FORMAT(`date_created`, '%M%')";

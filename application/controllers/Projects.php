@@ -10,6 +10,7 @@ class Projects extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
+        $this->load->model('model_issue');
         $this->model->CheckSession();
         $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
@@ -59,7 +60,7 @@ class Projects extends CI_Controller {
         $pj_des  =  $this->input->post('pj_des');
         $status =  $this->input->post('status');
 
-       $result = $this->model->insert_project($pj_name,$pj_des,$status);
+       $result = $this->model_issue->insert_project($pj_name,$pj_des,$status);
        if($result == true){
        // echo "<script>alert('Inserted Data Success')</script>";
          $this->session->set_flashdata('error','<div class="alert alert-success hide-it">  
@@ -83,6 +84,39 @@ class Projects extends CI_Controller {
        }
        
 
+    }
+
+    public function edit()
+    {
+        $id = $this->uri->segment('3');
+        $sql="SELECT * FROM sys_projects where pj_id = '$id';";
+        //$sql =  'SELECT * FROM sys_users ';
+        $query = $this->db->query($sql); 
+        $data['result'] = $query->result(); 
+
+        $this->load->view('projects/edit',$data);//bring $data to user_data 
+        $this->load->view('footer');
+  
+    }
+
+    public function save_edit()
+    {
+        $pj_id =  $this->input->post('pj_id');
+        $pj_name =  $this->input->post('pj_name');
+        $pj_des =  $this->input->post('pj_des');
+        $enable =  $this->input->post('enable');
+      
+        echo $pj_id;
+
+        $this->model_issue->save_edit_project($pj_id, $pj_name,$pj_des, $enable);
+        redirect('projects/manage');
+    }
+
+    public function delete()
+    {
+        $this->model_issue->delete_project($this->uri->segment('3'));
+
+        redirect('projects/manage');
     }
 
     

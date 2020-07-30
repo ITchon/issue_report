@@ -170,15 +170,15 @@ var chartData = {
   labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
   datasets: [
   {
-    data: [<?php echo $totol;?>],
+    data: [685],
     backgroundColor: colors[1]
   },
   {
-    data: [<?php echo $totol;?>],
+    data: [521],
     backgroundColor: colors[2]
   },
   {
-    data: [<?php echo $totol;?>],
+    data: [656],
     backgroundColor: colors[4]
   }]
 };

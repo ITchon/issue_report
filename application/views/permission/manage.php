@@ -7,7 +7,7 @@
             </div>
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">Simple Table</h4>
+                  <h4 class="card-title ">List Permissions</h4>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">

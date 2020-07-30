@@ -109,11 +109,11 @@
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
-                echo base_url() . 'issue/edit/' . $r->is_id;
+                echo base_url() . 'user/edit_u/' . $r->is_id;
                 ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>
 
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
-                echo base_url() . 'issue/delete/' . $r->is_id;
+                echo base_url() . 'user/deleteuser/' . $r->is_id;
                 ?>';"><i class='btn-dark btn-sm fa fa-trash'></i></a>
                 <?php  
             echo "</tr>";
