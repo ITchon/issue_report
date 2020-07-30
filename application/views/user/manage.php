@@ -21,7 +21,7 @@
 									    	<div id="btn_delete" class="btn btn-dark"><span class="fa fa-trash-o"></span></div>
 								    	</td>
 								    </tr>	
-                    <tr class="table-dark text-dark">
+                    <tr class=" text-dark">
                     <th class="text-center">
 															<label class="pos-rel">
 																<input type="checkbox" class="ace" />

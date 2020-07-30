@@ -13,7 +13,7 @@
                 <div class="card-body">
                   <table id="example" class="table">
                   <thead>
-                      <tr class="table-dark text-dark" >
+                      <tr class="text-dark" >
     
                         <th width="20%"  style="font-weight: bold;">Group name</th>
                         <th class="text-center"  style="font-weight: bold;" width="20%">Manage</th>

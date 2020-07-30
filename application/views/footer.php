@@ -215,6 +215,7 @@
 				$('#dynamic-table')
 				//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
 				.DataTable( {
+          "order": [[ 1, "desc" ]],
 					bAutoWidth: false,
 					// "aoColumns": [
 					//   { "bSortable": false },

@@ -12,8 +12,8 @@
                 <div class="card-body">
                   <table id="example" class="table">
                   <thead>
-                  <tr class="table-dark text-dark" >
-                        <th  style="font-weight: bold;">Group name</th>
+                  <tr class="text-dark" >
+                        <th  style="font-weight: bold;">Group Name</th>
                         <th class="text-center"  style="font-weight: bold;">Status</th>
                        
                       </tr>
