@@ -68,10 +68,20 @@ class Report extends CI_Controller {
 
     public function list()
     {
-
-       $pj_id =  $this->input->post('pj_id');
-       $result = $this->model_issue->list($pj_id);
-       $data['result'] = $result;
+      $src_pj =  $this->input->post('src_pj');
+      $src_st =  $this->input->post('src_st');
+      if($this->input->post('src_pj') == null){
+        $src_pj = 0;
+      }
+      if($this->input->post('src_st') == null){
+        $src_st = 0;
+      }
+      if($this->input->post('src_st') == null && $this->input->post('src_pj') == null){
+        $src_st = 'null';
+        $src_pj = 'null';
+      }
+        $result = $this->model_issue->list($src_pj,$src_st);
+        $data['result'] = $result;
 
        $this->load->view('report/list',$data);//bring $data to user_data 
        $this->load->view('footer');

@@ -107,7 +107,7 @@
                 <a href="javascript:void(0)"  data-id="<?php echo $r->is_id;?>" class="  view_img"><i class='btn-success btn-sm fa fa-search'> </i></a>
                 <a class='btn-primary ' data-toggle='tooltip'  onclick="javascript:window.location='<?php
                 echo base_url() . 'issue/view/' . $r->is_id;
-                ?>';"><i class='btn-info btn-sm fa fa-gear'> </i></a>
+                ?>';"><i class='btn-warning btn-sm fa fa-eye'> </i></a>
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
@@ -233,7 +233,7 @@ $('body').on('click', '.view_img', function () {
         if(res.success != false){
 
           for(i=0; i<res.data.length; i++){
-                          html += '<div >'+'<img src="<?php echo base_url();?>uploads/'+res.data[i].file_code+' " class="zoom img-responsive responsive" style="height:250px;max-width: 100%;" />'+'</div>';
+                          html += '<div >'+'<img src="<?php echo base_url();?>uploads/'+res.data[i].file_code+' " class="zoom img-responsive responsive" style="height:250px;max-width: 100%;" />'+'</div>'+'<hr>';
                       }
           $('[name="img_code"]').val(res.data[0].file_code);
           $('#show_data').html(html);

@@ -38,12 +38,12 @@ The above copyright notice and this permission notice shall be included in all c
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-          <div class="card card-login">
+          <div class="card card-login" >
             <form class="form" action="<?php echo base_url()?>Login/chklogin" method="post" data-toggle="validator">
               <div class="card-header card-header-success text-center">
                 <h4 class="card-title">Login</h4>
                 <div class="social-line">
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
+                  <a href="" class="btn btn-just-icon btn-link">
                    <h4>ISSUE REPORT</h4>
                   </a>
                 </div>
@@ -68,8 +68,8 @@ The above copyright notice and this permission notice shall be included in all c
                   <input type="password" name="password" class="form-control" placeholder="Password...">
                 </div>
               </div>
-              <div class="footer text-center" style="padding-bottom:20px">
-                <button class="btn btn-rose " type="submit"><a href="#pablo" class="text-white">Get Started</a></button>
+              <div class="footer text-center"  style="padding-bottom:20px">
+                <button class="btn btn-rose text-white" type="submit">Get Started</button>
               </div>
             </form>
           </div>

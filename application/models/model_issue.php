@@ -13,13 +13,19 @@ public function issue_by_id($id)
 }
 
 
-public function list($id)
+public function list($src_pj,$src_st)
 {
+  if($src_pj !=0){
+    $src_pj =  implode(',',$src_pj);
+  }
+  if($src_st !=0){
+    $src_st =  implode(',',$src_st);
+  }
         $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.date_identified,
         sis.date_er,sis.date_updated,sis.delete_flag
         FROM sys_issue  AS sis 
         inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-         where sis.delete_flag != 0 AND sis.pj_id = $id ";
+         where sis.delete_flag != 0 AND sis.cur_st IN ($src_st) AND sj.pj_name IN ($src_pj)";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;
@@ -67,7 +73,7 @@ public function delete_project($id)
   
   public function select_issue()
 {
-  $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,
+  $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.entered_by,
   DATE_FORMAT(sis.date_identified, "%Y-%m-%d") AS date_identified,
   DATE_FORMAT(sis.date_er, "%Y-%m-%d") AS date_er,
   DATE_FORMAT(sis.date_updated, "%Y-%m-%d") AS date_updated,
@@ -104,6 +110,30 @@ public function delete_project($id)
       return $array;
        }
 
+
+       public function edit_issue($id)
+ {
+  $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,
+  sis.priority,sis.pj_id,sis.owner_id,sow.owner_name,sis.imp_sum,sis.act_step,sis.is_type,
+  sis.final_rs,sis.is_note,sis.esc_req,sis.entered_by,
+DATE_FORMAT(sis.date_identified, '%Y-%m-%d') AS date_identified,
+DATE_FORMAT(sis.date_er, '%Y-%m-%d') AS date_er,
+DATE_FORMAT(sis.date_updated, '%Y-%m-%d') AS date_updated,
+sis.delete_flag
+
+FROM sys_issue  AS sis 
+inner join sys_projects as sj on sj.pj_id = sis.pj_id
+inner join sys_owner as sow on sow.owner_id = sis.owner_id 
+where sis.delete_flag != 0 AND sis.is_id = $id ";
+
+          $query = $this->db->query($sql);  
+         $result = $query->result(); 
+         return $result;
+ }
+
+
+
+
   public function save_issue($data,$is_id)
  {
   $this->session->set_userdata('is_id',$is_id);
@@ -112,6 +142,7 @@ $this->db->update('sys_issue', $data);
 
     $last_id = $this->db->insert_id();
  }
+
 
  function insert_img($file,$c)
  {

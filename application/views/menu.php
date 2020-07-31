@@ -32,13 +32,12 @@ TBKK
   <link href='<?= base_url() ?>assets/resources/dropzone.css' type='text/css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css' type='text/css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css' type='text/css' rel='stylesheet'>
-  <link href="<?= base_url() ?>assets/multiselect/style/multiselect.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo base_url().'assets/css/select2.min.css'; ?>">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/select2.min.css ">
 
-  
+
+
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-  <script src="<?= base_url() ?>assests/multiselect/multiselect.min.js"></script>
-  <script src='<?= base_url() ?>assets/resources/dropzone.js' type='text/javascript'></script>
+  <script src='<?php echo base_url() ?>assets/resources/dropzone.js' type='text/javascript'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js' type='text/javascript'></script>
   <script src="<?php echo base_url()?>/assets/js/jquery-3.5.1.js"></script>
   <!-- <script src="<?php echo base_url()?>assets/js/responsive.bootstrap4.min.js"></script> -->
