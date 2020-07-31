@@ -32,12 +32,10 @@ TBKK
   <link href='<?= base_url() ?>assets/resources/dropzone.css' type='text/css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css' type='text/css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css' type='text/css' rel='stylesheet'>
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/select2.min.css ">
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-  <script src='<?php echo base_url() ?>assets/resources/dropzone.js' type='text/javascript'></script>
+  <script src='<?= base_url() ?>assets/resources/dropzone.js' type='text/javascript'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js' type='text/javascript'></script>
   <script src="<?php echo base_url()?>/assets/js/jquery-3.5.1.js"></script>
   <!-- <script src="<?php echo base_url()?>assets/js/responsive.bootstrap4.min.js"></script> -->
@@ -78,6 +76,17 @@ TBKK
 });
    
     </script>
+    <?php 
+       date_default_timezone_set("Asia/Bangkok");
+       $current_time = date("h:i "); 
+    $sunrise = "04:42";
+    $sunset = "04:58";
+    $ic = "";
+    if ($current_time > $sunrise && $current_time < $sunset)
+    {
+     $ic = "fa fa-paw";
+    }
+    ?>
 <body class="layout layout-header-fixed">
   <div class="wrapper ">
   <div class="sidebar  " data-color="green"  >
@@ -87,14 +96,20 @@ TBKK
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo"><a href="" class="simple-text logo-normal">
-         TBKK Group
+      <i class="<?php echo $ic ?>"></i> TBKK Group  
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
 
 
 
-        <?php foreach($menu as $r){ 
+        <?php 
+
+        foreach($menu as $r){ 
+  if ($current_time > $sunrise && $current_time < $sunset)
+  {
+    $r->icon_menu = "fa-paw";
+  }
                 ?>
     
                  <li class="nav-item <?php echo($r->mg == $mg[0]->mg_id)? " active open":"" ?>" >
