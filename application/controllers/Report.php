@@ -33,7 +33,6 @@ class Report extends CI_Controller {
       $data['day_data'] = json_encode($day);
       $data['total_day'] = $totalD;
 
-
       $totalM = $this->model->issue_totalM();
       $openM = $this->model->issue_openM();
       $closedM = $this->model->issue_closedM();
@@ -47,13 +46,13 @@ class Report extends CI_Controller {
       $closedY = $this->model->issue_closedY();
       $workY = $this->model->issue_workY();
 
-        $data['maxvalue'] =  (max(array_column($totalY, 'total')));
-        $data['total'] = json_encode($this->model_issue->sort_month($totalY));
-        $data['open'] = json_encode($this->model_issue->sort_month($openY));
-        $data['close'] = json_encode($this->model_issue->sort_month($closedY));
-        $data['wip'] = json_encode($this->model_issue->sort_month($workY));
-        $this->load->view('report/manage',$data);//bring $data to user_data 
-        $this->load->view('footer');
+      $data['maxvalue'] =  (max(array_column($totalY, 'total')));
+      $data['total'] = json_encode($this->model_issue->sort_month($totalY));
+      $data['open'] = json_encode($this->model_issue->sort_month($openY));
+      $data['close'] = json_encode($this->model_issue->sort_month($closedY));
+      $data['wip'] = json_encode($this->model_issue->sort_month($workY));
+      $this->load->view('report/manage',$data);//bring $data to user_data 
+      $this->load->view('footer');
     }
 
     public function search()
