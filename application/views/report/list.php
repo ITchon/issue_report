@@ -104,8 +104,8 @@
                 <td class="text-center">
                 <a href="javascript:void(0)"  data-id="<?php echo $r->is_id;?>" class="  view_img"><i class='btn-success btn-sm fa fa-search'> </i></a>
                 <a class='btn-primary ' data-toggle='tooltip'  onclick="javascript:window.location='<?php
-                echo base_url() . 'user/rule/' . $r->is_id;
-                ?>';"><i class='btn-info btn-sm fa fa-gear'> </i></a>
+                echo base_url() . 'issue/view/' . $r->is_id;
+                ?>';"><i class='btn-warning btn-sm fa fa-eye'> </i></a>
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
