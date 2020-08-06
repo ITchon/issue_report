@@ -162,8 +162,6 @@ if(button.value == 'select'){
 					//   { "bSortable": false }
 					// ],
 					"aaSorting": [],
-					
-					
 					//"bProcessing": true,
 			        //"bServerSide": true,
 			        //"sAjaxSource": "http://127.0.0.1/table.php"	,
