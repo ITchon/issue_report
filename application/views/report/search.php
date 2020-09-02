@@ -19,22 +19,22 @@ label{
 
 <?php echo $this->session->flashdata("error"); ?>
 
-<div class="col-12 ">
-<label class="col-2"></label>
+<div class="col-12  ">
+
 <label for="email-2" id="my-multi-select" class="control-label " ><b>  Select Projects  </b></label>      
 <select name="src_pj[]" multiple="multiple" class="multiple-select text-left">
 <?php foreach($result_p as $rp){ ?>
 <option value='"<?php echo $rp->pj_name ?>"'><?php echo $rp->pj_name ?></option>
 <?php } ?>
 </select>
-<label class="col-2"></label>
+
 <label for="email-2" id="my-multi-select" class="control-label" ><b>  Select Projects  </b></label> 
 <select name="src_st[]" multiple="multiple" class="multiple-select text-left">
 <option value='"Closed"'>Closed</option>
 <option value='"Work In Progress"'>Work In Progress</option>
 <option value='"Open"'>Open</option>
 </select>
-<label class="col-2"></label>
+
   <button type="submit" id="btn" class="btn btn-success" name="chk" value="chk">Search</button>
 </div>
 

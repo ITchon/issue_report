@@ -17,7 +17,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="<?php echo base_url()?>assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-TBKK
+  TBKK
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->  
@@ -76,28 +76,18 @@ TBKK
 });
    
     </script>
-    <?php 
-       date_default_timezone_set("Asia/Bangkok");
-       $current_time = date("h:i "); 
-    $sunrise = "04:42";
-    $sunset = "04:58";
-    $ic = "";
-    if ($current_time > $sunrise && $current_time < $sunset)
-    {
-     $ic = "fa fa-paw";
-    }
-    ?>
+ 
 <body class="layout layout-header-fixed">
   <div class="wrapper ">
-  <div class="sidebar  " data-color="green"  >
+  <div class="sidebar  " data-color="azure"  >
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo"><a href="" class="simple-text logo-normal">
-      <i class="<?php echo $ic ?>"></i> TBKK Group  
-        </a></div>
+      <div class="logo"><a href="" class="simple-text logo-normal" style=" font-weight: 900;">
+      TBKK Group  
+      </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
 
@@ -106,16 +96,13 @@ TBKK
         <?php 
 
         foreach($menu as $r){ 
-  if ($current_time > $sunrise && $current_time < $sunset)
-  {
-    $r->icon_menu = "fa-paw";
-  }
+
                 ?>
     
                  <li class="nav-item <?php echo($r->mg == $mg[0]->mg_id)? " active open":"" ?>" >
                   <a class="nav-link" aria-haspopup="true" href="<?php echo base_url()?><?php echo $r->link ?>">
                     <i class="sidenav-icon fa  <?php echo $r->icon_menu ?>"></i>
-                    <p><?php echo $r->g_name ?></p>
+                    <p style=" font-weight: 500;"><?php echo $r->g_name ?></p>
                   </a>
 
                 
@@ -136,8 +123,7 @@ TBKK
 
           <li class="nav-item active-pro ">
             <a class="nav-link" href="./upgrade.html">
-              <i class="material-icons">unarchive</i>
-              <p>Upgrade to PRO</p>
+              <p></p>
             </a>
           </li>
 
@@ -154,7 +140,7 @@ TBKK
           <div class="navbar-wrapper">
             <a class="navbar-brand " href="javascript:;"><?php echo $mg[0]->name ?></a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler " type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>

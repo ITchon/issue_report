@@ -72,12 +72,12 @@
 
                 <a class='btn-primary' data-toggle='tooltip'  onclick="javascript:window.location='<?php
                 echo base_url() . 'user/rule/' . $r->su_id;
-                ?>';"><i class='btn-info btn-sm fa fa-gear'> </i></a>
+                ?>';"><i class='btn-primary btn-sm fa fa-gear'> </i></a>
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
                 echo base_url() . 'user/edit_u/' . $r->su_id;
-                ?>';"><i class='btn-info btn-sm fa fa-wrench'></i></a>
+                ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>
 
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
                 echo base_url() . 'user/deleteuser/' . $r->su_id;

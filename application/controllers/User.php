@@ -170,13 +170,11 @@ class User extends CI_Controller {
 		
 
 		$uid = $this->input->post('chk_uid');
-
 		$this->model->num_disableUser($uid);
         $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
         <span>  Disable data success</span>
       </div> ');
 		redirect('user/manage');
-
 	}
 
     public function deleteuser()
@@ -192,9 +190,7 @@ class User extends CI_Controller {
 
     public function checkall_delete(){
 
-
 		$uid = $this->input->post('chk_uid');
-		
 		$this->model->num_deleteUser($uid);
         $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
         <span>  Delete data success</span>

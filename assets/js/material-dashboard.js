@@ -451,13 +451,13 @@ md = {
     $sidebar_wrapper = $('.sidebar-wrapper');
 
     if (!mobile_menu_initialized) {
-      $navbar = $('nav').find('.navbar-collapse').children('.navbar-nav');
+
 
       mobile_menu_content = '';
 
       nav_content = $navbar.html();
 
-      nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + '</ul>';
+
 
       navbar_form = $('nav').find('.navbar-form').get(0);
 
