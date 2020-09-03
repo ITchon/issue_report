@@ -17,8 +17,8 @@ class Issue extends CI_Controller {
     }
     public function manage()
     {   
-        //$this->model->CheckPermission($this->session->userdata('su_id'));
-        //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
+        $this->model->CheckPermission($this->session->userdata('su_id'));
+        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
 
          $result = $this->model_issue->select_issue();
        $data['result'] = $result; 
@@ -29,8 +29,8 @@ class Issue extends CI_Controller {
 
     public function add()
     {   
-        //$this->model->CheckPermission($this->session->userdata('su_id'));
-        //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
+        $this->model->CheckPermission($this->session->userdata('su_id'));
+        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
         $sql='SELECT spj.pj_id,spj.pj_name FROM sys_issue as sis
         INNER JOIN sys_projects as spj ON spj.pj_id = sis.pj_id 
         INNER JOIN sys_owner as sow ON sow.owner_id = sis.owner_id
@@ -104,9 +104,9 @@ class Issue extends CI_Controller {
 
       public function edit()
     {
+      $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
+      $this->model->CheckPermission($this->session->userdata('su_id'));
         $id = $this->uri->segment('3');
-        
-
         $result = $this->model_issue->edit_issue($id);
         $data['result'] = $result; 
         
