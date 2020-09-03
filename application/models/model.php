@@ -14,28 +14,32 @@ class Model extends CI_Model
       }else{    return TRUE;    }
   }
   public function CheckPermission($para){
-        
-        $get_url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
+        if($this->session->userdata('sug_id')==1){
+         
+        }else{
 
-        $sqlChkPerm = "SELECT sp.name,sp.controller
-        FROM
-        sys_users_permissions AS sup
-        INNER JOIN sys_permissions AS sp ON sp.sp_id = sup.sp_id
-        LEFT JOIN sys_permission_groups AS spg ON sp.spg_id = spg.spg_id
-        WHERE
-        sp.enable='1' AND spg.enable='1' AND sup.su_id='{$para}' AND sp.controller='{$get_url}';";
-        
-        $excChkPerm = $this->db->query($sqlChkPerm);
-        $numChkPerm = $excChkPerm->num_rows();
-        
-        if($numChkPerm == 0) {
-            
-            echo '<script language="javascript">';
-            echo 'alert("Permission '.$get_url.' not found.");';
-            echo 'history.go(-1);';
-            echo '</script>';
-            exit();
-            
+          $get_url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
+  
+          $sqlChkPerm = "SELECT sp.name,sp.controller
+          FROM
+          sys_users_permissions AS sup
+          INNER JOIN sys_permissions AS sp ON sp.sp_id = sup.sp_id
+          LEFT JOIN sys_permission_groups AS spg ON sp.spg_id = spg.spg_id
+          WHERE
+          sp.enable='1' AND spg.enable='1' AND sup.su_id='{$para}' AND sp.controller='{$get_url}';";
+          
+          $excChkPerm = $this->db->query($sqlChkPerm);
+          $numChkPerm = $excChkPerm->num_rows();
+          
+          if($numChkPerm == 0) {
+              
+              echo '<script language="javascript">';
+              echo 'alert("Permission '.$get_url.' not found.");';
+              echo 'history.go(-1);';
+              echo '</script>';
+              exit();
+              
+          }
         }
 
   }
@@ -62,6 +66,9 @@ class Model extends CI_Model
  }
 
   public function CheckPermissionGroup($para){
+    if($this->session->userdata('sug_id')==1){
+         
+    }else{
     $get_url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
     $sqlSelPerm = "SELECT
   p.sp_id,
@@ -83,6 +90,7 @@ class Model extends CI_Model
     exit();
     
     }
+  }
  }
 
   public function getuser($user,$pass) {  
@@ -181,30 +189,47 @@ $query= $this->db->query($sql1);
 
  public function save_edit_menu($mg_id, $sp_id, $name,$order)
  {
-    
-if($order != null){
-  $num= $this->db->query("SELECT mg_id,order_no FROM sys_menu_groups where order_no > '$order' ORDER BY order_no ASC"); 
-  $chk= $num->result();
-if($chk > 0){
-  foreach($chk as $c){
-    $num = $c->order_no+1;
-    $mg_id = $c->mg_id;
-  $sql = "UPDATE sys_menu_groups SET order_no= $num WHERE mg_id=$mg_id;";
-  $result = $this->db->query($sql);
+  //  echo $mg_id;
+  //  echo $sp_id;
+  //  echo $name;
+  //  echo $order;
+    $new_order= $order+1;
+   $sql =  "SELECT * FROM sys_menu_groups where mg_id = $mg_id"; 
+  $query = $this->db->query($sql);
+  $res = $query->result()[0]; 
+   $old_order = $res->order_no;  
+
+  // --------------
+  //  $sql =  "SELECT * FROM sys_menu_groups where order_no between $new_order and $old_order"; 
+ 
+if($old_order > $order){
+    $a = $old_order;
+    $b = $order+1;
+  $sql =  "UPDATE sys_menu_groups SET order_no= $new_order WHERE mg_id=$mg_id"; 
+  $query = $this->db->query($sql);
+  $sql =  "SELECT * FROM sys_menu_groups where order_no between $b and $a and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
+  $query = $this->db->query($sql);
+  $res = $query->result(); 
+  foreach($res as $r){
+  $sql =  "UPDATE sys_menu_groups SET order_no= order_no+1 WHERE mg_id=$r->mg_id"; 
+  $query = $this->db->query($sql);
   }
-  $order++;
-  $sql1 ="UPDATE sys_menu_groups SET sp_id = '$sp_id', date_updated = CURRENT_TIMESTAMP, order_no = '$order' WHERE mg_id = '$mg_id'";
-  $query = $this->db->query($sql1);
-}
+
 }else{
-  $sql1 ="UPDATE sys_menu_groups SET name = '$name',sp_id = '$sp_id', date_updated = CURRENT_TIMESTAMP WHERE mg_id = '$mg_id'";
-  $query = $this->db->query($sql1);
+  $a = $old_order;
+  $b = $order;
+  $sql =  "UPDATE sys_menu_groups SET order_no= $order WHERE mg_id=$mg_id"; 
+  $query = $this->db->query($sql);
+  $sql =  "SELECT * FROM sys_menu_groups where order_no between $a and $b and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
+  $query = $this->db->query($sql);
+  $res = $query->result(); 
+  foreach($res as $r){
+  $sql =  "UPDATE sys_menu_groups SET order_no= order_no-1 WHERE mg_id=$r->mg_id"; 
+  $query = $this->db->query($sql);
+  }
 }
-   if($query){
-       return true;
-   }else{
-     return false;
-   }
+  
+
  }
 
 

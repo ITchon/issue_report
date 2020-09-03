@@ -20,9 +20,9 @@ class Projects extends CI_Controller {
         //$this->model->CheckPermission($this->session->userdata('su_id'));
         //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
         $sql =  'SELECT * FROM sys_projects  AS spj 
-    where spj.delete_flag != 0 ';
+        where spj.delete_flag != 0 ';
         $query = $this->db->query($sql); 
-       $data['result'] = $query->result(); 
+        $data['result'] = $query->result(); 
         $this->load->view('projects/manage',$data);//bring $data to user_data 
         $this->load->view('footer');
     }

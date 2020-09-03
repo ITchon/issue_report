@@ -14,6 +14,7 @@
                   <thead>
                   <tr class=" text-dark" >
                         <th style="font-weight: bold;">Menu name</th>
+                        <th style="font-weight: bold;"> Order No</th>
                         <th class="text-center"  style="font-weight: bold;" width="30%">Manage</th>
                       </tr>
                     </thead>
@@ -21,8 +22,9 @@
                       
                     <?php
                     foreach($result as $r){
-            echo "<tr>";
+                echo "<tr>";
                 echo "<td>".$r->name."</td>";
+                echo "<td>".$r->order_no."</td>";
                  if($r->enable!=1 ){?>
                   
                   <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php

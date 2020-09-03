@@ -19,7 +19,7 @@ class Menu extends CI_Controller {
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
 
-        $sql =  'select * from sys_menu_groups';
+        $sql =  'select * from sys_menu_groups ORDER BY `order_no` ASC';
         $query = $this->db->query($sql); 
        $data['result'] = $query->result(); 
 
