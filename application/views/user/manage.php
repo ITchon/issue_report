@@ -76,7 +76,7 @@
 
 
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
-                echo base_url() . 'user/edit_u/' . $r->su_id;
+                echo base_url() . 'user/edit/' . $r->su_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>
 
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php

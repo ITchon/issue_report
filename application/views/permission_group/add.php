@@ -17,7 +17,7 @@ label{
                 </div>
               
 <hr>
-            <form class="table form form-horizontal container" action="<?php echo base_url()?>usergroup/insert" method="post" data-toggle="validator">
+            <form class="table form form-horizontal container" action="<?php echo base_url()?>permissiongroup/insert" method="post" data-toggle="validator">
 
                   <?php echo $this->session->flashdata("error"); ?>
 

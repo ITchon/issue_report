@@ -12,43 +12,63 @@ label{
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h2 class="card-title ">Add Permission</h2>
+                  <h2 class="card-title ">Add Menu</h2>
                   <p class="card-category"><h1></h1></p>
                 </div>
               
 <hr>
-<form class="table form form-horizontal container" action="<?php echo base_url()?>permission/insert" method="post" data-toggle="validator">
+<form class="table form form-horizontal container" action="<?php echo base_url()?>menu/insert" method="post" data-toggle="validator">
                  
 <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"><b>PermissionName</b> </label>
-                          <input type="text" class="form-control" name="gname" required>
+                          <label class="bmd-label-floating"><b>Name</b> </label>
+                          <input type="text" class="form-control" name="name" required>
                         </div>
                       </div>
 
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating"><b>Controller</b> </label>
-                          <input type="text" class="form-control" name="controller" required>
-                        </div>
-                      </div>
 
                       <div class="form-group">
                       <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b> Select Group</b></label>      
           
                       <div class="col-sm-6 col-md-6">
-                   <select name="spg_id" class="form-control select2"  required>
+                   <select name="sp_id" class="form-control select2"  required>
                     <option value=""> - - - Select Group - - - </option>
                  <?php 
-             foreach($excLoadG as $r){?>
+             foreach($result_sp as $s){?>
             
-              <option value="<?php  echo $r->spg_id ?>"><?php echo $r->name ?></option>
+              <option value="<?php  echo $s->sp_id ?>"><?php echo $s->name ?></option>
               <?php
            }
       ?>     
          </select>
          </div>
           </div>
+
+          <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating"><b>Icon</b> </label>
+                          <input type="text" class="form-control" name="icon">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                      <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b> Select Order</b></label>      
+          
+                      <div class="col-sm-6 col-md-6">
+                   <select name="order" class="form-control select2"  required>
+                    <option value=""> - - - Select Order - - - </option>
+                 <?php 
+             foreach($result_mg as $m){?>
+            
+              <option value="<?php  echo $m->order_no ?>">After <?php echo $m->name ?></option>
+              <?php
+           }
+      ?>     
+         </select>
+         </div>
+          </div>
+
+
 
 
                       <div class="form-group">

@@ -38,7 +38,7 @@
                   <?php
                 }
                 ?> <a type ='button' class=' ' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
-                echo base_url() . 'permissiongroup/edit_pg/' . $r->spg_id;
+                echo base_url() . 'permissiongroup/edit/' . $r->spg_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'> </i> </a>
                 <?php 
                 echo "<a type='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."permissiongroup/delete_pg/".$r->spg_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i class='btn-dark btn-sm fa fa-trash'></i></a></td>";

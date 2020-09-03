@@ -11,14 +11,7 @@ class Usergroup extends CI_Controller {
         $this->load->database(); 
         $this->load->model('model');
         $this->model->CheckSession();
-        $menu['menu'] = $this->model->showmenu();
-        $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
-        $query = $this->db->query($sql); 
-        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
-         $menu['mg']= $this->model->givemeid($url);
-         $menu['submenu']= $query->result(); 
-         //$this->load->view('header');
-         $this->load->view('menu',$menu);
+        $this->model->load_menu();
        
     }
 
@@ -33,7 +26,7 @@ class Usergroup extends CI_Controller {
         
     }
 
-    public function rule_ug($id)
+    public function rule($id)
     {       
             $this->model->CheckPermission($this->session->userdata('su_id'));
          $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
@@ -54,7 +47,7 @@ class Usergroup extends CI_Controller {
             $data['result_group']= $query->result(); 
 
          $this->load->view('user_group/manage',$data);
-         $this->load->view('user_group/rule_userg', $data);//bring $data to user_data 
+         $this->load->view('user_group/rule', $data);//bring $data to user_data 
          $this->load->view('footer');
    
     }
@@ -148,7 +141,7 @@ class Usergroup extends CI_Controller {
  
     }
 
-    public function edit_ug()
+    public function edit()
     {
         $this->model->CheckPermission($this->session->userdata('su_id'));
          $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));

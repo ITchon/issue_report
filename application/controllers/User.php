@@ -11,13 +11,7 @@ class User extends CI_Controller {
         $this->load->database(); 
         $this->load->model('model');
         $this->model->CheckSession();
-        $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
-        $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
-        $query = $this->db->query($sql); 
-        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
-         $menu['mg']= $this->model->givemeid($url);
-         $menu['submenu']= $query->result();
-         $this->load->view('menu',$menu);
+        $this->model->load_menu();
        
     }
     public function manage()
@@ -215,7 +209,7 @@ class User extends CI_Controller {
  
     }
 
-    public function edit_u()
+    public function edit()
     {
         $this->model->CheckPermission($this->session->userdata('su_id'));
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));

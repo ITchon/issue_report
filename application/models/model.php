@@ -39,6 +39,28 @@ class Model extends CI_Model
         }
 
   }
+
+  public function load_menu()
+  { 
+      $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'),$this->session->userdata('su_id'));
+     $this->load->view('menu',$menu);
+ 
+
+  }
+
+  function showmenu($sug_id,$su_id)
+  {
+    $sql =  'SELECT smg.name AS g_name, smg.icon_menu,smg.mg_id, smg.order_no ,sp.controller FROM sys_menu_groups as smg
+    INNER JOIN sys_permissions as sp ON sp.sp_id = smg.sp_id
+    INNER JOIN sys_permission_groups as spg ON spg.spg_id = sp.spg_id
+    INNER JOIN sys_users_groups_permissions as sug ON sug.spg_id = sp.spg_id
+    INNER JOIN sys_users_permissions as sup ON sup.sp_id = sp.sp_id
+    WHERE sup.su_id = 1 AND sug.sug_id = 1 ORDER BY smg.order_no ASC';
+    $query = $this->db->query($sql); 
+    $result = $query->result();
+    return $result;
+ }
+
   public function CheckPermissionGroup($para){
     $get_url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
     $sqlSelPerm = "SELECT
@@ -82,16 +104,28 @@ return false;
   }
 
 } 
- function showmenu(){
-    $sql =  'SELECT DISTINCT smg.name AS g_name, smg.icon_menu, sm.mg_id, smg.mg_id AS mg, smg.order_no 
-    ,smg.link
-    FROM sys_menus AS sm 
-    inner JOIN sys_menu_groups AS smg ON smg.mg_id = sm.mg_id 
-    ORDER BY smg.order_no ASC';    
-    $query = $this->db->query($sql); 
-    $result = $query->result();
-    return $result;
+
+function get_mg(){
+  $sql ="SELECT * FROM sys_menu_groups ORDER BY order_no ASC";
+    $query = $this->db->query($sql);  
+   $data = $query->result(); 
+   return $data;
  }
+
+function get_mg_noby($id){
+  $sql ="SELECT * FROM sys_menu_groups where mg_id != $id ORDER BY order_no ASC";
+    $query = $this->db->query($sql);  
+   $data = $query->result(); 
+   return $data;
+ }
+
+ function get_sp(){
+  $sql ="SELECT * FROM sys_permissions where delete_flag != 0 AND name RLIKE('manage')";
+    $query = $this->db->query($sql);  
+   $data = $query->result(); 
+   return $data;
+ }
+
  function givemeid($para){
   $sql ="SELECT *  FROM sys_menus 
   WHERE link='$para'  ";
@@ -117,6 +151,60 @@ $password = base64_encode(trim($password));
  }
  return false;
    
+ }
+
+ function insert_menu($name, $sp_id, $mg_id, $icon, $order)
+ {
+  $num= $this->db->query("SELECT mg_id,order_no FROM sys_menu_groups where order_no > '$order' ORDER BY order_no ASC"); 
+  $chk= $num->result();
+if($chk > 0){
+  $oder+1;
+  $sql1 ="INSERT INTO sys_menu_groups (name, sp_id, icon_menu, enable, date_created,order_no) 
+  VALUES ( '$name', '$sp_id', '$icon', '1', CURRENT_TIMESTAMP,'$order' )";
+$query= $this->db->query($sql1); 
+
+  foreach($chk as $c){
+    $num = $c->order_no+1;
+    $mg_id = $c->mg_id;
+  $sql = "UPDATE sys_menu_groups SET order_no= $num WHERE mg_id=$mg_id;";
+  $result = $this->db->query($sql);
+  }
+}
+  if($query){
+      return true;
+  }else{
+    return false;
+  }
+ 
+   
+ }
+
+ public function save_edit_menu($mg_id, $sp_id, $name,$order)
+ {
+    
+if($order != null){
+  $num= $this->db->query("SELECT mg_id,order_no FROM sys_menu_groups where order_no > '$order' ORDER BY order_no ASC"); 
+  $chk= $num->result();
+if($chk > 0){
+  foreach($chk as $c){
+    $num = $c->order_no+1;
+    $mg_id = $c->mg_id;
+  $sql = "UPDATE sys_menu_groups SET order_no= $num WHERE mg_id=$mg_id;";
+  $result = $this->db->query($sql);
+  }
+  $order++;
+  $sql1 ="UPDATE sys_menu_groups SET sp_id = '$sp_id', date_updated = CURRENT_TIMESTAMP, order_no = '$order' WHERE mg_id = '$mg_id'";
+  $query = $this->db->query($sql1);
+}
+}else{
+  $sql1 ="UPDATE sys_menu_groups SET name = '$name',sp_id = '$sp_id', date_updated = CURRENT_TIMESTAMP WHERE mg_id = '$mg_id'";
+  $query = $this->db->query($sql1);
+}
+   if($query){
+       return true;
+   }else{
+     return false;
+   }
  }
 
 
@@ -190,7 +278,7 @@ $password = base64_encode(trim($password));
  function insert_permissiongroup($gname)
  {
   $sql ="INSERT INTO sys_permission_groups (name,enable,date_created,delete_flag) VALUES ( '$gname', '1', CURRENT_TIMESTAMP,  '1' );";
-    $query = $this->db->query($sql);  
+    $query = $this->db->query($sql);
    if($query){
      return true;
    }

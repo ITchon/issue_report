@@ -10,14 +10,7 @@ class Permissiongroup extends CI_Controller {
         $this->load->database(); 
         $this->load->model('model');
         $this->model->CheckSession();
-        $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
-        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
-         $menu['mg']= $this->model->givemeid($url); 
-         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
-         $query = $this->db->query($sql); 
-         $menu['submenu']= $query->result(); 
-         $this->load->view('menu',$menu);
-         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
+        $this->model->load_menu();
     }
 	public function index()
     {	
@@ -42,7 +35,9 @@ class Permissiongroup extends CI_Controller {
        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
 
-        $this->load->view('permission_group/add');//bring $data to user_data 
+        $data['result_mg'] = $this->model->get_mg();
+
+        $this->load->view('permission_group/add',$data);//bring $data to user_data 
         $this->load->view('footer');
     }
 
@@ -89,7 +84,6 @@ class Permissiongroup extends CI_Controller {
         $result = $this->model->insert_permissiongroup($gname);
         redirect('permissiongroup/manage');
 
-
     }
 
     public function delete_pg()
@@ -101,13 +95,13 @@ class Permissiongroup extends CI_Controller {
         redirect('permissiongroup/manage');
     }
 
-    public function edit_pg()
+    public function edit()
     {
        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
 
         $id = $this->uri->segment('3');
-        $sql =  "SELECT spg.spg_id, spg.name as spg_name from sys_permission_groups as spg  where delete_flag !=0";
+        $sql =  "SELECT spg.spg_id, spg.name as spg_name from sys_permission_groups as spg  where spg.spg_id = $id";
 
         $query = $this->db->query($sql); 
         $data['result'] = $query->result(); 

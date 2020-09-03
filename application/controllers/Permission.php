@@ -11,13 +11,7 @@ class Permission extends CI_Controller {
         $this->load->model('model');
         $this->load->helper('url'); 
         $this->model->CheckSession();
-        $menu['menu'] = $this->model->showmenu($this->session->userdata('sug_id'));
-        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method()); 
-         $menu['mg']= $this->model->givemeid($url); 
-         $sql =  "select * from sys_menus where order_no != 0 and enable != 0 ORDER BY order_no";
-         $query = $this->db->query($sql); 
-         $menu['submenu']= $query->result(); 
-         $this->load->view('menu',$menu);      
+        $this->model->load_menu();  
     }
 	public function index()
     {	
@@ -109,7 +103,7 @@ class Permission extends CI_Controller {
         }
     }
 
-    public function edit_permission()
+    public function edit()
     {
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
