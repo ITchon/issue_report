@@ -5,7 +5,7 @@
 
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">List Users  <a href="<?php echo base_url()?>user/add"><button class="btn btn-success ">ADD</button></a></h4>
+                  <h4 class="card-title ">List Users  <a href="<?php echo base_url()?>user/add"><button class="btn btn-primary ">ADD</button></a></h4>
 
                 </div>
                 <div class="card-body">
