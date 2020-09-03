@@ -199,25 +199,20 @@ $query= $this->db->query($sql1);
 
  public function save_edit_menu($mg_id, $sp_id, $name,$order)
  {
-  //  echo $mg_id;
-  //  echo $sp_id;
-  //  echo $name;
-  //  echo $order;
-    $new_order= $order+1;
+  
    $sql =  "SELECT * FROM sys_menu_groups where mg_id = $mg_id"; 
   $query = $this->db->query($sql);
   $res = $query->result()[0]; 
    $old_order = $res->order_no;  
+   $a = $old_order;
+   $b = $order;
 
-  // --------------
-  //  $sql =  "SELECT * FROM sys_menu_groups where order_no between $new_order and $old_order"; 
  
 if($old_order > $order){
-    $a = $old_order;
-    $b = $order+1;
-  $sql =  "UPDATE sys_menu_groups SET order_no= $new_order WHERE mg_id=$mg_id"; 
+
+  $sql =  "UPDATE sys_menu_groups SET order_no= $order+1 WHERE mg_id=$mg_id"; 
   $query = $this->db->query($sql);
-  $sql =  "SELECT * FROM sys_menu_groups where order_no between $b and $a and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
+  $sql =  "SELECT * FROM sys_menu_groups where order_no between $b+1 and $a and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
   $query = $this->db->query($sql);
   $res = $query->result(); 
   foreach($res as $r){
@@ -226,8 +221,7 @@ if($old_order > $order){
   }
 
 }else{
-  $a = $old_order;
-  $b = $order;
+
   $sql =  "UPDATE sys_menu_groups SET order_no= $order WHERE mg_id=$mg_id"; 
   $query = $this->db->query($sql);
   $sql =  "SELECT * FROM sys_menu_groups where order_no between $a and $b and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
