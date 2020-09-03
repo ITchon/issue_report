@@ -173,21 +173,14 @@ $password = base64_encode(trim($password));
 
  function insert_menu($name, $sp_id, $mg_id, $icon, $order)
  {
-  $num= $this->db->query("SELECT mg_id,order_no FROM sys_menu_groups where order_no > '$order' ORDER BY order_no ASC"); 
-  $chk= $num->result();
-if($chk > 0){
-  $oder+1;
+  $num= $this->db->query("SELECT MAX(order_no) as order_no FROM sys_menu_groups"); 
+  $res= $num->result()[0];
+
+  $order = $res->order_no+1;
   $sql1 ="INSERT INTO sys_menu_groups (name, sp_id, icon_menu, enable, date_created,order_no) 
   VALUES ( '$name', '$sp_id', '$icon', '1', CURRENT_TIMESTAMP,'$order' )";
 $query= $this->db->query($sql1); 
 
-  foreach($chk as $c){
-    $num = $c->order_no+1;
-    $mg_id = $c->mg_id;
-  $sql = "UPDATE sys_menu_groups SET order_no= $num WHERE mg_id=$mg_id;";
-  $result = $this->db->query($sql);
-  }
-}
   if($query){
       return true;
   }else{

@@ -12,8 +12,8 @@
                   <table id="example" class="table">
                   <thead>
                   <tr class=" text-dark" >
-                  <th style="font-weight: bold;">Menu name</th>
                         <th style="font-weight: bold;"> Order No</th>
+                        <th style="font-weight: bold;">Menu name</th>
                         <th class="text-center"  style="font-weight: bold;" width="30%">Manage</th>
                       </tr>
                     </thead>
@@ -22,8 +22,8 @@
                     <?php
                     foreach($result as $r){
                 echo "<tr>";
-                echo "<td>".$r->name."</td>";
                 echo "<td>".$r->order_no."</td>";
+                echo "<td>".$r->name."</td>";
                 if($r -> enable ==1 ){  
                   $icon = "btn-success btn-sm fa fa-check";
                 }

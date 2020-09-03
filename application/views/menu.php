@@ -138,7 +138,7 @@ The above copyright notice and this permission notice shall be included in all c
       <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white"  style="  position: sticky;" >
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand " href="javascript:;"><?php echo $menu[0]->g_name ?></a>
+            <a class="navbar-brand " href="<?php echo base_url().$this->uri->segment('1')?>/manage"><b><?php echo ucfirst(trim($this->router->fetch_class())) ?></b></a>
           </div>
           <button class="navbar-toggler " type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
