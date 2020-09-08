@@ -5,7 +5,7 @@
 
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title "> List Projects <a href="<?php echo base_url()?>projects/add"><button class="btn btn-success ">ADD</button></a></h4>
+                  <h4 class="card-title "> List Projects <a href="<?php echo base_url()?>projects/add"><button class="btn btn-primary ">ADD</button></a></h4>
                   
                   <p class="card-category"><h1></h1></p>
                 </div>

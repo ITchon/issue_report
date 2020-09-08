@@ -3,11 +3,10 @@
           <div class="row">
             <div class="col-md-12">
             <div align="right">
-            <a href="<?php echo base_url()?>menu/add"><button class="btn btn-warning">+</button></a>
             </div>
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">List Menu</h4>
+                  <h4 class="card-title ">List Menu <a href="<?php echo base_url()?>menu/add"><button class="btn btn-primary">ADD</button></a> </h4>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">
