@@ -28,7 +28,6 @@ backdrop: 'static'
             <?php
                    $i = 0;
                  foreach($result_group as $r){     
-
                   if($i !=  $r->spg_id){
                       echo "<div class='col-12'>
                       <hr>
