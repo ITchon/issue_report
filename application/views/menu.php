@@ -48,6 +48,7 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="<?php echo base_url()?>assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
   <script src="<?php echo base_url()?>assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+  <script src="<?php echo base_url()?>assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
 </head>
 
 <style>
@@ -84,8 +85,7 @@ The above copyright notice and this permission notice shall be included in all c
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo"><a href="" class="simple-text logo-normal" style=" font-weight: 900;">
-      TBKK Group  
+      <div class="logo"><a class="simple-text logo-normal" style=" font-weight: 900;" href="<?php echo base_url().$this->uri->segment('1')?>/manage">TBKK Group
       </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -138,7 +138,8 @@ The above copyright notice and this permission notice shall be included in all c
       <nav class="navbar navbar-expand-lg navbar navbar-absolute fixed-top bg-white"  style="  position: sticky;" >
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand " href="<?php echo base_url().$this->uri->segment('1')?>/manage"><b><?php echo ucfirst(trim($this->router->fetch_class())) ?></b></a>
+            <?php $now =  $this->router->fetch_method() ?>
+            <a class="navbar-brand" href="<?php echo base_url().$this->uri->segment('1')?>/manage"><b><?php echo ucfirst(trim($this->router->fetch_class())) ?><?php if($now != "manage" &&  $now != "list" &&  $now != "show"){?> : <?php echo ucfirst($now) ?><?php }?></a></b>
           </div>
           <button class="navbar-toggler " type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>

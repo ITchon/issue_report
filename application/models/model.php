@@ -129,6 +129,24 @@ function get_mg(){
    $data = $query->result(); 
    return $data;
  }
+function get_issue(){
+  $sql = "SELECT * FROM sys_issue where delete_flag != 0";
+   $query = $this->db->query($sql);
+   $result = $query->result();
+   return $result;
+ }
+function get_issue_bycur($c){
+  $sql = "SELECT COUNT(cur_st) as cur_st FROM sys_issue where delete_flag != 0 AND cur_st = '$c'";
+   $query = $this->db->query($sql);
+   $result = $query->result()[0];
+   return $result;
+ }
+function get_issue_lastfix(){
+  $sql = "SELECT MAX(date_updated) as date_updated FROM sys_issue where delete_flag != 0 AND cur_st = 'closed'";
+   $query = $this->db->query($sql);
+   $result = $query->result()[0];
+   return $result;
+ }
 
 function get_mg_noby($id){
   $sql ="SELECT * FROM sys_menu_groups where mg_id != $id ORDER BY order_no ASC";
@@ -138,7 +156,7 @@ function get_mg_noby($id){
  }
 
  function get_sp(){
-  $sql ="SELECT * FROM sys_permissions where delete_flag != 0 AND name RLIKE('manage')";
+  $sql ="SELECT * FROM sys_permissions where delete_flag != 0 AND controller RLIKE('manage') OR controller RLIKE('show') ";
     $query = $this->db->query($sql);  
    $data = $query->result(); 
    return $data;

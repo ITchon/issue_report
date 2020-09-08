@@ -1,22 +1,219 @@
+<style>
+  .card{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+  .chart-container {
+  position: relative;
+  margin: 20px;
+  height: 30vh;
 
+}
+
+</style>
+<style>
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;
+align:center;
+}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 10s;
+  animation-name: fade;
+  animation-duration: 2.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+</style>
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-rose">
+                  <h4 class="card-title "> Issue Graph Report </h4>
+                    
+                </div>
+                <div class="col-md-12">
+                  <br>
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones">
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+                <?php if($closed_issue == $sum_issue){
+                  $icon = 'success';
+                  $text = 'check';
+                  $status = 'No More Issue';
+                }else{
+                  $icon = 'danger';
+                  $text = 'warning';
+                  $status = 'We Have to fix Issue';
+                }?>
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
+                <div class="card-header card-header-<?php echo $icon ?> card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
+                    <i class="material-icons"><?php echo $text ?></i>
                   </div>
-                  <p class="card-category">Used Space</p>
-                  <h3 class="card-title">49/50
+                  <p class="card-category"><b>Closed Issue</b></p>
+                  <h3 class="card-title"><?php echo $closed_issue ?>/<?php echo $sum_issue ?>
                     <small>GB</small>
                   </h3>
                 </div>
+
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons text-danger">warning</i>
-                    <a href="javascript:;">Get More Space...</a>
+                      <i class="material-icons text-<?php echo $icon ?>"><?php echo $text ?></i>
+                    <h4 class="text-<?php echo $icon ?>"><?php echo $status; ?></h4>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                  <i class="material-icons">date_range</i>
+
+                    
+                    <?php 
+
+// Declare and define two dates 
+$date1 = strtotime($last_fix); 
+$date2 = strtotime(date("Y-m-d H:i:s")); 
+
+// Formulate the Difference between two dates 
+$diff = abs($date2 - $date1); 
+
+
+// To get the year divide the resultant date into 
+// total seconds in a year (365*60*60*24) 
+$years = floor($diff / (365*60*60*24)); 
+
+
+// To get the month, subtract it with years and 
+// divide the resultant date into 
+// total seconds in a month (30*60*60*24) 
+$months = floor(($diff - $years * 365*60*60*24) 
+							/ (30*60*60*24)); 
+
+
+// To get the day, subtract it with years and 
+// months and divide the resultant date into 
+// total seconds in a days (60*60*24) 
+$days = floor(($diff - $years * 365*60*60*24 - 
+			$months*30*60*60*24)/ (60*60*24)); 
+
+
+// To get the hour, subtract it with years, 
+// months & seconds and divide the resultant 
+// date into total seconds in a hours (60*60) 
+$hours = floor(($diff - $years * 365*60*60*24 
+	- $months*30*60*60*24 - $days*60*60*24) 
+								/ (60*60)); 
+
+
+// To get the minutes, subtract it with years, 
+// months, seconds and hours and divide the 
+// resultant date into total seconds i.e. 60 
+$minutes = floor(($diff - $years * 365*60*60*24 
+		- $months*30*60*60*24 - $days*60*60*24 
+						- $hours*60*60)/ 60); 
+
+
+// To get the minutes, subtract it with years, 
+// months, seconds, hours and minutes 
+$seconds = floor(($diff - $years * 365*60*60*24 
+		- $months*30*60*60*24 - $days*60*60*24 
+				- $hours*60*60 - $minutes*60)); 
+
+// Print the result 
+
+printf("%d years, %d months, %d days, %d hours, "
+	. "%d minutes, %d seconds", $years, $months, 
+			$days, $hours, $minutes, $seconds); 
+?> 
+
                   </div>
                 </div>
               </div>
@@ -121,297 +318,55 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-tabs card-header-primary">
-                  <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                      <span class="nav-tabs-title">Tasks:</span>
-                      <ul class="nav nav-tabs" data-tabs="tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#profile" data-toggle="tab">
-                            <i class="material-icons">bug_report</i> Bugs
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#messages" data-toggle="tab">
-                            <i class="material-icons">code</i> Website
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#settings" data-toggle="tab">
-                            <i class="material-icons">cloud</i> Server
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane" id="messages">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane" id="settings">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-warning">
-                  <h4 class="card-title">Employees Stats</h4>
-                  <p class="card-category">New employees on 15th September, 2016</p>
-                </div>
-                <div class="card-body table-responsive">
-                  <table class="table table-hover">
-                    <thead class="text-warning">
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Salary</th>
-                      <th>Country</th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+ 
+            </div>  
           </div>
         </div>
+        </div>
       </div>
-     
+      
+
+
+
+      <script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
