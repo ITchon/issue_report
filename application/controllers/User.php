@@ -54,7 +54,7 @@ class User extends CI_Controller {
         $id = $this->uri->segment('3');
      
             $data['result'] =  $this->model->get_user(); 
-            $sql =  'select * from sys_users_permissions where su_id = '.$id.'';
+            $sql = 'select * from sys_users_permissions where su_id = '.$id.'';
             $query = $this->db->query($sql); 
             $data['result_user']= $query->result(); 
      
