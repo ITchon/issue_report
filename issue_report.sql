@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2020 at 06:41 AM
+-- Generation Time: Sep 08, 2020 at 10:00 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -113,14 +113,14 @@ CREATE TABLE `sys_menus` (
 --
 
 INSERT INTO `sys_menus` (`m_id`, `mg_id`, `name`, `method`, `link`, `enable`, `order_no`, `date_created`) VALUES
-('1', '3', 'Edit Profile', 'editprofile/manage', 'editprofile/manage', '1', '1', '20/3/2015 00:00:00'),
+('1', '3', 'Edit Profile', 'setting/manage', 'setting/manage', '1', '1', '20/3/2015 00:00:00'),
 ('15', '2', 'Rule', 'user/manage', 'user/rule', '1', '0', '20/3/2015 00:00:00'),
-('2', '3', 'Change Password', 'changepassword/account', 'changepassword/account', '1', '2', '20/3/2015 00:00:00'),
-('21', '4', 'Edit_Permission', 'permission/manage', 'permission/edit_permission', '0', '3', NULL),
-('22', '12', 'Edit_Permission_Groups', 'permissiongroup/edit_pg', 'permissiongroup/edit_pg', '0', '4', NULL),
-('23', '5', 'Rlue_Group', 'usergroup/rule_ug', 'usergroup/rule_ug', '0', '3', NULL),
-('24', '5', 'Edit_Group', 'usergroup/edit_ug', 'usergroup/edit_ug', '0', '4', NULL),
-('25', '2', 'Edit_User', 'user/edit_u', 'user/edit_u', '0', '4', NULL),
+('2', '3', 'Change Password', 'setting/edit_profile', 'setting/edit_profile', '1', '2', '20/3/2015 00:00:00'),
+('21', '4', 'Edit_Permission', 'permission/manage', 'permission/edit', '0', '3', NULL),
+('22', '12', 'Edit_Permission_Groups', 'permissiongroup/edit', 'permissiongroup/edit', '0', '4', NULL),
+('23', '5', 'Rlue_Group', 'usergroup/rule', 'usergroup/rule', '0', '3', NULL),
+('24', '5', 'Edit_Group', 'usergroup/edit', 'usergroup/edit', '0', '4', NULL),
+('25', '2', 'Edit_User', 'user/edit', 'user/edit', '0', '4', NULL),
 ('29', '5', 'Add Usergroup', 'usergroup/add', 'usergroup/add', '1', '1', NULL),
 ('3', '4', 'Permission', 'permission/manage', 'permission/manage', '1', '2', '20/3/2015 00:00:00'),
 ('30', '4', 'Add Permission', 'permission/add', 'permission/add', '1', '1', NULL),
@@ -135,8 +135,9 @@ INSERT INTO `sys_menus` (`m_id`, `mg_id`, `name`, `method`, `link`, `enable`, `o
 ('39', '6', 'Edit Projects', 'projects/edit', 'projects/edit', '1', '0', NULL),
 ('4', '12', 'Permission Group', 'permissiongroup/manage', 'permissiongroup/manage', '1', '2', '20/3/2015 00:00:00'),
 ('40', '7', 'Edit Issue', 'issue/edit', 'issue/edit', '1', '0', NULL),
-('401', '7', 'View Issue', 'issue/view', 'issue/view', '1', '0', NULL),
-('5', '2', 'Add User', 'user/add', 'user/add', '1', '1', '20/3/2015 00:00:00'),
+('41', '7', 'View Issue', 'issue/view', 'issue/view', '1', '0', NULL),
+('42\r\n', '10', 'Manage Menu', 'menu/manage', 'menu/manage', '1', '1', NULL),
+('5', '2', 'Add User', 'user/manage', 'user/add', '1', '1', '20/3/2015 00:00:00'),
 ('6', '2', 'Manage User', 'user/manage', 'user/manage', '1', '2', '20/3/2015 00:00:00'),
 ('7', '5', 'Manage Usergroup', 'usergroup/manage', 'usergroup/manage', '1', '2', '20/3/2015 00:00:00'),
 ('8', '1', 'Home', 'manage/index', 'manage/index', '1', '1', '20/3/2015 00:00:00');
@@ -150,28 +151,30 @@ INSERT INTO `sys_menus` (`m_id`, `mg_id`, `name`, `method`, `link`, `enable`, `o
 CREATE TABLE `sys_menu_groups` (
   `mg_id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `link` varchar(255) NOT NULL,
+  `sp_id` int(11) NOT NULL,
   `icon_menu` varchar(50) DEFAULT NULL,
   `enable` varchar(1) DEFAULT NULL,
   `order_no` tinyint(4) DEFAULT NULL,
-  `date_created` datetime DEFAULT NULL
+  `date_created` datetime DEFAULT NULL,
+  `date_updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sys_menu_groups`
 --
 
-INSERT INTO `sys_menu_groups` (`mg_id`, `name`, `link`, `icon_menu`, `enable`, `order_no`, `date_created`) VALUES
-(1, 'Main', '', 'fa-home', '1', 1, '2015-03-03 00:00:00'),
-(2, 'Users', 'user/manage', 'fa-user', '1', 3, '2015-03-03 00:00:00'),
-(3, 'Settings', '', 'fa-cog', '1', 2, '2015-03-03 00:00:00'),
-(4, 'Permissions', 'permission/manage', 'fa-unlock-alt', '1', 5, '2015-03-20 00:00:00'),
-(5, 'Groups', 'usergroup/manage', 'fa-group', '1', 4, '2015-03-20 00:00:00'),
-(6, 'Projects', 'projects/manage', 'fa fa-check-square-o', '1', 7, NULL),
-(7, 'Issue', 'issue/manage', 'fa fa-check-square-o', '1', 8, NULL),
-(8, 'Report Graph', 'report/manage', ' fa-wrench\r\n', '1', 10, NULL),
-(9, 'Report Issue', 'report/search', ' fa-wrench\r\n', '1', 9, NULL),
-(12, 'Permissions Groups', 'permissiongroup/manage', ' fa-wrench\n', '1', 6, '2020-06-22 15:16:15');
+INSERT INTO `sys_menu_groups` (`mg_id`, `name`, `sp_id`, `icon_menu`, `enable`, `order_no`, `date_created`, `date_updated`) VALUES
+(1, 'Main', 2, 'fa-home', '1', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Users', 17, 'fa-user', '1', 3, '2015-03-03 00:00:00', '2020-09-03 12:01:17'),
+(3, 'Settings', 1, 'fa-cog', '1', 2, '2015-03-03 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Permissions', 16, 'fa-unlock-alt', '1', 5, '2015-03-20 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Groups', 18, 'fa-group', '1', 4, '2015-03-20 00:00:00', '2020-09-03 13:37:03'),
+(6, 'Projects', 73, 'fa fa-book', '1', 9, NULL, '0000-00-00 00:00:00'),
+(7, 'Issue', 77, 'fa fa-check-square-o', '1', 10, NULL, '0000-00-00 00:00:00'),
+(8, 'Report Graph', 79, 'fa fa-paragraph', '1', 12, NULL, '2020-09-03 13:27:50'),
+(9, 'Report Issue', 78, '	fa fa-bug', '1', 11, NULL, '0000-00-00 00:00:00'),
+(10, 'Menu', 81, '	fa fa-th-list', '1', 7, NULL, '2020-09-03 13:49:47'),
+(12, 'Permissions Groups', 15, ' fa-wrench\n', '1', 6, '2020-06-22 15:16:15', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -215,19 +218,19 @@ CREATE TABLE `sys_permissions` (
 --
 
 INSERT INTO `sys_permissions` (`sp_id`, `spg_id`, `name`, `controller`, `enable`, `date_created`, `date_updated`, `delete_flag`, `date_deleted`) VALUES
-(1, 1, 'EDIT PROFILE', 'editprofile/manage', '1', '2015-03-03 00:00:00', '2020-04-29 11:10:27', '1', '2020-01-17 16:06:55'),
-(2, 1, 'CHANGE PASSWORD PROFILE', 'changepassword/account', '1', '2015-03-03 00:00:00', '2020-04-10 10:31:07', '1', '2020-01-17 16:06:55'),
+(1, 1, 'EDIT PROFILE', 'setting/manage', '1', '2015-03-03 00:00:00', '2020-09-02 14:10:58', '1', '2020-01-17 16:06:55'),
+(2, 1, 'DASH BOARD', 'dashboard/show', '1', '2015-03-03 00:00:00', '2020-04-10 10:31:07', '1', '2020-01-17 16:06:55'),
 (3, 2, 'ADD USER', 'user/add', '1', '2015-03-03 00:00:00', '2020-01-17 10:02:34', '1', '2020-01-17 09:28:06'),
-(4, 2, 'EDIT USER', 'user/edit_u', '1', '2015-03-03 00:00:00', '2020-04-10 10:31:08', '1', NULL),
+(4, 2, 'EDIT USER', 'user/edit', '1', '2015-03-03 00:00:00', '2020-04-10 10:31:08', '1', NULL),
 (5, 2, 'DELETE USER', 'user/deleteuser', '1', '2015-03-03 00:00:00', '2020-01-17 10:02:34', '1', NULL),
-(6, 4, 'ADD PERMISSION', 'permission/add', '1', '2015-03-20 00:00:00', NULL, '1', NULL),
-(7, 4, 'EDIT PERMISSION', 'permission/edit_permission', '1', '2015-03-20 00:00:00', '2020-04-29 16:01:10', '1', NULL),
+(6, 4, 'ADD PERMISSION', 'permission/add', '1', '2015-03-20 00:00:00', '2020-09-03 11:34:23', '1', NULL),
+(7, 4, 'EDIT PERMISSION', 'permission/edit', '1', '2015-03-20 00:00:00', '2020-04-29 16:01:10', '1', NULL),
 (8, 4, 'DELETE PERMISSION', 'permission/deletepermission', '1', '2015-03-20 00:00:00', NULL, '1', NULL),
 (9, 3, 'ADD USER GROUP', 'usergroup/insert', '1', '2015-03-20 00:00:00', '2020-04-10 13:07:06', '1', NULL),
-(10, 3, 'EDIT USER GROUP', 'usergroup/edit_ug', '1', '2015-03-20 00:00:00', '2020-06-02 10:39:40', '1', NULL),
+(10, 3, 'EDIT USER GROUP', 'usergroup/edit', '1', '2015-03-20 00:00:00', '2020-06-02 10:39:40', '1', NULL),
 (11, 3, 'DELETE USER GROUP', 'usergroup/deletegroup', '1', '2015-03-20 00:00:00', NULL, '1', '2020-05-26 13:22:27'),
 (12, 5, 'ADD PERMISSION GROUP', 'permissiongroup/add', '1', '2015-03-20 00:00:00', '2020-06-02 11:51:02', '1', NULL),
-(13, 5, 'EDIT PERMISSION GROUP', 'permissiongroup/edit_pg', '1', '2015-03-20 00:00:00', NULL, '1', NULL),
+(13, 5, 'EDIT PERMISSION GROUP', 'permissiongroup/edit', '1', '2015-03-20 00:00:00', NULL, '1', NULL),
 (14, 5, 'DELETE PERMISSION GROUP', 'permissiongroup/delete_pg', '1', '2015-03-20 00:00:00', '2020-04-29 13:17:43', '1', NULL),
 (15, 5, 'MANAGE PERMISSION GROUP', 'permissiongroup/manage', '1', '2015-03-20 00:00:00', '2020-06-30 13:04:48', '1', NULL),
 (16, 4, 'MANAGE PERMISSION', 'permission/manage', '1', '2015-03-20 00:00:00', '2020-07-03 08:44:14', '1', NULL),
@@ -236,13 +239,27 @@ INSERT INTO `sys_permissions` (`sp_id`, `spg_id`, `name`, `controller`, `enable`
 (19, 4, 'EDIT USER RULE', 'user/rule', '1', '2015-03-25 00:00:00', '2020-01-17 10:02:34', '1', NULL),
 (20, 2, 'ENABLE USER', 'user/enable', '1', '2017-02-01 00:00:00', '2020-01-17 10:02:34', '1', NULL),
 (21, 2, 'DISABLE USER', 'user/disable', '1', '2017-02-01 00:00:00', '2020-01-17 10:02:34', '1', NULL),
-(22, 5, 'EDIT USERGROUP RULE', 'usergroup/rule_ug', '1', '2020-06-02 11:03:48', NULL, '1', NULL),
+(22, 5, 'EDIT USERGROUP RULE', 'usergroup/rule', '1', '2020-06-02 11:03:48', NULL, '1', NULL),
 (23, 3, 'DISABLE USERGROUP', 'usergroup/disable', '1', '2020-06-02 11:22:59', NULL, '1', NULL),
 (24, 3, 'ENABLE USERGROUP', 'usergroup/enable', '1', '2020-06-02 11:23:41', NULL, '1', NULL),
 (28, 4, 'DISABLE PERMISSION', 'permission/disable', '1', '2020-06-02 11:36:27', NULL, '1', NULL),
 (29, 4, 'ENABLE PERMISSION', 'permission/enable', '1', '2020-06-02 11:36:47', NULL, '1', NULL),
 (31, 5, 'DISABLE PERMISSIONGROUP', 'permissiongroup/disable', '1', '2020-06-02 11:46:29', NULL, '1', NULL),
-(32, 5, 'ENABLE PERMISSIONGROUP', 'permissiongroup/enable', '1', '2020-06-02 11:47:03', NULL, '1', NULL);
+(32, 5, 'ENABLE PERMISSIONGROUP', 'permissiongroup/enable', '1', '2020-06-02 11:47:03', NULL, '1', NULL),
+(73, 9, 'MANAGE PROJECT', 'projects/manage', '1', NULL, NULL, '1', NULL),
+(74, 9, 'ADD PROJECT', 'projects/add', '1', NULL, NULL, '1', NULL),
+(75, 9, 'DELETE PROJECT', 'projects/delete', '1', NULL, NULL, '1', NULL),
+(76, 9, 'EDIT PROJECT', 'projects/edit', '1', NULL, NULL, '1', NULL),
+(77, 10, 'MANAGE ISSUE', 'issue/manage', '1', NULL, NULL, '1', NULL),
+(78, 6, 'MANAGE REPORT', 'report/list', '1', NULL, NULL, '1', NULL),
+(79, 6, 'MANAGE GRAPH REPORT', 'report/manage', '1', NULL, NULL, '1', NULL),
+(80, 7, 'ADD MENU', 'menu/add', '1', NULL, NULL, '1', NULL),
+(81, 7, 'MANAGE MENU', 'menu/manage', '1', NULL, NULL, '1', NULL),
+(82, 7, 'EDIT MENU', 'menu/edit', '1', NULL, NULL, '1', NULL),
+(83, 9, 'ENABLE PROJECT', 'projects/enable', '1', NULL, NULL, '1', NULL),
+(84, 10, 'EDIT ISSUE', 'issue/edit', '1', NULL, NULL, '1', NULL),
+(85, 10, 'ADD ISSUE', 'issue/add', '1', NULL, NULL, '1', NULL),
+(86, 7, 'ENALBE MENU', 'menu/enable', '1', NULL, NULL, '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -269,7 +286,12 @@ INSERT INTO `sys_permission_groups` (`spg_id`, `name`, `enable`, `date_created`,
 (2, 'MANAGE USERS', '1', '2020-01-17 10:02:34', '1', NULL, NULL),
 (3, 'MANAGE USER GROUPS', '1', '2015-03-03 00:00:00', '1', NULL, '2020-07-03 08:27:57'),
 (4, 'MANAGE PERMISSION', '1', '2015-03-25 00:00:00', '1', NULL, '2020-05-12 14:35:03'),
-(5, 'MANAGE PERMISSION GROUPS', '1', '2015-03-25 00:00:00', '1', NULL, '2020-06-02 12:04:39');
+(5, 'MANAGE PERMISSION GROUPS', '1', '2015-03-25 00:00:00', '1', NULL, '2020-06-02 12:04:39'),
+(6, 'MANAGE REPORT', '1', NULL, '1', NULL, NULL),
+(7, 'MANAGE MENU', '1', NULL, '1', NULL, NULL),
+(8, 'MANAGE TEST', '1', '2020-09-03 08:21:02', '1', NULL, '2020-09-03 08:25:22'),
+(9, 'MANAGE PROJECT', '1', '2020-09-03 08:46:17', '1', NULL, NULL),
+(10, 'MANAGE ISSUE', '1', '2020-09-03 08:54:03', '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -294,8 +316,9 @@ CREATE TABLE `sys_projects` (
 
 INSERT INTO `sys_projects` (`pj_id`, `pj_name`, `pj_des`, `enable`, `delete_flag`, `date_created`, `date_updated`, `date_deleted`) VALUES
 (1, 'น้ำท่วม', 'รอการระบาย', '1', '1', '2020-07-21 09:50:31', '2020-07-23 14:43:33', '2020-07-23 14:41:25'),
-(2, 'ประชาชนชุมนุม', 'เป็นภัยต่อความมั่นคงระดับชาติ', '1', '1', '2020-07-21 09:51:11', '2020-07-21 09:51:11', '2020-07-23 14:41:29'),
-(6, 'Project01', 'รอการระบาย', '1', '1', '2020-07-31 11:32:57', '2020-07-31 11:32:57', '0000-00-00 00:00:00');
+(2, 'ประชาชนชุมนุม', 'เป็นภัยต่อความมั่นคงระดับชาติ', '1', '1', '2020-07-21 09:51:11', '2020-09-08 09:43:55', '2020-07-23 14:41:29'),
+(6, 'Project01', 'รอการระบาย', '1', '1', '2020-07-31 11:32:57', '2020-09-03 11:52:06', '0000-00-00 00:00:00'),
+(7, 'ชูสามนิ้ว', 'อาจาร์ยคนไหนเจอให้ตีมือ', '1', '1', '2020-08-21 15:21:39', '2020-09-08 14:04:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -325,7 +348,7 @@ CREATE TABLE `sys_users` (
 --
 
 INSERT INTO `sys_users` (`su_id`, `sug_id`, `username`, `password`, `firstname`, `lastname`, `gender`, `email`, `enable`, `last_access`, `date_created`, `date_updated`, `delete_flag`, `date_deleted`) VALUES
-(1, 1, 'sadmin', 'dGVhbWludw==', 'Talerngsak', 'Klangsatorn', 'male', 'talerngsak@tbkk.co.th', '1', '2019-01-23 09:16:00', '2019-01-23 09:16:00', '2020-07-16 09:07:08', '1', NULL),
+(1, 1, 'sadmin', 'dGVhbWludw==', 'Talerngsak', 'Klangsatornss', 'male', 'talerngsak@tbkk.co.th', '1', '2019-01-23 09:16:00', '2019-01-23 09:16:00', '2020-07-31 14:33:34', '1', NULL),
 (2, 2, 'talerngsak', 'YWExMjM0NTY=', 'Talerngsak', 'Klangsatorn', 'male', 'talerngsak@tbkk.co.th', '1', NULL, '2020-02-05 15:20:48', '2020-04-09 16:52:29', '1', NULL),
 (3, 3, 'samart', 'YWExMjM0NTY=', 'Samart', 'Thanomchart', 'male', 'samart@tbkk.co.th', '1', NULL, '2020-02-05 15:21:44', '2020-07-21 08:07:10', '1', '2020-03-03 13:34:16'),
 (4, 3, 'ABC', 'YWExMjM0NTY=', 'Aksarapak', 'Daotaisong', 'female', 'aksarapak@tbkk.co.th', '1', NULL, '2020-02-05 15:22:19', '2020-07-15 13:14:11', '1', '2020-06-29 09:44:54'),
@@ -371,25 +394,23 @@ INSERT INTO `sys_users_groups_permissions` (`sugp_id`, `sug_id`, `spg_id`, `date
 (1082, 0, 1, '2020-06-01 13:23:14'),
 (1083, 0, 2, '2020-06-01 13:23:14'),
 (1086, 4, 2, '2020-06-01 13:31:34'),
-(1185, 1, 1, '2020-07-01 12:03:15'),
-(1186, 1, 2, '2020-07-01 12:03:15'),
-(1187, 1, 3, '2020-07-01 12:03:15'),
-(1188, 1, 4, '2020-07-01 12:03:15'),
-(1189, 1, 5, '2020-07-01 12:03:15'),
-(1190, 1, 9, '2020-07-01 12:03:15'),
-(1191, 1, 10, '2020-07-01 12:03:15'),
-(1192, 1, 11, '2020-07-01 12:03:15'),
-(1193, 1, 12, '2020-07-01 12:03:15'),
-(1210, 2, 1, '2020-07-07 16:37:53'),
-(1211, 2, 2, '2020-07-07 16:37:53'),
-(1212, 2, 3, '2020-07-07 16:37:53'),
-(1213, 2, 4, '2020-07-07 16:37:53'),
-(1214, 2, 5, '2020-07-07 16:37:53'),
-(1215, 2, 9, '2020-07-07 16:37:53'),
-(1216, 2, 10, '2020-07-07 16:37:53'),
-(1217, 2, 11, '2020-07-07 16:37:53'),
-(1218, 2, 12, '2020-07-07 16:37:53'),
-(1224, 3, 1, '2020-07-16 13:27:26');
+(1224, 3, 1, '2020-07-16 13:27:26'),
+(1226, 2, 1, '2020-09-02 14:06:49'),
+(1227, 2, 2, '2020-09-02 14:06:49'),
+(1228, 2, 3, '2020-09-02 14:06:49'),
+(1229, 2, 4, '2020-09-02 14:06:49'),
+(1230, 2, 5, '2020-09-02 14:06:49'),
+(1231, 2, 14, '2020-09-02 14:06:49'),
+(1239, 1, 1, '2020-09-03 10:39:45'),
+(1240, 1, 2, '2020-09-03 10:39:45'),
+(1241, 1, 3, '2020-09-03 10:39:45'),
+(1242, 1, 4, '2020-09-03 10:39:45'),
+(1243, 1, 5, '2020-09-03 10:39:45'),
+(1244, 1, 6, '2020-09-03 10:39:45'),
+(1245, 1, 7, '2020-09-03 10:39:45'),
+(1246, 1, 8, '2020-09-03 10:39:45'),
+(1247, 1, 9, '2020-09-03 10:39:45'),
+(1248, 1, 10, '2020-09-03 10:39:45');
 
 -- --------------------------------------------------------
 
@@ -411,67 +432,49 @@ CREATE TABLE `sys_users_permissions` (
 INSERT INTO `sys_users_permissions` (`sup_id`, `su_id`, `sp_id`, `date_created`) VALUES
 (95, 14, 1, '2020-04-29 16:10:10'),
 (96, 14, 4, '2020-04-29 16:10:10'),
-(170, 7, 1, '2020-06-02 09:58:24'),
-(1360, 1, 1, '2020-07-07 15:54:01'),
-(1361, 1, 2, '2020-07-07 15:54:01'),
-(1362, 1, 3, '2020-07-07 15:54:01'),
-(1363, 1, 4, '2020-07-07 15:54:01'),
-(1364, 1, 5, '2020-07-07 15:54:01'),
-(1365, 1, 6, '2020-07-07 15:54:01'),
-(1366, 1, 7, '2020-07-07 15:54:01'),
-(1367, 1, 8, '2020-07-07 15:54:01'),
-(1368, 1, 9, '2020-07-07 15:54:01'),
-(1369, 1, 10, '2020-07-07 15:54:01'),
-(1370, 1, 11, '2020-07-07 15:54:01'),
-(1371, 1, 12, '2020-07-07 15:54:01'),
-(1372, 1, 13, '2020-07-07 15:54:01'),
-(1373, 1, 14, '2020-07-07 15:54:01'),
-(1374, 1, 15, '2020-07-07 15:54:01'),
-(1375, 1, 16, '2020-07-07 15:54:01'),
-(1376, 1, 17, '2020-07-07 15:54:01'),
-(1377, 1, 18, '2020-07-07 15:54:01'),
-(1378, 1, 19, '2020-07-07 15:54:01'),
-(1379, 1, 20, '2020-07-07 15:54:01'),
-(1380, 1, 21, '2020-07-07 15:54:01'),
-(1381, 1, 22, '2020-07-07 15:54:01'),
-(1382, 1, 23, '2020-07-07 15:54:01'),
-(1383, 1, 24, '2020-07-07 15:54:01'),
-(1384, 1, 28, '2020-07-07 15:54:01'),
-(1385, 1, 29, '2020-07-07 15:54:01'),
-(1386, 1, 31, '2020-07-07 15:54:01'),
-(1387, 1, 32, '2020-07-07 15:54:01'),
-(1388, 1, 33, '2020-07-07 15:54:01'),
-(1389, 1, 34, '2020-07-07 15:54:01'),
-(1390, 1, 35, '2020-07-07 15:54:01'),
-(1391, 1, 36, '2020-07-07 15:54:01'),
-(1392, 1, 37, '2020-07-07 15:54:01'),
-(1393, 1, 38, '2020-07-07 15:54:01'),
-(1394, 1, 39, '2020-07-07 15:54:01'),
-(1395, 1, 43, '2020-07-07 15:54:01'),
-(1396, 1, 44, '2020-07-07 15:54:01'),
-(1397, 1, 45, '2020-07-07 15:54:01'),
-(1398, 1, 46, '2020-07-07 15:54:01'),
-(1399, 1, 47, '2020-07-07 15:54:01'),
-(1400, 1, 48, '2020-07-07 15:54:01'),
-(1401, 1, 50, '2020-07-07 15:54:01'),
-(1402, 1, 51, '2020-07-07 15:54:01'),
-(1403, 1, 52, '2020-07-07 15:54:01'),
-(1404, 1, 53, '2020-07-07 15:54:01'),
-(1405, 1, 54, '2020-07-07 15:54:01'),
-(1406, 1, 55, '2020-07-07 15:54:01'),
-(1407, 1, 56, '2020-07-07 15:54:01'),
-(1408, 1, 57, '2020-07-07 15:54:01'),
-(1409, 1, 58, '2020-07-07 15:54:01'),
-(1410, 1, 59, '2020-07-07 15:54:01'),
-(1411, 1, 60, '2020-07-07 15:54:01'),
-(1412, 1, 61, '2020-07-07 15:54:01'),
-(1413, 1, 62, '2020-07-07 15:54:01'),
-(1414, 1, 63, '2020-07-07 15:54:01'),
-(1415, 1, 64, '2020-07-07 15:54:01'),
-(1416, 1, 65, '2020-07-07 15:54:01'),
-(1417, 1, 66, '2020-07-07 15:54:01'),
-(1418, 1, 67, '2020-07-07 15:54:01'),
-(1419, 1, 68, '2020-07-07 15:54:01');
+(1542, 7, 1, '2020-09-02 15:13:31'),
+(1770, 1, 1, '2020-09-03 11:59:45'),
+(1771, 1, 2, '2020-09-03 11:59:45'),
+(1772, 1, 3, '2020-09-03 11:59:45'),
+(1773, 1, 4, '2020-09-03 11:59:46'),
+(1774, 1, 5, '2020-09-03 11:59:46'),
+(1775, 1, 6, '2020-09-03 11:59:46'),
+(1776, 1, 7, '2020-09-03 11:59:46'),
+(1777, 1, 8, '2020-09-03 11:59:46'),
+(1778, 1, 9, '2020-09-03 11:59:46'),
+(1779, 1, 10, '2020-09-03 11:59:46'),
+(1780, 1, 11, '2020-09-03 11:59:46'),
+(1781, 1, 12, '2020-09-03 11:59:46'),
+(1782, 1, 13, '2020-09-03 11:59:46'),
+(1783, 1, 14, '2020-09-03 11:59:46'),
+(1784, 1, 15, '2020-09-03 11:59:46'),
+(1785, 1, 16, '2020-09-03 11:59:46'),
+(1786, 1, 17, '2020-09-03 11:59:46'),
+(1787, 1, 18, '2020-09-03 11:59:46'),
+(1788, 1, 19, '2020-09-03 11:59:47'),
+(1789, 1, 20, '2020-09-03 11:59:47'),
+(1790, 1, 21, '2020-09-03 11:59:47'),
+(1791, 1, 22, '2020-09-03 11:59:47'),
+(1792, 1, 23, '2020-09-03 11:59:47'),
+(1793, 1, 24, '2020-09-03 11:59:47'),
+(1794, 1, 28, '2020-09-03 11:59:47'),
+(1795, 1, 29, '2020-09-03 11:59:47'),
+(1796, 1, 31, '2020-09-03 11:59:47'),
+(1797, 1, 32, '2020-09-03 11:59:47'),
+(1798, 1, 73, '2020-09-03 11:59:47'),
+(1799, 1, 74, '2020-09-03 11:59:47'),
+(1800, 1, 75, '2020-09-03 11:59:47'),
+(1801, 1, 76, '2020-09-03 11:59:47'),
+(1802, 1, 77, '2020-09-03 11:59:47'),
+(1803, 1, 78, '2020-09-03 11:59:47'),
+(1804, 1, 79, '2020-09-03 11:59:47'),
+(1805, 1, 80, '2020-09-03 11:59:47'),
+(1806, 1, 81, '2020-09-03 11:59:47'),
+(1807, 1, 82, '2020-09-03 11:59:47'),
+(1808, 1, 83, '2020-09-03 11:59:47'),
+(1809, 1, 84, '2020-09-03 11:59:47'),
+(1810, 1, 85, '2020-09-03 11:59:47'),
+(1811, 1, 86, '2020-09-03 11:59:47');
 
 -- --------------------------------------------------------
 
@@ -591,6 +594,12 @@ ALTER TABLE `sys_issue`
   MODIFY `is_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `sys_menu_groups`
+--
+ALTER TABLE `sys_menu_groups`
+  MODIFY `mg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `sys_owner`
 --
 ALTER TABLE `sys_owner`
@@ -600,19 +609,19 @@ ALTER TABLE `sys_owner`
 -- AUTO_INCREMENT for table `sys_permissions`
 --
 ALTER TABLE `sys_permissions`
-  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `sys_permission_groups`
 --
 ALTER TABLE `sys_permission_groups`
-  MODIFY `spg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `spg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `sys_projects`
 --
 ALTER TABLE `sys_projects`
-  MODIFY `pj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sys_users`
@@ -624,19 +633,19 @@ ALTER TABLE `sys_users`
 -- AUTO_INCREMENT for table `sys_users_groups_permissions`
 --
 ALTER TABLE `sys_users_groups_permissions`
-  MODIFY `sugp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1225;
+  MODIFY `sugp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1249;
 
 --
 -- AUTO_INCREMENT for table `sys_users_permissions`
 --
 ALTER TABLE `sys_users_permissions`
-  MODIFY `sup_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1426;
+  MODIFY `sup_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1812;
 
 --
 -- AUTO_INCREMENT for table `sys_user_groups`
 --
 ALTER TABLE `sys_user_groups`
-  MODIFY `sug_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sug_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

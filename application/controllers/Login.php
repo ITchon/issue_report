@@ -43,7 +43,7 @@ class Login extends CI_Controller {
              </div> ');
                 redirect('login'); 
              } else{
-                redirect('manage/index');
+                redirect('dashboard/show');
              }
         }
      else{
