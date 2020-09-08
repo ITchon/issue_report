@@ -3,10 +3,11 @@
           <div class="row">
             <div class="col-md-12">
             <div align="right">
+     
             </div>
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">List Permissions  <a href="<?php echo base_url()?>permission/add"><button class="btn btn-success">ADD</button></a></h4>
+                  <h4 class="card-title ">List Permissions <a href="<?php echo base_url()?>permission/add"><button class="btn btn-primary">ADD</button></a></h4>
                 </div>
                 <div class="card-body">
                   <table id="example" class="table">

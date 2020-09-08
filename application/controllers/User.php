@@ -52,15 +52,8 @@ class User extends CI_Controller {
         $this->model->CheckPermission($this->session->userdata('su_id'));
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
         $id = $this->uri->segment('3');
-        $sql =  "SELECT su.su_id,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
-        FROM
-        sys_users  AS su 
-        INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id
-        where su.delete_flag != 0 AND su.username != 'sadmin'";
-            //$sql =  'select * from sys_users where delete_flag != 0';
-            $query = $this->db->query($sql); 
-            $data['result'] = $query->result(); 
-
+     
+            $data['result'] =  $this->model->get_user(); 
             $sql =  'select * from sys_users_permissions where su_id = '.$id.'';
             $query = $this->db->query($sql); 
             $data['result_user']= $query->result(); 
@@ -69,14 +62,19 @@ class User extends CI_Controller {
             $query = $this->db->query($sql); 
             $data['result_name']= $query->result(); 
 
-            $sql =  'SELECT * FROM sys_permissions sp INNER JOIN sys_users_groups_permissions sugp ON sugp.spg_id = sp.spg_id where sugp.sug_id= '.$data['result_name'][0]->sug_id.'';
+
+            $sql =  'SELECT sp.sp_id,sp.name as p_name , spg.name as g_name ,sugp.spg_id ,sp.controller FROM sys_permissions sp 
+            inner join sys_users_groups_permissions sugp ON sugp.spg_id = sp.spg_id 
+            inner join sys_permission_groups spg on spg.spg_id = sp.spg_id 
+            inner join sys_menu_groups smg on smg.sp_id = sp.sp_id
+            where sugp.sug_id= '.$data['result_name'][0]->sug_id.' ORDER BY smg.order_no ASC , sp.name';
             $query = $this->db->query($sql); 
             $data['result_group'] = $query->result();
      
          $this->load->view('user/manage',$data);//bring $data to user_data 
          $this->load->view('user/rule_user', $data);//bring $data to user_data 
      
-            $this->load->view('footer');
+        $this->load->view('footer');
    
     }
 

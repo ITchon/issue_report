@@ -101,7 +101,18 @@ class Model extends CI_Model
     
     }
   }
+ } 
+  public function get_user()
+ {
+   $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
+   FROM
+   sys_users  AS su 
+   INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != "1"';
+   $query = $this->db->query($sql); 
+   $result =  $query->result();
+   return $result;
  }
+
 
   public function getuser($user,$pass) {  
     $pass = base64_encode(trim($pass));
@@ -210,7 +221,7 @@ $query= $this->db->query($sql1);
 
  public function save_edit_menu($mg_id, $sp_id, $name,$order)
  {
-  
+
    $sql =  "SELECT * FROM sys_menu_groups where mg_id = $mg_id"; 
   $query = $this->db->query($sql);
   $res = $query->result()[0]; 
@@ -220,7 +231,6 @@ $query= $this->db->query($sql1);
 
  
 if($old_order > $order){
-
   $sql =  "UPDATE sys_menu_groups SET order_no= $order+1 WHERE mg_id=$mg_id"; 
   $query = $this->db->query($sql);
   $sql =  "SELECT * FROM sys_menu_groups where order_no between $b+1 and $a and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 

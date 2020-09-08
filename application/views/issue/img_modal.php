@@ -27,9 +27,7 @@
          
                                 <div id="show_data" ></div>
           
-            <div class="modal-footer">
-             
-            </div>
+         
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
