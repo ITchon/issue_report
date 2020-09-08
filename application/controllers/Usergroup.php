@@ -46,8 +46,8 @@ class Usergroup extends CI_Controller {
             $query = $this->db->query($sql3); 
             $data['result_group']= $query->result(); 
 
-         $this->load->view('user_group/manage',$data);
-         $this->load->view('user_group/rule', $data);//bring $data to user_data 
+            $this->load->view('user_group/manage',$data);
+            $this->load->view('user_group/rule', $data);//bring $data to user_data 
          $this->load->view('footer');
    
     }
