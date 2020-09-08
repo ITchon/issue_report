@@ -3,6 +3,16 @@
 class Model extends CI_Model
 {
 
+  public function get_user()
+  {
+    $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
+    FROM
+    sys_users  AS su 
+    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != "1"';
+    $query = $this->db->query($sql); 
+    $result =  $query->result();
+    return $result;
+  }
 
   public function CheckSession()        
   {
@@ -59,7 +69,7 @@ class Model extends CI_Model
     INNER JOIN sys_permission_groups as spg ON spg.spg_id = sp.spg_id
     INNER JOIN sys_users_groups_permissions as sug ON sug.spg_id = sp.spg_id
     INNER JOIN sys_users_permissions as sup ON sup.sp_id = sp.sp_id
-    WHERE sup.su_id = 1 AND sug.sug_id = 1 ORDER BY smg.order_no ASC';
+    WHERE sup.su_id = 1 AND sug.sug_id = 1 AND smg.enable != 0 ORDER BY smg.order_no ASC';
     $query = $this->db->query($sql); 
     $result = $query->result();
     return $result;
@@ -174,21 +184,14 @@ $password = base64_encode(trim($password));
 
  function insert_menu($name, $sp_id, $mg_id, $icon, $order)
  {
-  $num= $this->db->query("SELECT mg_id,order_no FROM sys_menu_groups where order_no > '$order' ORDER BY order_no ASC"); 
-  $chk= $num->result();
-if($chk > 0){
-  $oder+1;
+  $num= $this->db->query("SELECT MAX(order_no) as order_no FROM sys_menu_groups"); 
+  $res= $num->result()[0];
+
+  $order = $res->order_no+1;
   $sql1 ="INSERT INTO sys_menu_groups (name, sp_id, icon_menu, enable, date_created,order_no) 
   VALUES ( '$name', '$sp_id', '$icon', '1', CURRENT_TIMESTAMP,'$order' )";
 $query= $this->db->query($sql1); 
 
-  foreach($chk as $c){
-    $num = $c->order_no+1;
-    $mg_id = $c->mg_id;
-  $sql = "UPDATE sys_menu_groups SET order_no= $num WHERE mg_id=$mg_id;";
-  $result = $this->db->query($sql);
-  }
-}
   if($query){
       return true;
   }else{
@@ -315,6 +318,47 @@ if($old_order > $order){
      return false;
    }
  }
+
+ public function enableProject($key){
+  $query = $this->db->query("SELECT * from sys_projects WHERE pj_id = $key "); 
+  $result = $query->result()[0];
+  if( $result->enable==0){
+  $sqlEdt = "UPDATE sys_projects SET enable='1' , date_updated=CURRENT_TIMESTAMP WHERE pj_id={$key};";
+  $exc_user = $this->db->query($sqlEdt);
+  }
+  else{
+    $sqlEdt = "UPDATE sys_projects SET enable='0' , date_updated=CURRENT_TIMESTAMP WHERE pj_id={$key};";
+    $exc_user = $this->db->query($sqlEdt);
+  }
+
+  if ($exc_user){
+    
+    return TRUE;    
+    
+  }else{    return FALSE;   }
+  
+}
+
+ public function enableMenu($key){
+  $query = $this->db->query("SELECT * from sys_menu_groups WHERE mg_id = $key "); 
+  $result = $query->result()[0];
+  if( $result->enable==0){
+  $sqlEdt = "UPDATE sys_menu_groups SET enable='1' , date_updated=CURRENT_TIMESTAMP WHERE mg_id={$key};";
+  $exc_user = $this->db->query($sqlEdt);
+  }
+  else{
+    $sqlEdt = "UPDATE sys_menu_groups SET enable='0' , date_updated=CURRENT_TIMESTAMP WHERE mg_id={$key};";
+    $exc_user = $this->db->query($sqlEdt);
+  }
+
+  if ($exc_user){
+    
+    return TRUE;    
+    
+  }else{    return FALSE;   }
+  
+}
+
 
 
 

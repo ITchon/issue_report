@@ -85,5 +85,19 @@ class Menu extends CI_Controller {
   
     }
 
+    public function enable($uid){
+
+        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
+        $this->model->CheckPermission($this->session->userdata('su_id'));
+        $result = $this->model->enableMenu($uid);
+
+        if($result!=FALSE){
+            redirect('menu/manage','refresh');
+        }else{
+            echo "<script>alert('Simting wrong')</script>";
+       redirect('menu/manage','refresh');
+        }
+    }
+
     
 }

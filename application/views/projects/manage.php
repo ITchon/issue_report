@@ -30,32 +30,25 @@
                  echo "<tr>";
                 echo "<td>".$r->pj_name."</td>";
                 echo "<td>".$r->pj_des."</td>";
-                if($r->enable!=1 ){?>
-                    <td class="text-center"><b><font color="red">DISABLE</font></b></td>
-  
-                  <?php
+                if($r->enable==1 ){  
+                  $icon = "btn-success btn-sm fa fa-check";
+                  $text = "ENABLE";
+                  $color = "#43a047";
                 }
-                else{?>
-                    <td class="text-center"><b><font color="lightgreen">ENABLE</font></b></td>
-                  <?php
-                }
-                echo "<td class=''>".$r->date_created."</td>";
-                if($r->enable!=1 ){?>
-                  
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
-                  echo base_url() . 'permission/enable/' . $r->pj_id;
-                  ?>';"><i class='btn-danger btn-sm fa fa-times'></i></a>
-                  <?php
-                }
-                else{?>
-
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ปิดการใช้งาน</h5>'  data-original-title='Rule' onclick="javascript:window.location='<?php
-                  echo base_url() . 'permission/disable/' . $r->pj_id;
-                  ?>';"><i class='btn-success btn-sm fa fa-check'></i></a>                      
-                  <?php
+                else{ 
+                  $icon = "btn-danger btn-sm fa fa-times";
+                  $text = "DISABLE";
+                  $color = "#D50000";
                 }
                 ?>
-                
+                    <td class="text-center"><b><font color="<?php echo $color ?>"><?php echo $text ?></font></b></td>
+                  <?php
+                echo "<td class=''>".$r->date_created."</td>";
+                ?>
+                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                  echo base_url() . 'projects/enable/' . $r->pj_id;
+                  ?>';"><i class="<?php echo $icon ?>"></i></a>
+                  
                 <a type ='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' class=' ' data-original-title='Rule' onclick="javascript:window.location='<?php
                 echo base_url() . 'projects/edit/' . $r->pj_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>

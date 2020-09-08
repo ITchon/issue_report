@@ -24,21 +24,17 @@
                 echo "<tr>";
                 echo "<td>".$r->order_no."</td>";
                 echo "<td>".$r->name."</td>";
-                 if($r->enable!=1 ){?>
-                  
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                if($r -> enable ==1 ){  
+                  $icon = "btn-success btn-sm fa fa-check";
+                }
+                else{ 
+                  $icon = "btn-danger btn-sm fa fa-times";
+                }
+                ?>
+              <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
                   echo base_url() . 'menu/enable/' . $r->mg_id;
-                  ?>';"><i class='btn-danger btn-sm fa fa-times'></i></a>
-                  <?php
-                }
-                else{?>
-
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ปิดการใช้งาน</h5>'  data-original-title='Rule' onclick="javascript:window.location='<?php
-                  echo base_url() . 'menu/disable/' . $r->mg_id;
-                  ?>';"><i class='btn-success btn-sm fa fa-check'></i></a>                      
-                  <?php
-                }
-                ?> <a type ='button' class=' ' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                  ?>';"><i class="<?php echo $icon ?>"></i></a>
+                <a type ='button' class=' ' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
                 echo base_url() . 'menu/edit/' . $r->mg_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'> </i> </a>
                 <?php 

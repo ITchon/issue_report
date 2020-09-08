@@ -117,6 +117,20 @@ class Projects extends CI_Controller {
         redirect('projects/manage');
     }
 
+    public function enable($uid){
+
+        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
+        $this->model->CheckPermission($this->session->userdata('su_id'));
+        $result = $this->model->enableProject($uid);
+
+        if($result!=FALSE){
+            redirect('projects/manage','refresh');
+        }else{
+            echo "<script>alert('Simting wrong')</script>";
+       redirect('projects/manage','refresh');
+        }
+    }
+
     
     
 }

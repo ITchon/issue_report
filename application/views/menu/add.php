@@ -51,22 +51,6 @@ label{
                         </div>
                       </div>
 
-                      <div class="form-group">
-                      <label for="email-2" class="col-sm-3 col-md-4 control-label" ><b> Select Order</b></label>      
-          
-                      <div class="col-sm-6 col-md-6">
-                   <select name="order" class="form-control select2"  required>
-                    <option value=""> - - - Select Order - - - </option>
-                 <?php 
-             foreach($result_mg as $m){?>
-            
-              <option value="<?php  echo $m->order_no ?>">After <?php echo $m->name ?></option>
-              <?php
-           }
-      ?>     
-         </select>
-         </div>
-          </div>
 
 
 
