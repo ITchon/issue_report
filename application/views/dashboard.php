@@ -46,26 +46,14 @@ img {vertical-align: middle;}
 }
 
 /* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
 
-.active {
-  background-color: #717171;
-}
 
 /* Fading animation */
 .fade {
   -webkit-animation-name: fade;
-  -webkit-animation-duration: 10s;
+  -webkit-animation-duration: 1.5s;
   animation-name: fade;
-  animation-duration: 2.5s;
+  animation-duration: 5s;
 }
 
 @-webkit-keyframes fade {
@@ -97,29 +85,21 @@ img {vertical-align: middle;}
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
   <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones">
-  <div class="text">Caption Text</div>
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 3</div>
   <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
-  <div class="text">Caption Two</div>
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 3</div>
   <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
-  <div class="text">Caption Three</div>
 </div>
 
 </div>
 <br>
 
-<div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-</div>
 
                 <?php if($closed_issue == $sum_issue){
                   $icon = 'success';
@@ -335,18 +315,13 @@ showSlides();
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
   }
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
   slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
 }
 </script>
 

@@ -102,16 +102,16 @@ class Model extends CI_Model
     }
   }
  } 
-  public function get_user()
- {
-   $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
-   FROM
-   sys_users  AS su 
-   INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != "1"';
-   $query = $this->db->query($sql); 
-   $result =  $query->result();
-   return $result;
- }
+//   public function get_user()
+//  {
+//    $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
+//    FROM
+//    sys_users  AS su 
+//    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != "1"';
+//    $query = $this->db->query($sql); 
+//    $result =  $query->result();
+//    return $result;
+//  }
 
 
   public function getuser($user,$pass) {  
