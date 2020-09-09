@@ -68,6 +68,7 @@ The above copyright notice and this permission notice shall be included in all c
   .logo {
   text-shadow: 2px 2px #c7bdbd;
 }
+
 </style>
 
 <script>
