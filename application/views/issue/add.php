@@ -19,7 +19,7 @@ label{
                 </div>
               
 <hr>
-            <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/upload" method="post" enctype="multipart/form-data" data-toggle="validator">
+            <form id="my-awesome-dropzone" class="table form form-horizontal container" action="<?= base_url()?>issue/upload" method="post" enctype="multipart/form-data" data-toggle="validator">
 
                   <?php echo $this->session->flashdata("error"); ?>
 

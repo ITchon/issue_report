@@ -17,6 +17,7 @@ label{
                   <form>
                     <div class="row">
                       <div class="col-md-12">
+                      <br>
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Username</b></label>
                           <input type="text" class="form-control" value="<?php echo $result->username ?>" readonly>

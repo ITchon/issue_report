@@ -70,6 +70,11 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
+.responsive {
+  width: 100%;
+  max-width: 830px;
+  height: auto;
+}
 </style>
 <div class="content">
         <div class="container-fluid">
@@ -80,21 +85,21 @@ img {vertical-align: middle;}
                   <h4 class="card-title "> Issue Graph Report </h4>
                     
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 text-center ">
                   <br>
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones" >
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
 </div>
 
 </div>

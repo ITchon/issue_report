@@ -5,6 +5,7 @@
     #btn_delete{
 
     }
+    
 </style>
 
 <div class="content">
