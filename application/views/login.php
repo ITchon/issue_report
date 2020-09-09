@@ -48,7 +48,9 @@ The above copyright notice and this permission notice shall be included in all c
                   </a>
                 </div>
               </div>
-              <p class="description text-center" style="padding-top:10px"></p>
+              
+              <p class="description text-center" style="padding-top:10px"> </p>
+              
               <div class="card-body">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -56,7 +58,7 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" name="username" class="form-control" placeholder="Username...">
+                  <input type="text" name="username" class="form-control" placeholder="Username..." required>
                 </div>
 
                 <div class="input-group">
@@ -65,11 +67,17 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" name="password" class="form-control" placeholder="Password...">
+                  <input type="password" name="password" class="form-control" placeholder="Password..." required>
+                  
                 </div>
+                
               </div>
+              <p class="description text-center" style="padding-top:10px"> <?php echo $this->session->flashdata("success"); ?> </p>
+              
               <div class="footer text-center"  style="padding-bottom:20px">
-                <button class="btn btn-rose text-white" type="submit">Get Started</button>
+              
+                <button class="btn btn-rose text-white" type="submit">Submit</button>
+                
               </div>
             </form>
           </div>
@@ -101,3 +109,9 @@ The above copyright notice and this permission notice shall be included in all c
 </body>
 
 </html>
+<script>
+        $(document).ready(function() {
+          $(".hide-it").fadeOut(5000);
+});
+   
+    </script>
