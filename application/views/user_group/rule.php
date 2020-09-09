@@ -10,7 +10,7 @@ backdrop: 'static'
   <div class="modal fade" id="rule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="bg-primary modal-header">
+      <div class="modal-header">
         <h1><?php echo $result[0]->sug_name; ?></h1>
       </div>
       <div class="modal-body">
