@@ -56,7 +56,9 @@ class User extends CI_Controller {
         $id = $this->uri->segment('3');
      
             $data['result'] =  $this->model->get_user(); 
+
             $sql = "select * from sys_users_permissions where su_id = $id";
+
             $query = $this->db->query($sql); 
             $data['result_user']= $query->result(); 
      
@@ -69,7 +71,11 @@ class User extends CI_Controller {
             inner join sys_users_groups_permissions sugp ON sugp.spg_id = sp.spg_id 
             inner join sys_permission_groups spg on spg.spg_id = sp.spg_id 
             inner join sys_menu_groups smg on smg.spg_id = spg.spg_id
+
             where sugp.sug_id= $sug_id ORDER BY smg.order_no ASC , sp.name";
+
+            // where sugp.sug_id= '.$data['result_name'][0]->sug_id.' ORDER BY smg.order_no ASC , sp.name';
+
             $query = $this->db->query($sql); 
             $data['result_group'] = $query->result();
      

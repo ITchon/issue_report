@@ -79,19 +79,27 @@ img {vertical-align: middle;}
     margin-top: 30px;
     border-radius: 6px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);  
-}
+
 </style>
 <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
+
               
                 <div class="col-md-12 text-center ">
                   <br>
-<div class="mySlides fade ">
-  <div class="numbertext ">1 / 3</div>
-  <img class="img-circle responsive " width="830" height="400" src="<?php echo base_url() ?>./upload/9.jpg" alt="Harry Jones" >
+                <div class="card-header card-header-rose">
+                  <h4 class="card-title "> Welcome </h4>
+                    
+                </div>
+                <div class="col-md-12 text-center ">
+                  <br>
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/9.jpg" alt="Harry Jones" >
+
 </div>
 
 <div class="mySlides fade">

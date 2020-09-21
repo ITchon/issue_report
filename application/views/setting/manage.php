@@ -18,7 +18,9 @@ label{
                     <div class="row">
                       <div class="col-md-12">
                       <br>
+
 <form class="table form form-horizontal container" action="<?php echo base_url()?>setting/save_edit" method="post" data-toggle="validator">
+
                         <div class="form-group">
                           <label class="bmd-label-floating"><b>Username</b></label>
                           <input type="text" class="form-control" value="<?php echo $result->username ?>" readonly>
