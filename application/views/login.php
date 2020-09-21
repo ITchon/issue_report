@@ -20,7 +20,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="<?php echo base_url()?>/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Kit by Creative Tim
+    TBKK 
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -34,7 +34,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 <body class="login-page sidebar-collapse">
 
-  <div class="page-header header-filter" style="background-image: url('<?php echo base_url()?>/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+  <div class="page-header header-filter" style="background-image: url('<?php echo base_url()?>/assets/img/test1.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
@@ -48,7 +48,9 @@ The above copyright notice and this permission notice shall be included in all c
                   </a>
                 </div>
               </div>
-              <p class="description text-center" style="padding-top:10px"></p>
+              
+              <p class="description text-center" style="padding-top:10px"> </p>
+              
               <div class="card-body">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -56,7 +58,7 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" name="username" class="form-control" placeholder="Username...">
+                  <input type="text" name="username" class="form-control" placeholder="Username..." required>
                 </div>
 
                 <div class="input-group">
@@ -65,11 +67,17 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" name="password" class="form-control" placeholder="Password...">
+                  <input type="password" name="password" class="form-control" placeholder="Password..." required>
+                  
                 </div>
+                
               </div>
+              <p class="description text-center" style="padding-top:10px"> <?php echo $this->session->flashdata("success"); ?> </p>
+              
               <div class="footer text-center"  style="padding-bottom:20px">
-                <button class="btn btn-rose text-white" type="submit">Get Started</button>
+              
+                <button class="btn btn-rose text-white" type="submit">Submit</button>
+                
               </div>
             </form>
           </div>
@@ -79,41 +87,6 @@ The above copyright notice and this permission notice shall be included in all c
       
     </div>
     
-    <footer class="footer">
-      <div class="container">
-        <nav class="float-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com/">
-                Creative Tim
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/presentation">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/blog">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license">
-                Licenses
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
-        </div>
-      </div>
-    </footer>
   </div>
   <!--   Core JS Files   -->
   <script src="<?php echo base_url().'assets/js/core/jquery.min.js'?>"></script>
@@ -136,3 +109,9 @@ The above copyright notice and this permission notice shall be included in all c
 </body>
 
 </html>
+<script>
+        $(document).ready(function() {
+          $(".hide-it").fadeOut(5000);
+});
+   
+    </script>

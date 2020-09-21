@@ -1,7 +1,10 @@
+
+
 <?php
 
 class Model_issue extends CI_Model
 {
+
 public function issue_by_id($id)
 {
         $sql ="SELECT `file_code`  FROM issue_img 
@@ -25,7 +28,7 @@ public function list($src_pj,$src_st)
         sis.date_er,sis.date_updated,sis.delete_flag
         FROM sys_issue  AS sis 
         inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-         where sis.delete_flag != 0 AND sis.cur_st IN ($src_st) AND sj.pj_name IN ($src_pj)";
+         where sis.delete_flag != 0 AND sis.cur_st IN ($src_st) AND sj.pj_id IN ($src_pj)";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;
@@ -39,7 +42,7 @@ public function insert_project($pj_name,$pj_des,$status)
         $chk= $num->result();
       
        if($chk==null){
-          $sql1 ="INSERT INTO sys_projects ( pj_name, pj_des, enable, date_created, date_updated,delete_flag) VALUES ( '$pj_name', '$pj_des', '$status', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1' )";
+          $sql1 ="INSERT INTO sys_projects ( pj_name, pj_des, enable, date_created, date_updated,delete_flag) VALUES ( N'$pj_name', N'$pj_des', '$status', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1' )";
         $query= $this->db->query($sql1); 
         if($query){
             return true;
@@ -53,7 +56,7 @@ public function insert_project($pj_name,$pj_des,$status)
 
 public function save_edit_project($pj_id, $pj_name,$pj_des, $enable)
 {
-   $sql1 ="UPDATE sys_projects SET pj_name = '$pj_name',pj_des = '$pj_des',enable = '$enable', date_updated = CURRENT_TIMESTAMP WHERE pj_id = '$pj_id'";
+   $sql1 ="UPDATE sys_projects SET pj_name = N'$pj_name',pj_des = N'$pj_des',enable = '$enable', date_updated = CURRENT_TIMESTAMP WHERE pj_id = '$pj_id'";
   $exc_user = $this->db->query($sql1);
   if ($exc_user ){ return true; }else{ return false; }
 }
@@ -73,14 +76,14 @@ public function delete_project($id)
   
   public function select_issue()
 {
-  $sql =  'SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.entered_by,
-  DATE_FORMAT(sis.date_identified, "%Y-%m-%d") AS date_identified,
-  DATE_FORMAT(sis.date_er, "%Y-%m-%d") AS date_er,
-  DATE_FORMAT(sis.date_updated, "%Y-%m-%d") AS date_updated,
+  $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,sis.priority,sis.entered_by,
+  sis.date_identified AS date_identified,
+  sis.date_er AS date_er,
+  sis.date_updated AS date_updated,
   sis.delete_flag
     FROM sys_issue  AS sis 
     inner join sys_projects as sj on sj.pj_id = sis.pj_id 
-     where sis.delete_flag != 0 ORDER BY `sis`.`is_id`  ASC';
+     where sis.delete_flag != 0 ORDER BY sis.is_id  ASC";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
          return $data;
@@ -116,14 +119,14 @@ public function delete_project($id)
   $sql =  "SELECT sis.is_id,sj.pj_name,sis.plant,sis.cur_st,sis.is_des,
   sis.priority,sis.pj_id,sis.owner_id,sow.owner_name,sis.imp_sum,sis.act_step,sis.is_type,
   sis.final_rs,sis.is_note,sis.esc_req,sis.entered_by,
-DATE_FORMAT(sis.date_identified, '%Y-%m-%d') AS date_identified,
-DATE_FORMAT(sis.date_er, '%Y-%m-%d') AS date_er,
-DATE_FORMAT(sis.date_updated, '%Y-%m-%d') AS date_updated,
+sis.date_identified AS date_identified,
+sis.date_er AS date_er,
+sis.date_updated AS date_updated,
 sis.delete_flag
 
 FROM sys_issue  AS sis 
-inner join sys_projects as sj on sj.pj_id = sis.pj_id
-inner join sys_owner as sow on sow.owner_id = sis.owner_id 
+left join sys_projects as sj on sj.pj_id = sis.pj_id
+left join sys_owner as sow on sow.owner_id = sis.owner_id 
 where sis.delete_flag != 0 AND sis.is_id = $id ";
 
           $query = $this->db->query($sql);  
@@ -134,13 +137,30 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
 
 
 
-  public function save_issue($data,$is_id)
+  public function save_issue($pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname)
  {
-  $this->session->set_userdata('is_id',$is_id);
-$this->db->where('is_id', $is_id);
-$this->db->update('sys_issue', $data);
-
-    $last_id = $this->db->insert_id();
+   $sql1 ="UPDATE sys_issue SET             
+            plant = '$plant',
+            date_identified = '$date_iden',
+            is_des = N'$is_des',
+            priority = '$priority',
+            owner_id = '$owner_id',
+            date_er = '$date_er',
+            esc_req = '$er',
+            imp_sum = N'$imp_sum',
+            act_step = N'$act_step',
+            is_type = '$is_type',
+            cur_st = '$cur_st',
+            final_rs = N'$frr',
+            is_note = N'$note',
+            entered_by = '$fname',
+            date_created = CURRENT_TIMESTAMP,
+            date_updated = CURRENT_TIMESTAMP,
+            delete_flag = 1,
+            date_deleted = ''
+            WHERE pj_id = $pj_id";
+  $exc_user = $this->db->query($sql1);
+  if ($exc_user ){ return true; }else{ return false; }
  }
 
 

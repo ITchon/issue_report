@@ -5,6 +5,7 @@
     #btn_delete{
 
     }
+    
 </style>
 
 <div class="content">
@@ -14,8 +15,10 @@
 
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title "> List Issue <a href="<?php echo base_url()?>issue/add"><button class="btn btn-primary ">ADD</button></a></h4>
-
+                  <h4 class="card-title "> List Issue 
+                        <?php  if($this->session->flashdata("add")!== null ) {?>
+                   <a href="<?php echo base_url()?>issue/add"><button class="btn btn-primary ">ADD</button></a></h4>
+                        <?php  } ?>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -25,8 +28,9 @@
                   <thead>
                     <tr>
 								    	<td colspan="12">
-        
+                        <?php  if($this->session->flashdata("delete")!== null ) {?>
 									    	<div id="btn_delete" class="btn btn-dark"><span class="fa fa-trash-o"></span></div>
+                         <?php  } ?>
 								    	</td>
 								    </tr>	
                     <tr class="text-dark">
@@ -97,27 +101,29 @@
                echo "<td class=".$color2.">".$r->cur_st."</td>";
                echo "<td class='show-read-more' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>".$r->is_des."</h5>'  data-original-title='Rule'><span > ".$r->is_des."</span></td>";
                echo "<td class=".$color.">"."<b>".$r->priority."</b>"."</td>";
-               echo "<td>".$r->date_identified."</td>";
-               echo "<td>".$r->date_er."</td>";
-               echo "<td>".$r->date_updated."</td>";
+               echo "<td>".explode(" ",$r->date_identified)[0]."</td>";
+               echo "<td>".explode(" ",$r->date_er)[0]."</td>";
+               echo "<td>".explode(" ",$r->date_updated)[0]."</td>";
 
                 ?> 
 
                 <td class="text-center">
+    
                 <a href="javascript:void(0)"  data-id="<?php echo $r->is_id;?>" class="  view_img"><i class='btn-success btn-sm fa fa-search'> </i></a>
                 <a class='btn-primary ' data-toggle='tooltip'  onclick="javascript:window.location='<?php
                 echo base_url() . 'issue/view/' . $r->is_id;
                 ?>';"><i class='btn-warning btn-sm fa fa-eye'> </i></a>
 
-
+                <?php  if($this->session->flashdata("edit")!== null ) {?>
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
                 echo base_url() . 'issue/edit/' . $r->is_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>
-
+                   <?php  } ?>
+               <?php  if($this->session->flashdata("delete")!== null ) {?>
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
                 echo base_url() . 'issue/delete/' . $r->is_id;
                 ?>';"><i class='btn-dark btn-sm fa fa-trash'></i></a>
-                <?php  
+                <?php  }
             echo "</tr>";
             $i++;    
         }
@@ -213,13 +219,13 @@ if(button.value == 'select'){
 					else myTable.row(row).select();
         });
 $('body').on('click', '.view_img', function () {
- 
+
  var id = $(this).data("id");
 
  console.log(id);
  $.ajax({
     type: "Post",
-    url:'<?php echo base_url() ?>/ajax/edit_issue',
+    url:"<?php echo base_url() ?>/ajax/edit_issue",
     data: {
        id: id
     },
@@ -238,12 +244,14 @@ $('body').on('click', '.view_img', function () {
           $('#modal_form').modal('show'); 
         }else{
           html = '<div class="text-center">'+'<h4>No data</h4>'+'</div>';
+
        $('#show_data').html(html);
        $('#modal_form').modal('show'); 
         }
        
     },
     error: function (res) {
+       alert('ERROR');
        console.log('Error:', res);
 
     }

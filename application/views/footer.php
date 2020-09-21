@@ -279,7 +279,7 @@
 		
     if(confirm('คุณต้องการเปิดการใช้งานนี้ใช่หรือไม่')){
       
-      $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/checkall_enable'; ?>');
+      $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/enable/0'; ?>');
       $('#frm_usermanagement').submit();
       
     }else{
@@ -295,7 +295,7 @@
     
     if(confirm('คุณต้องการระงับรายการนี้ใช่หรือไม่')){
     
-           $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/checkall_disable'; ?>');
+           $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/enable/1'; ?>');
       $('#frm_usermanagement').submit();
     
     }else{
@@ -309,7 +309,7 @@
     
     if(confirm('คุณต้องการลบรายการใช้งานนี้ใช่หรือไม่')){
     
-          $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/checkall_delete'; ?>');
+          $('#frm_usermanagement').attr('action', '<?php echo base_url().'user/delete/1'; ?>');
       $('#frm_usermanagement').submit();
     
     }else{

@@ -13,6 +13,8 @@ class Issue extends CI_Controller {
         $this->load->model('model_issue');
         $this->model->CheckSession();
         $this->model->load_menu();
+        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
+        $this->model->button_show($this->session->userdata('su_id'),$url);     
        
     }
     public function manage()
@@ -44,10 +46,8 @@ class Issue extends CI_Controller {
         $query = $this->db->query($sqlSelG); 
         $data['result_p'] = $query->result(); 
 
-        $sqlSelG = "SELECT * FROM sys_owner";
-        $query = $this->db->query($sqlSelG); 
-        $data['result_own'] = $query->result(); 
-
+        $data['result_own'] = $this->model->get_owner();
+ 
         $this->load->view('issue/add',$data);//bring $data to user_data 
         $this->load->view('footer');
     }
@@ -114,13 +114,11 @@ class Issue extends CI_Controller {
         $is_id =  $data['result'][0]->is_id ;
         $owner_id =  $data['result'][0]->owner_id ;
 
-        $sql="SELECT * FROM sys_projects ;";
+        $sql="SELECT * FROM sys_projects ";
         $query = $this->db->query($sql); 
         $data['result_pj'] = $query->result(); 
 
-        $sqlSelG = "SELECT * FROM sys_owner";
-        $query = $this->db->query($sqlSelG); 
-        $data['result_own'] = $query->result();
+        $data['result_own'] = $this->model->get_owner();
         
         $sqlSelG = "SELECT * FROM issue_img as smg WHERE smg.is_id = $is_id AND smg.delete_flag != 0";
         $query = $this->db->query($sqlSelG); 
@@ -159,28 +157,7 @@ class Issue extends CI_Controller {
       $config['encrypt_name'] = TRUE;
 
         if($plant != null){
-          $data = array(
-            'pj_id' => $pj_id,
-            'plant' => $plant,
-            'date_identified' => $date_iden,
-            'is_des' => $is_des,
-            'priority' => $priority,
-            'owner_id' => $owner_id,
-            'date_er' => $date_er,
-            'esc_req' => $er,
-            'imp_sum' => $imp_sum,
-            'act_step' => $act_step,
-            'is_type' => $is_type,
-            'cur_st' => $cur_st,
-            'final_rs' => $frr,
-            'is_note' => $note,
-            'entered_by' => $fname,
-            'date_created' => 'CURRENT_TIMESTAMP',
-            'date_updated' => 'CURRENT_TIMESTAMP',
-            'delete_flag' => 1,
-            'date_deleted' => ''
-      );
-        $this->model_issue->save_issue($data,$is_id);
+        $this->model_issue->save_issue($pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname);
           if($this->input->post('chk_uid') != null){
             $img_id =  $this->input->post('chk_uid');
             foreach($img_id as $img){
@@ -232,11 +209,8 @@ $this->model_issue->insert_img($file,$c);
       $sql="SELECT * FROM sys_projects ;";
       $query = $this->db->query($sql); 
       $data['result_pj'] = $query->result(); 
+      $data['result_own'] = $this->model->get_owner();
   
-      $sqlSelG = "SELECT * FROM sys_owner";
-      $query = $this->db->query($sqlSelG); 
-      $data['result_own'] = $query->result();
-      
       $sqlSelG = "SELECT * FROM issue_img as smg WHERE smg.is_id = $is_id AND smg.delete_flag != 0";
       $query = $this->db->query($sqlSelG); 
       $data['result_img'] = $query->result(); 

@@ -33,23 +33,17 @@ class Login extends CI_Controller {
              $username = $this->session->userdata('username');
 
              if($data['u_enable'] != 1){
-               $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-               <span> Your account has been disable </span>
-             </div> ');
+               $this->session->set_flashdata('success','<span class="text-danger hide-it"> Your account has been disable </span>');
                 redirect('login');  
              }else if($data['sug_enable'] != 1){
-               $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-               <span> Your group has been disable </span>
-             </div> ');
+               $this->session->set_flashdata('success','<span class="text-danger hide-it"> Your group has been disable </span>');
                 redirect('login'); 
              } else{
-                redirect('manage/index');
+                redirect('dashboard/show');
              }
         }
      else{
-      $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-      <span> Wrong password or username </span>
-    </div> ');
+      $this->session->set_flashdata('success',' <span class="text-danger hide-it"> Wrong username or password</span>');
         redirect('login');  
      
      }

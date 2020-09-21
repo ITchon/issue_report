@@ -12,7 +12,7 @@
 </style>
 <style>
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
+
 .mySlides {display: none;
 align:center;
 }
@@ -57,12 +57,12 @@ img {vertical-align: middle;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
+  from {opacity: 0.5} 
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: 0.5} 
   to {opacity: 1}
 }
 
@@ -70,31 +70,38 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
+.responsive {
+  width: 100%;
+  max-width: 830px;
+  height: auto;
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);  
+}
 </style>
 <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-rose">
-                  <h4 class="card-title "> Issue Graph Report </h4>
-                    
-                </div>
-                <div class="col-md-12">
+              
+                <div class="col-md-12 text-center ">
                   <br>
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones">
+<div class="mySlides fade ">
+  <div class="numbertext ">1 / 3</div>
+  <img class="img-circle responsive " width="830" height="400" src="<?php echo base_url() ?>./upload/9.jpg" alt="Harry Jones" >
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/10.jpg" alt="Harry Jones">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 3</div>
-  <img class="img-circle" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/11.jpg" alt="Harry Jones">
 </div>
 
 </div>
@@ -115,24 +122,25 @@ img {vertical-align: middle;}
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-<?php echo $icon ?> card-header-icon">
+               <!--  <div class="card-header  card-header-<?php echo $icon ?> card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons"><?php echo $text ?></i>
                   </div>
                   <p class="card-category"><b>Closed Issue</b></p>
                   <h3 class="card-title"><?php echo $closed_issue ?>/<?php echo $sum_issue ?>
-                    <small>GB</small>
+                   
                   </h3>
                 </div>
 
-                <div class="card-footer">
+                <div class="card-footer ">
                   <div class="stats">
                       <i class="material-icons text-<?php echo $icon ?>"><?php echo $text ?></i>
                     <h4 class="text-<?php echo $icon ?>"><?php echo $status; ?></h4>
                   </div>
                 </div>
-                <div class="card-footer">
-                  <div class="stats">
+                <div class="card-footer "> -->
+
+                <!--   <div class="stats">
                   <i class="material-icons">date_range</i>
 
                     
@@ -194,11 +202,11 @@ printf("%d years, %d months, %d days, %d hours, "
 			$days, $hours, $minutes, $seconds); 
 ?> 
 
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+           <!--  <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-success card-header-icon">
                   <div class="card-icon">
@@ -213,8 +221,8 @@ printf("%d years, %d months, %d days, %d hours, "
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            </div> -->
+         <!--    <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-danger card-header-icon">
                   <div class="card-icon">
@@ -297,7 +305,7 @@ printf("%d years, %d months, %d days, %d hours, "
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
  
             </div>  
           </div>
@@ -321,7 +329,7 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}    
   slides[slideIndex-1].style.display = "block";  
-  setTimeout(showSlides, 5000); // Change image every 2 seconds
+  setTimeout(showSlides, 5000);
 }
 </script>
 

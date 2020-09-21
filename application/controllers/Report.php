@@ -15,8 +15,10 @@ class Report extends CI_Controller {
         $this->model->load_menu();
        
     }
-    public function manage()
+    public function graph()
     { 
+      $this->model->CheckPermission($this->session->userdata('su_id'));
+      $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
       $this->load->model('model_issue');
       $totalD = $this->model->issue_totalD();
       $openD = $this->model->issue_openD();
@@ -39,31 +41,34 @@ class Report extends CI_Controller {
       $closedY = $this->model->issue_closedY();
       $workY = $this->model->issue_workY();
 
+       if($totalY == false){
+        $totalY = array(["total"=> 0]);
+      }
       $data['maxvalue'] =  (max(array_column($totalY, 'total')));
       $data['total'] = json_encode($this->model_issue->sort_month($totalY));
       $data['open'] = json_encode($this->model_issue->sort_month($openY));
       $data['close'] = json_encode($this->model_issue->sort_month($closedY));
       $data['wip'] = json_encode($this->model_issue->sort_month($workY));
-      $this->load->view('report/manage',$data);
+      $this->load->view('report/graph',$data);
       $this->load->view('footer');
     }
 
     public function list()
     { 
+         $this->model->CheckPermission($this->session->userdata('su_id'));
+        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
       if(($this->input->post('chk')==null)){
         $sqlSelG = "SELECT * FROM sys_projects WHERE delete_flag != 0";
         $query = $this->db->query($sqlSelG); 
         $data['result_p'] = $query->result(); 
   
           $this->load->view('report/search',$data);
-       
       }else{
         $sqlSelG = "SELECT * FROM sys_projects WHERE delete_flag != 0";
         $query = $this->db->query($sqlSelG); 
         $data['result_p'] = $query->result(); 
   
           
-       
         $chk =  $this->input->post('chk');
         $src_pj =  $this->input->post('src_pj');
         $src_st =  $this->input->post('src_st');
@@ -77,8 +82,7 @@ class Report extends CI_Controller {
           $src_st = 'null';
           $src_pj = 'null';
         }
-          $result = $this->model_issue->list($src_pj,$src_st);
-          $data['result'] = $result;
+           $data['result'] = $this->model_issue->list($src_pj,$src_st);
 
           $this->load->view('report/search',$data);
          $this->load->view('report/list',$data);

@@ -13,14 +13,16 @@ class Projects extends CI_Controller {
         $this->load->model('model_issue');
         $this->model->CheckSession();
         $this->model->load_menu();
+        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
+        $this->model->button_show($this->session->userdata('su_id'),$url);    
        
     }
     public function manage()
     {   
         //$this->model->CheckPermission($this->session->userdata('su_id'));
         //$this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $sql =  'SELECT * FROM sys_projects  AS spj 
-        where spj.delete_flag != 0 ';
+        $sql =  "SELECT * FROM sys_projects  AS spj 
+        where spj.delete_flag != 0 ";
         $query = $this->db->query($sql); 
         $data['result'] = $query->result(); 
         $this->load->view('projects/manage',$data);//bring $data to user_data 

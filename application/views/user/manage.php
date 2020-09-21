@@ -1,3 +1,5 @@
+
+
 <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -5,8 +7,10 @@
 
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title ">List Users  <a href="<?php echo base_url()?>user/add"><button class="btn btn-success ">ADD</button></a></h4>
-
+             
+                  <h4 class="card-title ">List Users   <?php  if($this->session->flashdata("add")!== null ) {?>
+                    <a href="<?php echo base_url()?>user/add"><button class="btn btn-primary ">ADD</button></a></h4>
+                      <?php } ?>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -16,9 +20,13 @@
                   <thead>
                     <tr>
 								    	<td colspan="7">
+                        <?php  if($this->session->flashdata("enable")!== null ) {?>
 									    	<div id="btn_enable" class="btn  btn-success"><span class="fa fa-check"></span></div>
 									    	<div id="btn_disable" class="btn  btn-danger"><span class="fa fa-times"></span></div>
+                      <?php } ?>
+                        <?php  if($this->session->flashdata("delete")!== null ) {?>
 									    	<div id="btn_delete" class="btn btn-dark"><span class="fa fa-trash-o"></span></div>
+                      <?php } ?>
 								    	</td>
 								    </tr>	
                     <tr class=" text-dark">
@@ -53,37 +61,37 @@
                 echo "<td>".$r->gender."</td>"; 
                 echo "<td>".$r->name."</td>";
                 echo "<td>".$r->email."</td>";
-                if($r->enable!=1 ){?>
-               
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
-                  echo base_url() . 'user/enable/' . $r->su_id;
-                  ?>';"><i class='btn-danger btn-sm fa fa-times'></i></a>
-                  <?php
+                if($r->enable!=1 ){
+                  $color = "btn-danger";
+                  $icon = "times";
                 }
-                else{?>
-        
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ปิดการใช้งาน</h5>'  data-original-title='Rule' onclick="javascript:window.location='<?php
-                  echo base_url() . 'user/disable/' . $r->su_id;
-                  ?>';"><i class='btn-success btn-sm fa fa-check'></i></a>                      
-                  <?php
+                else{
+                  $color = "btn-success";
+                  $icon = "check";
                 }
-                ?> 
-
-
+                ?> <td class="text-center">
+              <?php  if($this->session->flashdata("enable")!== null ) {?>
+                  <a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                  echo base_url() . 'user/enable/' . $r->su_id.'/'.$r->enable;
+                  ?>';"><i class='<?php echo $color ?> btn-sm fa fa-<?php echo $icon ?>'></i></a>
+            <?php } ?>
+ <?php  if($this->session->flashdata("rule")!== null ) {?>
                 <a class='btn-primary' data-toggle='tooltip'  onclick="javascript:window.location='<?php
                 echo base_url() . 'user/rule/' . $r->su_id;
-                ?>';"><i class='btn-primary btn-sm fa fa-gear'> </i></a>
-
-
+                ?>';"><i class='btn-primary btn-sm fa fa-key'> </i></a>
+            <?php } ?>
+ <?php  if($this->session->flashdata("edit")!== null ) {?>
                 <a type ='button' data-toggle='tooltip'  class=' ' onclick="javascript:window.location='<?php
                 echo base_url() . 'user/edit/' . $r->su_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>
-
+                            <?php } ?>
+ <?php  if($this->session->flashdata("delete")!== null ) {?>
                   <a type ='button' data-toggle='tooltip'  class=' ' onclick="if (confirm('Are you sure you want to delete '))javascript:window.location='<?php
-                echo base_url() . 'user/deleteuser/' . $r->su_id;
+                echo base_url() . 'user/delete/' . $r->su_id.'/'.'1';
                 ?>';"><i class='btn-dark btn-sm fa fa-trash'></i></a>
                 <?php  
             echo "</tr>";
+          }
         }
     ?>
                   	<?php echo form_close();?>
