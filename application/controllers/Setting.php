@@ -10,7 +10,7 @@ class Setting extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
-        $this->load->model('model_issue');
+        $this->load->model('model_setting');
         $this->model->CheckSession();
         $this->model->load_menu();
        
@@ -30,33 +30,46 @@ class Setting extends CI_Controller {
 
     public function save_edit()
     {
-        echo "save_edit";
-        die();
-        $pj_id =  $this->input->post('pj_id');
-        $pj_name =  $this->input->post('pj_name');
-        $pj_des =  $this->input->post('pj_des');
-        $enable =  $this->input->post('enable');
+        $su_id = $this->session->userdata('su_id');
+        $username =  $this->input->post('username');
+        $fname =  $this->input->post('fname');
+        $lname =  $this->input->post('lname');
+        $email =  $this->input->post('email');
+        $gender =  $this->input->post('gender');
       
-        echo $pj_id;
 
-        $this->model_issue->save_edit_project($pj_id, $pj_name,$pj_des, $enable);
-        redirect('projects/manage');
+        $this->model_setting->save_edit_profile($su_id, $username, $fname, $lname, $email, $gender);
+        redirect('setting/manage');
     }
 
 
     public function changed_pass()
     {
-        echo "changed_pass";
-        die();
-        $pj_id =  $this->input->post('pj_id');
-        $pj_name =  $this->input->post('pj_name');
-        $pj_des =  $this->input->post('pj_des');
-        $enable =  $this->input->post('enable');
-      
-        echo $pj_id;
+        $su_id = $this->session->userdata('su_id');
+        $cur_pass =  $this->input->post('cur_pass');
+        $new_pass =  $this->input->post('new_pass');
+        $cnew_pass =  $this->input->post('cnew_pass');
 
-        $this->model_issue->save_edit_project($pj_id, $pj_name,$pj_des, $enable);
-        redirect('projects/manage');
+        $res = $this->model_setting->check_cur_password($su_id,$cur_pass);
+        if($res == false){
+        $this->session->set_flashdata('error','<div class="alert alert-warning hide-it">  
+          <span>  <b> Warning - </b> Current Password Incorrect</span>
+        </div> ');
+         redirect('setting/manage');
+        }
+        else if($new_pass != $cnew_pass){
+        $this->session->set_flashdata('error','<div class="alert alert-warning hide-it">  
+          <span>  <b> Warning - </b> Confirm Password Dose Not Match</span>
+        </div> ');
+         redirect('setting/manage');
+        }else{
+        $this->model_setting->save_changed_password($su_id,$new_pass);
+        $this->session->set_flashdata('error','<div class="alert alert-success hide-it">  
+          <span>  <b> Success - </b> Password Is Changed</span>
+        </div> ');
+        }
+
+        redirect('setting/manage');
     }
 
 
