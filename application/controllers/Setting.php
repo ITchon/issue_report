@@ -38,7 +38,17 @@ class Setting extends CI_Controller {
         $gender =  $this->input->post('gender');
       
 
-        $this->model_setting->save_edit_profile($su_id, $username, $fname, $lname, $email, $gender);
+        $res = $this->model_setting->save_edit_profile($su_id, $username, $fname, $lname, $email, $gender);
+        if($res != false){
+        $this->session->set_flashdata('error','<div class="alert alert-success hide-it">  
+          <span>  <b> Success - </b> Data Is Changed</span>
+        </div> ');
+        }else{
+        $this->session->set_flashdata('error','<div class="alert alert-warning hide-it">  
+          <span>  <b> Warning - </b> Someting Wrong</span>
+        </div> ');
+
+        }
         redirect('setting/manage');
     }
 

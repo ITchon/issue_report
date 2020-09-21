@@ -9,8 +9,7 @@ class Model_setting extends CI_Model
 {
    $sql1 ="UPDATE sys_users SET username = N'$username',firstname = N'$fname',lastname = '$lname',email = '$email',gender = '$gender', date_updated = CURRENT_TIMESTAMP WHERE su_id = '$su_id'";
   $query = $this->db->query($sql1);
-  $data = $query->result(); 
-  if ($data){ return true; }else{ return false; }
+  if ($query){ return true; }else{ return false; }
 }
 
 	public function check_cur_password($su_id,$password)
