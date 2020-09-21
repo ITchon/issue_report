@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller {
     }
 	public function show()
 	{	
-    $issue = array('Open','Work In Progress');
+    $issue = array('Open','Work In Progress','Closed');
     $num = 0;
         foreach($issue as $s){
     $res = $this->model->get_issue_bycur($s);

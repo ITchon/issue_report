@@ -5,8 +5,10 @@
 
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title "> List Projects <a href="<?php echo base_url()?>projects/add"><button class="btn btn-primary ">ADD</button></a></h4>
-                  
+                  <h4 class="card-title "> List Projects 
+                  <?php if($this->session->flashdata("edit")!== null ) {?>
+                  <a href="<?php echo base_url()?>projects/add"><button class="btn btn-primary ">ADD</button></a></h4>
+                  <?php } ?>
                   <p class="card-category"><h1></h1></p>
                 </div>
                 <div class="card-body">
@@ -34,27 +36,36 @@
                   $icon = "btn-success btn-sm fa fa-check";
                   $text = "ENABLE";
                   $color = "#43a047";
+                  $tooltip = "ปิดการใช้งาน";
                 }
                 else{ 
                   $icon = "btn-danger btn-sm fa fa-times";
                   $text = "DISABLE";
                   $color = "#D50000";
+                  $tooltip = "เปิดการใช้งาน";
                 }
-                ?>
+                    ?>
                     <td class="text-center"><b><font color="<?php echo $color ?>"><?php echo $text ?></font></b></td>
+
                   <?php
                 echo "<td class=''>".$r->date_created."</td>";
-                ?>
-                  <td class="text-center"><a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เปิดการใช้งาน</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
+                 ?>
+                  <td class="text-center">
+                <?php if($this->session->flashdata("enable")!== null ) {?>
+                 
+                  <a type="button" data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5><?php echo $tooltip ?></h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
                   echo base_url() . 'projects/enable/' . $r->pj_id;
                   ?>';"><i class="<?php echo $icon ?>"></i></a>
-                  
+                <?php } ?>
+                <?php if($this->session->flashdata("edit")!== null ) {?>
                 <a type ='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' class=' ' data-original-title='Rule' onclick="javascript:window.location='<?php
                 echo base_url() . 'projects/edit/' . $r->pj_id;
                 ?>';"><i class='btn-primary btn-sm fa fa-wrench'></i></a>
-                <?php 
-                echo "<a type='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."projects/delete/".$r->pj_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i class='btn-danger btn-sm fa fa-trash'></i></a></td>";  
-           
+               <?php } ?>
+                <?php if($this->session->flashdata("delete")!== null ) {
+                echo "<a type='button' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>ลบข้อมูล</h5>' href='".base_url()."projects/delete/".$r->pj_id."' onclick='return confirm(\"Confirm Delete Item\")' ><i class='btn-danger btn-sm fa fa-trash'></i></a>";  
+                  };
+              echo "</td>";
             echo "</tr>";
         }
     ?>

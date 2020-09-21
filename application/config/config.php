@@ -23,9 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$root = "http://".$_SERVER['HTTP_HOST'];
-$root .= dirname($_SERVER['SCRIPT_NAME']);
-$config['base_url'] = $root;
+// $root = "http://".$_SERVER['HTTP_HOST'];
+// $root .= dirname($_SERVER['SCRIPT_NAME']);
+// $config['base_url'] = $root;
+$config['base_url'] = 'http://192.168.161.207/issue_report/';
 
 /*
 |--------------------------------------------------------------------------
@@ -379,17 +380,26 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$sessDir = session_save_path();
-$sessDir = "{$sessDir}/sessionPath";
-is_dir($sessDir)?:mkdir($sessDir);
+// $sessDir = session_save_path();
+// $sessDir = "{$sessDir}/sessionPath";
+// is_dir($sessDir)?:mkdir($sessDir);
+
+// $config['sess_driver'] = 'files';
+// $config['sess_cookie_name'] = 'ci_session';
+// $config['sess_expiration'] = 7200;
+// $config['sess_save_path'] = $sessDir;
+// $config['sess_match_ip'] = FALSE;
+// $config['sess_time_to_update'] = 300;
+// $config['sess_regenerate_destroy'] = FALSE;
 
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_cookie_name'] = 'ci_pickk_system';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = $sessDir;
+$config['sess_save_path'] = "C:\Temp";
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+
 
 /*
 |--------------------------------------------------------------------------

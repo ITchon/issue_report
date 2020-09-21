@@ -19,7 +19,7 @@ class Menu extends CI_Controller {
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
 
-        $sql =  'select * from sys_menu_groups ORDER BY `order_no` ASC';
+        $sql =  "SELECT * from sys_menu_groups ORDER BY order_no ASC";
         $query = $this->db->query($sql); 
        $data['result'] = $query->result(); 
 
@@ -34,8 +34,7 @@ class Menu extends CI_Controller {
     {   
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));   
         $this->model->CheckPermission($this->session->userdata('su_id'));
-
-        $data['result_sp'] = $this->model->get_sp();
+        $data['result_spg'] = $this->model->get_spg();
         $data['result_mg'] = $this->model->get_mg();
 
         $this->load->view('menu/add',$data);//bring $data to user_data 
@@ -46,10 +45,11 @@ class Menu extends CI_Controller {
     {
         $name =  $this->input->post('name');
         $sp_id =  $this->input->post('sp_id');
+        $spg_id =  $this->input->post('sgp_id');
         $mg_id =  $this->input->post('mg_id');
         $icon =  $this->input->post('icon');
         $order =  $this->input->post('order');
-        $result = $this->model->insert_menu($name, $sp_id,$mg_id,$icon,$order);
+        $result = $this->model->insert_menu($name, $spg_id,$sp_id,$mg_id,$icon,$order);
         redirect('menu/manage');
 
     }
@@ -62,7 +62,7 @@ class Menu extends CI_Controller {
         $sql="SELECT * FROM sys_menu_groups where mg_id = '$id'";
         $query = $this->db->query($sql); 
         $data['result'] = $query->result(); 
-        $data['result_sp'] = $this->model->get_sp();
+        $data['result_spg'] = $this->model->get_spg();
         $data['result_mg'] = $this->model->get_mg_noby($id);
 
         $this->load->view('menu/edit',$data);//bring $data to user_data 
@@ -74,11 +74,13 @@ class Menu extends CI_Controller {
     {
         $mg_id =  $this->input->post('mg_id');
         $sp_id =  $this->input->post('sp_id');
+        $spg_id =  $this->input->post('spg_id');
         $name =  $this->input->post('name');
+        $icon =  $this->input->post('icon');
         $order =  $this->input->post('order');
 
 
-        $this->model->save_edit_menu($mg_id, $sp_id, $name,$order);
+        $this->model->save_edit_menu($name,$icon,$mg_id, $spg_id,$sp_id, $order);
         redirect('menu/manage');
 
 

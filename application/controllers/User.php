@@ -11,17 +11,19 @@ class User extends CI_Controller {
         $this->load->database(); 
         $this->load->model('model');
         $this->model->CheckSession();
-        $this->model->load_menu();
-       
+        $this->model->load_menu();  
+        $url = trim($this->router->fetch_class().'/'.$this->router->fetch_method());
+        $this->model->button_show($this->session->userdata('su_id'),$url);     
+
     }
     public function manage()
     {   
         $this->model->CheckPermission($this->session->userdata('su_id'));
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $sql =  'SELECT su.su_id,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
+        $sql =  "SELECT su.su_id,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
     FROM
     sys_users  AS su 
-    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND su.username != "sadmin"';
+    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND su.username != 'sadmin'";
         $query = $this->db->query($sql); 
        $data['result'] = $query->result(); 
         $this->load->view('user/manage',$data);//bring $data to user_data 
@@ -54,20 +56,26 @@ class User extends CI_Controller {
         $id = $this->uri->segment('3');
      
             $data['result'] =  $this->model->get_user(); 
-            $sql = 'select * from sys_users_permissions where su_id = '.$id.'';
+
+            $sql = "select * from sys_users_permissions where su_id = $id";
+
             $query = $this->db->query($sql); 
             $data['result_user']= $query->result(); 
      
             $sql =  "SELECT su.su_id,su.sug_id, su.firstname as su_name from sys_users as su where su.su_id = $id";
             $query = $this->db->query($sql); 
             $data['result_name']= $query->result(); 
+            $sug_id = $data['result_name'][0]->sug_id;
 
-
-            $sql =  'SELECT sp.sp_id,sp.name as p_name , spg.name as g_name ,sugp.spg_id ,sp.controller FROM sys_permissions sp 
+            $sql =  "SELECT sp.sp_id,sp.name as p_name , spg.name as g_name ,sugp.spg_id ,sp.controller FROM sys_permissions sp 
             inner join sys_users_groups_permissions sugp ON sugp.spg_id = sp.spg_id 
             inner join sys_permission_groups spg on spg.spg_id = sp.spg_id 
             inner join sys_menu_groups smg on smg.spg_id = spg.spg_id
-            where sugp.sug_id= '.$data['result_name'][0]->sug_id.' ORDER BY smg.order_no ASC , sp.name';
+
+            where sugp.sug_id= $sug_id ORDER BY smg.order_no ASC , sp.name";
+
+            // where sugp.sug_id= '.$data['result_name'][0]->sug_id.' ORDER BY smg.order_no ASC , sp.name';
+
             $query = $this->db->query($sql); 
             $data['result_group'] = $query->result();
      
@@ -113,11 +121,31 @@ class User extends CI_Controller {
        
 
     }
-    public function enable($uid){
-
+    public function enable(){
+    
         $this->model->CheckPermission($this->session->userdata('su_id'));
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $result = $this->model->enableUser($uid);
+    if($this->uri->segment('4')!=null){
+        if($this->uri->segment('4')==0){
+        $result = $this->model->enableUser($this->uri->segment('3'));  
+        }else{
+        $result = $this->model->disableUser($this->uri->segment('3'));
+        }
+    }else{
+        $uid = $this->input->post('chk_uid');
+       if($this->uri->segment('3')==0){
+         $result = $this->model->num_enableUser($uid);
+        $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
+        <span>  Enable data success</span>
+      </div> ');
+        }else{
+         $this->model->num_disableUser($uid);
+        $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
+        <span>  Disable data success</span>
+      </div> ');
+        $result = $this->model->disableUser($this->uri->segment('3'));
+        }  
+    }
 
         if($result!=FALSE){
             redirect('user/manage','refresh');
@@ -129,67 +157,29 @@ class User extends CI_Controller {
         }
     }
     
-	public function checkall_enable(){
+	
 
-
-		$uid = $this->input->post('chk_uid');
-		
-		$this->model->num_enableUser($uid);
-        $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
-        <span>  Enable data success</span>
-      </div> ');
-		redirect('user/manage');
-
-	}
-
-    public function disable($uid){
-
-        $this->model->CheckPermission($this->session->userdata('su_id'));
-        $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $result = $this->model->disableUser($uid);
-
-        if($result!=FALSE){
-            redirect('user/manage','refresh');
-            
-
-        }else{
-            echo "<script>alert('Simting wrong')</script>";
-            redirect('user/manage','refresh');
-
-        }
-    }
-    public function checkall_disable(){
-		
-
-		$uid = $this->input->post('chk_uid');
-		$this->model->num_disableUser($uid);
-        $this->session->set_flashdata('success','<div class="alert alert-danger hide-it">  
-        <span>  Disable data success</span>
-      </div> ');
-		redirect('user/manage');
-	}
-
-    public function deleteuser()
+    public function delete()
     {
         $this->model->CheckPermission($this->session->userdata('su_id'));
         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
-        $this->model->delete_user($this->uri->segment('3'));
+        if($this->uri->segment('4')!=null){
+                 $this->model->delete_user($this->uri->segment('3'));
         $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
         <span>  Delete Success</span>
       </div> ');
-        redirect('user/manage');
-    }
-
-    public function checkall_delete(){
-
-		$uid = $this->input->post('chk_uid');
-		$this->model->num_deleteUser($uid);
+        }else{
+        $uid = $this->input->post('chk_uid');
+        $this->model->num_deleteUser($uid);
         $this->session->set_flashdata('success','<div class="alert alert-success hide-it">  
         <span>  Delete data success</span>
       </div> ');;
-		redirect('user/manage');
+        }
+   
+        redirect('user/manage');
+    }
 
-	}
+ 
 
     public function save_user_permission()
     {

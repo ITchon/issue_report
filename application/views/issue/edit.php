@@ -7,6 +7,8 @@ label{
 
 </style>
 
+
+
   <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -88,15 +90,17 @@ label{
                    <select id="ato" name="owner_id" class="form-control select2"  >
                    <option disabled value="">- - - Select Owner- - - </option>
 
-                    <?php foreach ($result_own as $r) {
+                    <?php foreach ($result_own as $r){
                         ?>
-                       <option value="<?php echo $r->owner_id ?>"><?php echo $r->owner_name ?></option>
+                       <option value="<?php echo $r->owner_id?>"><?php echo $r->owner_name ?></option>
+
                   <?php
                    } ?>
                    </select>
 
                     </div>
                     </div>
+
                     
 
                     <div class="col-md-12">

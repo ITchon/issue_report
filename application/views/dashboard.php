@@ -74,15 +74,24 @@ img {vertical-align: middle;}
   width: 100%;
   max-width: 830px;
   height: auto;
-}
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);  
+
 </style>
 <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
+
+              
+                <div class="col-md-12 text-center ">
+                  <br>
                 <div class="card-header card-header-rose">
-                  <h4 class="card-title "> Issue Graph Report </h4>
+                  <h4 class="card-title "> Welcome </h4>
                     
                 </div>
                 <div class="col-md-12 text-center ">
@@ -120,24 +129,25 @@ img {vertical-align: middle;}
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-<?php echo $icon ?> card-header-icon">
+               <!--  <div class="card-header  card-header-<?php echo $icon ?> card-header-icon">
                   <div class="card-icon">
                     <i class="material-icons"><?php echo $text ?></i>
                   </div>
                   <p class="card-category"><b>Closed Issue</b></p>
                   <h3 class="card-title"><?php echo $closed_issue ?>/<?php echo $sum_issue ?>
-                    <small>GB</small>
+                   
                   </h3>
                 </div>
 
-                <div class="card-footer">
+                <div class="card-footer ">
                   <div class="stats">
                       <i class="material-icons text-<?php echo $icon ?>"><?php echo $text ?></i>
                     <h4 class="text-<?php echo $icon ?>"><?php echo $status; ?></h4>
                   </div>
                 </div>
-                <div class="card-footer">
-                  <div class="stats">
+                <div class="card-footer "> -->
+
+                <!--   <div class="stats">
                   <i class="material-icons">date_range</i>
 
                     
@@ -199,11 +209,11 @@ printf("%d years, %d months, %d days, %d hours, "
 			$days, $hours, $minutes, $seconds); 
 ?> 
 
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+           <!--  <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-success card-header-icon">
                   <div class="card-icon">
@@ -218,8 +228,8 @@ printf("%d years, %d months, %d days, %d hours, "
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            </div> -->
+         <!--    <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
                 <div class="card-header card-header-danger card-header-icon">
                   <div class="card-icon">
@@ -302,7 +312,7 @@ printf("%d years, %d months, %d days, %d hours, "
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
  
             </div>  
           </div>

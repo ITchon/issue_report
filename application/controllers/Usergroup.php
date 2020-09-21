@@ -10,7 +10,7 @@ class Usergroup extends CI_Controller {
         $this->load->helper('url');
         $this->load->database(); 
         $this->load->model('model');
-        $this->model->CheckSession();
+        // $this->model->CheckSession();
         $this->model->load_menu();
        
     }
@@ -18,7 +18,9 @@ class Usergroup extends CI_Controller {
     
 	public function manage()
     {
-        $sql =  'SELECT * FROM sys_user_groups WHERE delete_flag != 0';
+            $this->model->CheckPermission($this->session->userdata('su_id'));
+         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
+        $sql =  "SELECT * FROM sys_user_groups WHERE delete_flag != 0";
         $query = $this->db->query($sql); 
        $data['result_all'] = $query->result();
         $this->load->view('user_group/manage',$data);//bring $data to user_data 
@@ -54,7 +56,8 @@ class Usergroup extends CI_Controller {
 
     public function add()
     {   
-        //$this->model->CheckPermission($this->session->userdata('su_id'));
+        $this->model->CheckPermission($this->session->userdata('su_id'));
+         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
 
 
         $this->load->view('user_group/add');//bring $data to user_data 
@@ -64,8 +67,8 @@ class Usergroup extends CI_Controller {
 
     public function insert()
     {
-        $this->model->CheckPermission($this->session->userdata('su_id'));
-         $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
+        // $this->model->CheckPermission($this->session->userdata('su_id'));
+        //  $this->model->CheckPermissionGroup($this->session->userdata('sug_id'));
         $gname =  $this->input->post('gname');
         $result = $this->model->insert_group($gname);
        if($result == true){

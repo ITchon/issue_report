@@ -5,10 +5,10 @@ class Model extends CI_Model
 
   public function get_user()
   {
-    $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
+    $sql = "SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
     FROM
     sys_users  AS su 
-    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != "1"';
+    INNER JOIN sys_user_groups AS sug ON sug.sug_id = su.sug_id where su.delete_flag != 0 AND sug.sug_id != 1";
     $query = $this->db->query($sql); 
     $result =  $query->result();
     return $result;
@@ -64,12 +64,12 @@ class Model extends CI_Model
 
   function showmenu($sug_id,$su_id)
   {
-    $sql =  'SELECT smg.name AS g_name, smg.icon_menu,smg.mg_id, smg.order_no ,sp.controller FROM sys_menu_groups as smg
+    $sql =  "SELECT smg.name AS g_name, smg.icon_menu,smg.mg_id, smg.order_no ,sp.controller FROM sys_menu_groups as smg
     INNER JOIN sys_permissions as sp ON sp.sp_id = smg.sp_id
     INNER JOIN sys_permission_groups as spg ON spg.spg_id = sp.spg_id
     INNER JOIN sys_users_groups_permissions as sug ON sug.spg_id = sp.spg_id
     INNER JOIN sys_users_permissions as sup ON sup.sp_id = sp.sp_id
-    WHERE sup.su_id = 1 AND sug.sug_id = 1 AND smg.enable != 0 ORDER BY smg.order_no ASC';
+    WHERE sup.su_id = $sug_id AND sug.sug_id = $su_id AND smg.enable != 0 ORDER BY smg.order_no ASC";
     $query = $this->db->query($sql); 
     $result = $query->result();
     return $result;
@@ -102,6 +102,25 @@ class Model extends CI_Model
     }
   }
  } 
+  public function button_show($id,$url)        
+  {
+     
+    $sql="SELECT * FROM  sys_permissions  where controller ='$url'";
+    $query = $this->db->query($sql); 
+    $res = $query->result();
+     if($res != null){
+    $spg_id = $res[0]->spg_id;
+    $sql = " SELECT * FROM sys_permissions sp inner join sys_users_permissions sup on sup.sp_id = sp.sp_id where su_id = $id and sp.spg_id = $spg_id and sp.button_show IS NOT NULL";
+    $query= $this->db->query($sql); 
+
+            $data = $query->result(); 
+            foreach ($data as $r ) {
+
+                  $this->session->set_flashdata($r->button_show,'');
+            }
+
+     }
+  }
 //   public function get_user()
 //  {
 //    $sql =  'SELECT su.su_id,su.password,su.username, su.firstname ,su.lastname, su.gender,su.email,su.enable,su.delete_flag, sug.name as name
@@ -133,7 +152,12 @@ return false;
   }
 
 } 
-
+function get_owner(){
+  $sql ="SELECT * FROM sys_owner";
+    $query = $this->db->query($sql);  
+   $data = $query->result(); 
+   return $data;
+ }
 function get_mg(){
   $sql ="SELECT * FROM sys_menu_groups ORDER BY order_no ASC";
     $query = $this->db->query($sql);  
@@ -167,12 +191,18 @@ function get_mg_noby($id){
  }
 
  function get_sp(){
-  $sql ="SELECT * FROM sys_permissions where delete_flag != 0 AND controller RLIKE('manage') OR controller RLIKE('show') ";
+  $sql ="SELECT * FROM sys_permissions where delete_flag != 0 or controller LIKE '%manage%'
+   OR controller LIKE '%show%' order by name";
     $query = $this->db->query($sql);  
    $data = $query->result(); 
    return $data;
  }
-
+ function get_spg(){
+  $sql ="SELECT * FROM sys_permission_groups where delete_flag != 0 order by name";
+    $query = $this->db->query($sql);  
+   $data = $query->result(); 
+   return $data;
+ }
  function givemeid($para){
   $sql ="SELECT *  FROM sys_menus 
   WHERE link='$para'  ";
@@ -200,14 +230,14 @@ $password = base64_encode(trim($password));
    
  }
 
- function insert_menu($name, $sp_id, $mg_id, $icon, $order)
+ function insert_menu($name,$spg_id, $sp_id, $mg_id, $icon, $order)
  {
   $num= $this->db->query("SELECT MAX(order_no) as order_no FROM sys_menu_groups"); 
   $res= $num->result()[0];
 
   $order = $res->order_no+1;
-  $sql1 ="INSERT INTO sys_menu_groups (name, sp_id, icon_menu, enable, date_created,order_no) 
-  VALUES ( '$name', '$sp_id', '$icon', '1', CURRENT_TIMESTAMP,'$order' )";
+  $sql1 ="INSERT INTO sys_menu_groups (name,spg_id, sp_id, icon_menu, enable, date_created,order_no) 
+  VALUES ( '$name','$spg_id', '$sp_id', '$icon', '1', CURRENT_TIMESTAMP,'$order' )";
 $query= $this->db->query($sql1); 
 
   if($query){
@@ -219,7 +249,7 @@ $query= $this->db->query($sql1);
    
  }
 
- public function save_edit_menu($mg_id, $sp_id, $name,$order)
+ public function save_edit_menu($name,$icon,$mg_id, $spg_id,$sp_id, $order)
  {
 
    $sql =  "SELECT * FROM sys_menu_groups where mg_id = $mg_id"; 
@@ -231,9 +261,9 @@ $query= $this->db->query($sql1);
 
  
 if($old_order > $order){
-  $sql =  "UPDATE sys_menu_groups SET order_no= $order+1 WHERE mg_id=$mg_id"; 
+  $sql =  "UPDATE sys_menu_groups SET order_no= $order+1,name = '$name' ,icon_menu = '$icon' ,spg_id = $spg_id , sp_id = $sp_id WHERE mg_id=$mg_id"; 
   $query = $this->db->query($sql);
-  $sql =  "SELECT * FROM sys_menu_groups where order_no between $b+1 and $a and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
+  $sql =  "SELECT * FROM sys_menu_groups where order_no between $b+1 and $a and mg_id != $mg_id ORDER BY sys_menu_groups.order_no ASC"; 
   $query = $this->db->query($sql);
   $res = $query->result(); 
   foreach($res as $r){
@@ -245,7 +275,7 @@ if($old_order > $order){
 
   $sql =  "UPDATE sys_menu_groups SET order_no= $order WHERE mg_id=$mg_id"; 
   $query = $this->db->query($sql);
-  $sql =  "SELECT * FROM sys_menu_groups where order_no between $a and $b and mg_id != $mg_id ORDER BY `sys_menu_groups`.`order_no` ASC"; 
+  $sql =  "SELECT * FROM sys_menu_groups where order_no between $a and $b and mg_id != $mg_id ORDER BY sys_menu_groups.order_no ASC"; 
   $query = $this->db->query($sql);
   $res = $query->result(); 
   foreach($res as $r){
@@ -283,8 +313,8 @@ if($old_order > $order){
   $sql ="INSERT INTO sys_issue (pj_id,plant,date_identified,is_des,priority,owner_id,date_er,
   esc_req,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
   date_updated,delete_flag) 
-  VALUES ( '$pj_id', '$plant', '$date_iden', '$is_des', '$priority','$owner_id','$date_er'
-  ,'$er','$imp_sum','$act_step','$is_type','$cur_st','$frr','$note','$fname'
+  VALUES ( '$pj_id', '$plant', '$date_iden', N'$is_des', '$priority','$owner_id','$date_er'
+  ,'$er',N'$imp_sum',N'$act_step','$is_type','$cur_st',N'$frr',N'$note',N'$fname'
   ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
     $query = $this->db->query($sql);  
     $last_id = $this->db->insert_id();
@@ -721,9 +751,8 @@ public function disablePermission_Group($key=''){
 
   public function issue_totalD()
   {
-    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE DATE(`date_created`) = CURRENT_DATE()
-     AND month(`date_created`) = month(now())
-     AND year(`date_created`) = year(now())";
+
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE CAST([date_created] as date) = CAST(GETDATE() as date) AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
@@ -736,8 +765,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_openD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open'
-    AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND CAST([date_created] as date) = CAST(GETDATE() as date) AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -754,8 +782,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_closedD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' 
-   AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND CAST([date_created] as date) = CAST(GETDATE() as date) AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -772,8 +799,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_workD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress'
-    AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND  CAST([date_created] as date) = CAST(GETDATE() as date) AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -790,7 +816,7 @@ public function disablePermission_Group($key=''){
 
   public function issue_totalM()
   {
-    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
@@ -805,8 +831,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_openM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' 
-   AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -823,8 +848,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_closedM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed'
-    AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -841,8 +865,7 @@ public function disablePermission_Group($key=''){
 
  public function issue_workM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' 
-   AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND MONTH([date_created]) = MONTH(GETDATE()) AND YEAR([date_created]) = YEAR(GETDATE())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -859,10 +882,10 @@ public function disablePermission_Group($key=''){
  
  public function issue_totalY()
  {
-   $sql="SELECT COUNT(is_id) AS total, DATE_FORMAT(`date_created`, '%c') AS month
+   $sql="SELECT COUNT(is_id) AS total, DATEPART(month,date_created) AS month
    FROM sys_issue 
-   WHERE year(`date_created`) = year(now())
-   GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+   WHERE YEAR([date_created]) = YEAR(GETDATE())
+   GROUP BY DATEPART(month,date_created)";
  $query= $this->db->query($sql);
  $total = $query->result(); 
  if($query){
@@ -875,10 +898,10 @@ public function disablePermission_Group($key=''){
 
 public function issue_openY()
  {
-  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
+  $sql="SELECT COUNT(is_id) AS total ,DATEPART(month,date_created) AS month
   FROM sys_issue 
-  WHERE cur_st = 'Open' AND year(`date_created`) = year(now())
-  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+  WHERE cur_st = 'Open' AND YEAR([date_created]) = YEAR(GETDATE())
+  GROUP BY DATEPART(month,date_created)";
  $query = $this->db->query($sql); 
  $total = $query->result(); 
  if($query){
@@ -891,10 +914,10 @@ public function issue_openY()
 
 public function issue_closedY()
  {
-  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
+  $sql="SELECT COUNT(is_id) AS total ,DATEPART(month,date_created) as month
   FROM sys_issue 
-  WHERE cur_st = 'Closed' AND year(`date_created`) = year(now())
-  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+  WHERE cur_st = 'Closed' AND YEAR([date_created]) = YEAR(GETDATE())
+  GROUP BY DATEPART(month,date_created)";
  $query = $this->db->query($sql); 
  $total = $query->result(); 
  if($query){
@@ -907,10 +930,10 @@ public function issue_closedY()
 
 public function issue_workY()
  {
-  $sql="SELECT COUNT(is_id) AS total ,DATE_FORMAT(date_created,'%c') as month
+  $sql="SELECT COUNT(is_id) AS total ,DATEPART(month,date_created) as month
   FROM sys_issue 
-  WHERE cur_st = 'Work In Progress' AND year(`date_created`) = year(now())
-  GROUP BY DATE_FORMAT(`date_created`, '%M%')";
+  WHERE cur_st = 'Work In Progress' AND YEAR([date_created]) = YEAR(GETDATE())
+  GROUP BY DATEPART(month,date_created)";
  $query = $this->db->query($sql); 
  $total = $query->result(); 
  if($query){

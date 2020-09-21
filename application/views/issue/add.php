@@ -81,11 +81,14 @@ label{
                     
                     <div class="form-group">
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Assigned To Owner</b><font color="red" size="1"> *This column is  the information.</font></label>      
-          
+   
                       <div class="col-sm-6 col-md-6">
                    <select name="owner_id" class="form-control select2"  >
                     <option value=""> - - - Select Owner - - - </option>
-                    <?php foreach ($result_own as $r) {
+                    <?php
+               
+           
+                    foreach ($result_own as $r) {
                         ?>
                        <option value="<?php echo $r->owner_id ?>"><?php echo $r->owner_name ?></option>
                   <?php
@@ -206,11 +209,7 @@ label{
       
       
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script>
-        $(document).ready(function() {
-    $('.select2').select2();
-});
-      </script>
+       
     <script type='text/javascript'>
   
   Dropzone.autoDiscover = false;

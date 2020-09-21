@@ -10,6 +10,7 @@ public function __construct()
         parent::__construct();
      $this->load->helper('url');
         $this->load->model('model');
+        $this->load->model('model_ajax');
         $this->load->model('model_issue');
     }
  
@@ -42,30 +43,13 @@ public function __construct()
 
     }
  
-    public function store()
+ public function fetch_menu()
     {
-        $data = array(
-                'title' => $this->input->post('title'),
-                'product_code' => $this->input->post('product_code'),
-                'description' => $this->input->post('description'),
-                'created_at' => date('Y-m-d H:i:s'),
-            );
-         
-        $status = false;
- 
-        $id = $this->input->post('product_id');
- 
-        if($id){
-           $update = $this->model->update($data);
-           $status = true;
-        }else{
-           $id = $this->model->create($data);
-           $status = true;
-        }
- 
-        $data = $this->model->get_by_id($id);
- 
-        echo json_encode(array("status" => $status , 'data' => $data));
+     if($this->input->post('spg_id'))
+     
+     {
+      echo $this->model_ajax->fetch_menu($this->input->post('spg_id'));
+     }
     }
  
     public function delete()

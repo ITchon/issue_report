@@ -41,7 +41,7 @@
                 }
                 ?> <a class='' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขสิทธิ์</h5>' onclick="javascript:window.location='<?php
                 echo base_url() . 'usergroup/rule/' . $r->sug_id;
-                ?>';"><i class='btn-primary btn-sm fa fa-gears'> </i> </a>
+                ?>';"><i class='btn-primary btn-sm fa fa-key'> </i> </a>
 
                 <a type ='button' class=' ' data-toggle='tooltip' data-html='true' data-placement='bottom' aria-describedby='passHelp' title='<h5>เเก้ไขข้อมูล</h5>' data-original-title='Rule' onclick="javascript:window.location='<?php
                 echo base_url() . 'usergroup/edit/' . $r->sug_id;

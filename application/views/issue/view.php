@@ -52,7 +52,10 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b>Date Identified</b> </label>
-                          <input readonly type="date" class="form-control" name="date_iden" value="<?php echo $result[0]->date_identified ?>" >
+
+                    <input readonly type="date" class="form-control" name="date_iden" 
+                    value="<?php echo explode(" ",$result[0]->date_identified)[0];?>" >
+                           
                         </div>
                       </div>
 
@@ -101,7 +104,7 @@ label{
                     <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b>Expected Resolution Date</b> </label>
-                          <input readonly type="date" class="form-control" name="date_er" value="<?php echo $result[0]->date_er ?>" >
+                          <input readonly type="date" class="form-control" name="date_er" value="<?php echo explode(" ",$result[0]->date_er)[0]; ?>" >
                         </div>
                       </div>
 
