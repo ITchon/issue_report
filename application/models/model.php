@@ -721,7 +721,9 @@ public function disablePermission_Group($key=''){
 
   public function issue_totalD()
   {
-    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE DATE(`date_created`) = CURRENT_DATE()";
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE DATE(`date_created`) = CURRENT_DATE()
+     AND month(`date_created`) = month(now())
+     AND year(`date_created`) = year(now())";
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
@@ -734,7 +736,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_openD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND DATE(`date_created`) = CURRENT_DATE()";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open'
+    AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -751,7 +754,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_closedD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND DATE(`date_created`) = CURRENT_DATE()";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' 
+   AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -768,7 +772,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_workD()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND DATE(`date_created`) = CURRENT_DATE()";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress'
+    AND DATE(`date_created`) = CURRENT_DATE() AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -785,7 +790,7 @@ public function disablePermission_Group($key=''){
 
   public function issue_totalM()
   {
-    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE month(`date_created`) = month(now())";
+    $sql="SELECT COUNT(is_id) as total FROM sys_issue WHERE month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query= $this->db->query($sql);
   $total = $query->result(); 
   if($query){
@@ -800,7 +805,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_openM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' AND month(`date_created`) = month(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Open' 
+   AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -817,7 +823,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_closedM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed' AND month(`date_created`) = month(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Closed'
+    AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){
@@ -834,7 +841,8 @@ public function disablePermission_Group($key=''){
 
  public function issue_workM()
   {
-   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' AND month(`date_created`) = month(now())";
+   $sql="SELECT COUNT(is_id) as total  FROM sys_issue WHERE cur_st = 'Work In Progress' 
+   AND month(`date_created`) = month(now()) AND year(`date_created`) = year(now())";
   $query = $this->db->query($sql); 
   $total = $query->result(); 
   if($query){

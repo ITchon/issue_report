@@ -23,7 +23,7 @@ label{
                 <div class="col-md-12">
                         <div class="form-group">
                         <input type="text" name="mg_id" value="<?php echo $result[0]->mg_id?>" hidden>
-                          <label class="bmd-label-floating"><b>Permission_Group Name</b> </label>
+                          <label class="bmd-label-floating"><b>Name</b> </label>
                           <input type="text" class="form-control" name="name" value="<?php echo $result[0]->name?>" required>
                         </div>
                       </div>

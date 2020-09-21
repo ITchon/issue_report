@@ -39,6 +39,10 @@ class Report extends CI_Controller {
       $closedY = $this->model->issue_closedY();
       $workY = $this->model->issue_workY();
 
+      if($totalY == false){
+        $totalY = array(["total"=> 0]);
+      }
+
       $data['maxvalue'] =  (max(array_column($totalY, 'total')));
       $data['total'] = json_encode($this->model_issue->sort_month($totalY));
       $data['open'] = json_encode($this->model_issue->sort_month($openY));

@@ -34,7 +34,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 <body class="login-page sidebar-collapse">
 
-  <div class="page-header header-filter" style="background-image: url('<?php echo base_url()?>/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+  <div class="page-header header-filter" style="background-image: url('<?php echo base_url()?>/assets/img/test1.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">

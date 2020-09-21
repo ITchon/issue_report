@@ -57,12 +57,12 @@ img {vertical-align: middle;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
+  from {opacity: 0.5} 
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: 0.5} 
   to {opacity: 1}
 }
 
@@ -89,17 +89,17 @@ img {vertical-align: middle;}
                   <br>
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
-  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/5.jpg" alt="Harry Jones" >
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/9.jpg" alt="Harry Jones" >
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 3</div>
-  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/6.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/10.jpg" alt="Harry Jones">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 3</div>
-  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/7.jpg" alt="Harry Jones">
+  <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/11.jpg" alt="Harry Jones">
 </div>
 
 </div>
@@ -326,7 +326,7 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}    
   slides[slideIndex-1].style.display = "block";  
-  setTimeout(showSlides, 5000); // Change image every 2 seconds
+  setTimeout(showSlides, 5000);
 }
 </script>
 
