@@ -99,7 +99,6 @@ img {vertical-align: middle;}
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
   <img class="img-circle responsive" width="830" height="400" src="<?php echo base_url() ?>./upload/9.jpg" alt="Harry Jones" >
-
 </div>
 
 <div class="mySlides fade">
