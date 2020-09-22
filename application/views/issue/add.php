@@ -185,7 +185,8 @@ label{
                           <label class=""><b> Attach file</b></label>
                         </div>
                       </div>
-                      <div multiple name="file" action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
+                      <div multiple name="file" action="<?= base_url()?>issue/save_edit" class="dropzone" id="my-awesome-dropzone">
+                      <input type="file" name="file" hidden></div>
                       
     </div> 
 

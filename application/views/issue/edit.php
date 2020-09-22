@@ -21,7 +21,7 @@ label{
                 </div>
               
 <hr>
-            <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
+            <form id="my-awesome-dropzone" class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
   <input type="text" hidden name="is_id" value="<?php echo $result[0]->is_id ?>">
                   <?php echo $this->session->flashdata("error"); ?>
 

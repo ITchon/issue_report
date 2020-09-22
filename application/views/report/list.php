@@ -72,9 +72,9 @@
                echo "<td class=".$color2.">".$r->cur_st."</td>";
                echo "<td>".$r->is_des."</td>";
                echo "<td class=".$color.">"."<b>".$r->priority."</b>"."</td>";
-               echo "<td>".$r->date_identified."</td>";
-               echo "<td>".$r->date_er."</td>";
-               echo "<td>".$r->date_updated."</td>";
+               echo "<td>".explode(" ",$r->date_identified)[0]."</td>";
+               echo "<td>".explode(" ",$r->date_er)[0]."</td>";
+               echo "<td>".explode(" ",$r->date_updated)[0]."</td>";
 
                 ?> 
 

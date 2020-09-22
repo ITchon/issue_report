@@ -164,9 +164,9 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
  }
 
 
- function insert_img($file,$c)
+ function insert_img($is_id,$file,$c)
  {
-  $is_id = $this->session->userdata('is_id');
+  // $is_id = $this->session->userdata('is_id');
   $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id', '$file','$c','1')";
     $query = $this->db->query($sql);  
    if($query){

@@ -92,7 +92,7 @@ class Issue extends CI_Controller {
     $uploaded = $this->upload->data();
     $code = array('filename'  => $uploaded['file_name']);
   foreach ($code as $c) {
-  $this->model->insert_img($file,$c);
+  $this->model->insert_img($last_id,$file,$c);
    }
  }
           redirect('issue/add','refresh');   
@@ -151,6 +151,7 @@ class Issue extends CI_Controller {
       $file = $_FILES['file']['name'];
       $fname = $this->session->userdata('firstname');
 
+
       $config['upload_path'] = 'uploads/'; 
       $config['allowed_types'] = '*';
       $config['max_size'] = '102400'; // max_size in kb
@@ -177,7 +178,7 @@ class Issue extends CI_Controller {
   $uploaded = $this->upload->data();
   $code = array('filename'  => $uploaded['file_name']);
 foreach ($code as $c) {
-$this->model_issue->insert_img($file,$c);
+$this->model_issue->insert_img($is_id,$file,$c);
  }
 }
         redirect('issue/manage','refresh');   
