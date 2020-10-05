@@ -22,6 +22,25 @@ class Model_ajax extends CI_Model
 
      return $output;
     }
+    function insert_issue($data)
+    {
+    //  $sql ="INSERT INTO sys_issue (pj_id,plant,date_identified,is_des,priority,owner_id,date_er,
+    //  esc_req,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
+    //  date_updated,delete_flag) 
+    //  VALUES ( '$data[pj_id]', '$data[plant]', '$data[date_iden]', N'$data[is_des]', '$data[priority]','$data[owner_id]','$data[date_er]'
+    //  ,'$data[er]',N'$data[imp_sum]',N'$data[act_step]','$data[is_type]','$data[cur_st]',N'$data[frr]',N'$data[note]',CURRENT_TIMESTAMP
+    //  ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
+    $sql ="INSERT INTO sys_issue (plant,note) 
+     VALUES ( '$data[plant]', '$data[note]')";
+       $query = $this->db->query($sql);  
+       $last_id = $this->db->insert_id();
+      if($query){
+        return $last_id;
+      }
+      else{
+        return false;
+      }
+    }
 
 }
 

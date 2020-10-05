@@ -23,10 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// $root = "http://".$_SERVER['HTTP_HOST'];
-// $root .= dirname($_SERVER['SCRIPT_NAME']);
-// $config['base_url'] = $root;
-$config['base_url'] = 'http://192.168.161.207/issue_report/';
+$root = "http://".$_SERVER['HTTP_HOST'];
+$root .= dirname($_SERVER['SCRIPT_NAME']);
+$config['base_url'] = $root;
+// $config['base_url'] = 'http://192.168.161.207/issue_report/';
 
 /*
 |--------------------------------------------------------------------------

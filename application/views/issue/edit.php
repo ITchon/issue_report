@@ -4,9 +4,26 @@ label{
   font-size:16px; 
    font-weight: bold;
 }
+		.dropzone {
+			background: #fff;
+			border: 2px dashed #ddd;
+			border-radius: 5px;
+		}
+
+		.dz-message {
+			color: #999;
+		}
+
+		.dz-message:hover {
+			color: #464646;
+		}
+
+		.dz-message h3 {
+			font-size: 200%;
+			margin-bottom: 15px;
+		}
 
 </style>
-
 
 
   <div class="content">
@@ -16,13 +33,13 @@ label{
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header card-header-rose">
-                  <h2 class="card-title ">Add Issue</h2>
+                  <h2 class="card-title ">Edit Issue</h2>
                   <p class="card-category"><h1></h1></p>
                 </div>
               
 <hr>
             <form id="my-awesome-dropzone" class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
-  <input type="text" hidden name="is_id" value="<?php echo $result[0]->is_id ?>">
+  <input type="text" hidden name="is_id" id="is_id" value="<?php echo $result[0]->is_id ?>">
                   <?php echo $this->session->flashdata("error"); ?>
 
                   <div class="form-group">
@@ -183,15 +200,21 @@ label{
                         </div>
                       </div>
                   
-       <div class='content'>
+                      <div class='content'>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class=""><b> Attach file</b></label>
                         </div>
                       </div>
-                      <div multiple name="file" action="<?= base_url()?>issue/save_edit" class="dropzone" id="my-awesome-dropzone">
-                      <input type="file" name="file" hidden>
-                      </div>
+                      <div id="file" class="dropzone" name="file" action="<?= base_url()?>issue/save_edit">
+			<div class="dz-message">
+      <div class="fallback">
+    </div>
+				<h3>Drop files here</h3> or <strong>click</strong> to upload
+			</div>
+		</div>
+                      
+    </div> 
                       <br>
 
                       <div class="col-md-12">
@@ -243,8 +266,7 @@ label{
     <div class="form-group">
                       <button class="btn btn-primary btn-block" type="submit" id='uploadfiles' value='Upload Files'>Sub Pay Sub Ta</button>
                     </div>
-              
-                  
+                
                 </form>
                 
             </div>
@@ -285,40 +307,72 @@ if(button.value == 'delete all'){
 </script>
       
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script>
-        $(document).ready(function() {
-    $('.select2').select2();
-});
-      </script>
-    <script type='text/javascript'>
-  
-  Dropzone.autoDiscover = false;
-  var myDropzone = new Dropzone(".dropzone", { 
+
+	<script>
+		Dropzone.autoDiscover = false;
+
+		var myDropzone = new Dropzone(".dropzone", {
       autoProcessQueue: false,
-      parallelUploads: 10 // Number of files process at a time (default 2)
-  });
- 
-  $('#uploadfiles').click(function(){
-      myDropzone.processQueue();
-  });
-  
-  </script>
-
-
-      <!--<script type="text/javascript">
-    $("#form").submit(function(){
-        $.ajax({
-           url: "<?php echo base_url(); ?>user/insert",
-           type: 'POST',
-           data: $("#form").serialize(),
-           success: function() {
-            alert('Success');
-           }
-        });
-
-
+			 url: "<?php echo site_url("issue/upload") ?>",
+			addRemoveLinks: true,
+			parallelUploads: 10,
+			removedfile: function(file) {
+				var name = file.name;
+        //del in database
+				$.ajax({
+					type: "post",
+					url: "<?php echo site_url("issue/remove") ?>",
+					data: { file: name },
+					dataType: 'html'
+				});
+        alert(name);
+				// remove the thumbnail
+				var previewElement;
+				return (previewElement = file.previewElement) != null ? (previewElement.parentNode.removeChild(file.previewElement)) : (void 0);
+			},
+			init: function() {
+				var me = this;
+				$.get("<?php echo site_url("issue/list_files") ?>", function(data) {
+					// if any files already in server show all here
+					if (data.length > 0) {
+						$.each(data, function(key, value) {
+							var mockFile = value;
+            
+							me.emit("addedfile", mockFile);
+							me.emit("thumbnail", mockFile, "<?php echo base_url(); ?>uploads/" + value.name);
+							me.emit("complete", mockFile);
+						});
+					}
+				});
+			}
     });
 
+	</script>
 
-</script> -->
+
+      <script type="text/javascript">
+    $('#uploadfiles').click(function(){
+      myDropzone.processQueue();
+      var is_id = $('#is_id').val();
+      var index;
+      var array=[];
+    for (index = 0; index < myDropzone.files.length; ++index) {
+        array.push(myDropzone.files[index].name);
+    };
+      $.ajax({
+					type: "post",
+					url: "<?php echo site_url("issue/save_edit") ?>",
+					data: { 
+            file: array,
+            is_id : is_id 
+            },
+					dataType: 'html',
+        success : function(data) {   
+            alert('success');
+        },
+      });
+  });
+
+
+</script>
 
