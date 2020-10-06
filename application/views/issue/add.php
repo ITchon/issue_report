@@ -81,14 +81,11 @@ label{
                     
                     <div class="form-group">
                       <label for="email-2" class="col-sm-6 col-md-12 control-label" ><b>Assigned To Owner</b><font color="red" size="1"> *This column is  the information.</font></label>      
-   
+          
                       <div class="col-sm-6 col-md-6">
                    <select name="owner_id" class="form-control select2"  >
                     <option value=""> - - - Select Owner - - - </option>
-                    <?php
-               
-           
-                    foreach ($result_own as $r) {
+                    <?php foreach ($result_own as $r) {
                         ?>
                        <option value="<?php echo $r->owner_id ?>"><?php echo $r->owner_name ?></option>
                   <?php
@@ -185,8 +182,7 @@ label{
                           <label class=""><b> Attach file</b></label>
                         </div>
                       </div>
-                      <div multiple name="file" action="<?= base_url()?>issue/save_edit" class="dropzone" id="my-awesome-dropzone">
-                      <input type="file" name="file" hidden></div>
+                      <div multiple name="file" action="<?= base_url()?>issue/upload" class="dropzone" id="my-awesome-dropzone"></div>
                       
     </div> 
 
@@ -210,7 +206,11 @@ label{
       
       
              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-       
+            <script>
+        $(document).ready(function() {
+    $('.select2').select2();
+});
+      </script>
     <script type='text/javascript'>
   
   Dropzone.autoDiscover = false;

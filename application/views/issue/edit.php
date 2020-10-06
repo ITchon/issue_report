@@ -7,8 +7,6 @@ label{
 
 </style>
 
-
-
   <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -21,7 +19,7 @@ label{
                 </div>
               
 <hr>
-            <form id="my-awesome-dropzone" class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
+            <form id="my-awesome-dropzone class="table form form-horizontal container" action="<?= base_url()?>issue/save_edit" method="post" enctype="multipart/form-data" data-toggle="validator">
   <input type="text" hidden name="is_id" value="<?php echo $result[0]->is_id ?>">
                   <?php echo $this->session->flashdata("error"); ?>
 
@@ -90,17 +88,15 @@ label{
                    <select id="ato" name="owner_id" class="form-control select2"  >
                    <option disabled value="">- - - Select Owner- - - </option>
 
-                    <?php foreach ($result_own as $r){
+                    <?php foreach ($result_own as $r) {
                         ?>
-                       <option value="<?php echo $r->owner_id?>"><?php echo $r->owner_name ?></option>
-
+                       <option value="<?php echo $r->owner_id ?>"><?php echo $r->owner_name ?></option>
                   <?php
                    } ?>
                    </select>
 
                     </div>
                     </div>
-
                     
 
                     <div class="col-md-12">

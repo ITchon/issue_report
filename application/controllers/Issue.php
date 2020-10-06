@@ -92,7 +92,7 @@ class Issue extends CI_Controller {
     $uploaded = $this->upload->data();
     $code = array('filename'  => $uploaded['file_name']);
   foreach ($code as $c) {
-  $this->model->insert_img($last_id,$file,$c);
+  $this->model->insert_img($file,$c);
    }
  }
           redirect('issue/add','refresh');   
@@ -151,14 +151,13 @@ class Issue extends CI_Controller {
       $file = $_FILES['file']['name'];
       $fname = $this->session->userdata('firstname');
 
-
       $config['upload_path'] = 'uploads/'; 
       $config['allowed_types'] = '*';
       $config['max_size'] = '102400'; // max_size in kb
       $config['encrypt_name'] = TRUE;
 
         if($plant != null){
-        $this->model_issue->save_issue($pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname);
+        $this->model_issue->save_issue($is_id,$pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname);
           if($this->input->post('chk_uid') != null){
             $img_id =  $this->input->post('chk_uid');
             foreach($img_id as $img){
@@ -172,13 +171,16 @@ class Issue extends CI_Controller {
         $this->upload->initialize($config);
 
         if(!$this->upload->do_upload('file')) {
-
+          echo $is_id;
+  die();
         redirect('issue/manage','refresh');   
 }else{
+  echo $is_id;
+  die();
   $uploaded = $this->upload->data();
   $code = array('filename'  => $uploaded['file_name']);
 foreach ($code as $c) {
-$this->model_issue->insert_img($is_id,$file,$c);
+$this->model_issue->insert_img($file,$c);
  }
 }
         redirect('issue/manage','refresh');   

@@ -137,9 +137,10 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
 
 
 
-  public function save_issue($pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname)
+  public function save_issue($is_id,$pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname)
  {
-   $sql1 ="UPDATE sys_issue SET             
+   $sql1 ="UPDATE sys_issue SET 
+            pj_id = '$pj_id',            
             plant = '$plant',
             date_identified = '$date_iden',
             is_des = N'$is_des',
@@ -158,15 +159,15 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
             date_updated = CURRENT_TIMESTAMP,
             delete_flag = 1,
             date_deleted = ''
-            WHERE pj_id = $pj_id";
+            WHERE is_id = $is_id";
   $exc_user = $this->db->query($sql1);
   if ($exc_user ){ return true; }else{ return false; }
  }
 
 
- function insert_img($is_id,$file,$c)
+ function insert_img($file,$c)
  {
-  // $is_id = $this->session->userdata('is_id');
+  $is_id = $this->session->userdata('is_id');
   $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id', '$file','$c','1')";
     $query = $this->db->query($sql);  
    if($query){
