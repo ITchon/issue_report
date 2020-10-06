@@ -57,6 +57,81 @@ public function __construct()
         $this->model->delete();
         echo json_encode(array("status" => TRUE));
     }
+
+    public function insert_issue(){  
+  
+        // $config['upload_path'] = 'uploads/'; 
+        // $config['allowed_types'] = '*';
+        // $config['max_size'] = '102400'; // max_size in kb
+        // $config['encrypt_name'] = TRUE;
+        // $config['overwrite'] = TRUE;
+        
+    
+    
+          
+          // $plant = $this->input->post('plant');
+          // $pj_id = $this->input->post('pj_id');
+          // $date_iden = $this->input->post('date_iden');
+          // $is_des = $this->input->post('is_des');
+          // $priority = $this->input->post('priority');
+          // $owner_id = $this->input->post('owner_id');
+          // $date_er = $this->input->post('date_er');
+          // $er = $this->input->post('er');
+          // $imp_sum = $this->input->post('imp_sum');
+          // $act_step = $this->input->post('act_step');
+          // $is_type = $this->input->post('is_type');
+          // $cur_st = $this->input->post('cur_st');
+          // $frr = $this->input->post('frr');
+          // $note = $this->input->post('note');
+    
+    
+           $data = array(
+              'plant' => $this->input->post('plant'),
+            //  'pj_id' => $this->input->post('pj_id'),
+            //  'date_iden' => $this->input->post('date_iden'),
+            //  'is_des' => $this->input->post('is_des'),
+            //  'priority' => $this->input->post('priority'),
+            //  'owner_id' => $this->input->post('owner_id'),
+            //  'date_er' => $this->input->post('date_er'),
+            //  'er' => $this->input->post('er'),
+            //  'imp_sum' => $this->input->post('imp_sum'),
+            //  'act_step' => $this->input->post('act_step'),
+            //  'is_type' => $this->input->post('is_type'),
+            //  'cur_st' => $this->input->post('cur_st'),
+            //  'frr' => $this->input->post('frr'),
+             'note' => $this->input->post('note')
+           );
+    
+          echo "<script>";
+          echo "console.log(data)";
+          echo "</script>";
+    
+    
+            if($plant != null){
+              $last_id = $this->model_ajax->insert_issue($data);
+              $this->session->set_userdata('is_id',$last_id);
+            }
+            
+            if($data != false){
+              echo json_encode(array(
+              "statusCode"=>200
+          ));
+          }else{
+              echo json_encode(array(
+              "statusCode"=>100
+              
+          ));
+          }
+    
+      
+          
+          
+    
+          redirect('issue/add','refresh');   
+        
+        
+     
+      }
  
  
  

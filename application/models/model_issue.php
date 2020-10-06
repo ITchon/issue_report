@@ -82,7 +82,7 @@ public function delete_project($id)
   sis.date_updated AS date_updated,
   sis.delete_flag
     FROM sys_issue  AS sis 
-    inner join sys_projects as sj on sj.pj_id = sis.pj_id 
+    left join sys_projects as sj on sj.pj_id = sis.pj_id 
      where sis.delete_flag != 0 ORDER BY sis.is_id  ASC";
           $query = $this->db->query($sql);  
          $data = $query->result(); 
@@ -139,9 +139,9 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
 
   public function save_issue($is_id,$pj_id,$plant,$date_iden,$is_des,$priority,$owner_id,$date_er,$er,$imp_sum,$act_step,$is_type,$cur_st,$frr,$note,$fname)
  {
-   $sql1 ="UPDATE sys_issue SET 
-            pj_id = '$pj_id',            
+   $sql1 ="UPDATE sys_issue SET             
             plant = '$plant',
+            pj_id = '$pj_id',
             date_identified = '$date_iden',
             is_des = N'$is_des',
             priority = '$priority',
@@ -161,14 +161,49 @@ where sis.delete_flag != 0 AND sis.is_id = $id ";
             date_deleted = ''
             WHERE is_id = $is_id";
   $exc_user = $this->db->query($sql1);
+  $this->session->set_userdata('save_id',$is_id);
   if ($exc_user ){ return true; }else{ return false; }
  }
-
-
- function insert_img($file,$c)
+ 
+ function insert_issue($data)
  {
-  $is_id = $this->session->userdata('is_id');
-  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id', '$file','$c','1')";
+  $sql ="INSERT INTO sys_issue (pj_id,plant,date_identified,is_des,priority,owner_id,date_er,
+  esc_req,imp_sum,act_step,is_type,cur_st,final_rs,is_note,entered_by,date_created,
+  date_updated,delete_flag) 
+  VALUES ( '$data[pj_id]', '$data[plant]', '$data[date_iden]', N'$data[is_des]', '$data[priority]','$data[owner_id]','$data[date_er]'
+  ,'$data[er]',N'$data[imp_sum]',N'$data[act_step]','$data[is_type]','$data[cur_st]',N'$data[frr]',N'$data[note]',CURRENT_TIMESTAMP
+  ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
+    $query = $this->db->query($sql);  
+    $last_id = $this->db->insert_id();
+    $this->session->set_userdata('is_id','');
+   if($query){
+     return $last_id;
+   }
+   else{
+     return false;
+   }
+ }
+ 
+
+
+ function insert_img($is_id,$file,$c)
+ {   
+  
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id','$file','$c','1')";
+    $query = $this->db->query($sql);  
+   if($query){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+ 
+
+
+ function update_img($is_id,$file)
+ {   
+  $sql ="UPDATE issue_img SET is_id = '$is_id' WHERE IN($file)";
     $query = $this->db->query($sql);  
    if($query){
      return true;

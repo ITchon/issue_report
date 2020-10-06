@@ -316,9 +316,10 @@ if($old_order > $order){
   VALUES ( '$pj_id', '$plant', '$date_iden', N'$is_des', '$priority','$owner_id','$date_er'
   ,'$er',N'$imp_sum',N'$act_step','$is_type','$cur_st',N'$frr',N'$note',N'$fname'
   ,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'1')";
+  echo $sql;
     $query = $this->db->query($sql);  
     $last_id = $this->db->insert_id();
-    $this->session->set_userdata('is_id',$last_id);
+     $this->session->set_userdata('is_id',$last_id);
    if($query){
      return $last_id;
    }
@@ -330,8 +331,8 @@ if($old_order > $order){
 
  function insert_img($file,$c)
  {
-  $is_id = $this->session->userdata('is_id');
-  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id'+1, '$file','$c','1')";
+   $is_id = $this->session->userdata('is_id');
+  $sql ="INSERT INTO issue_img (is_id,file_n,file_code,delete_flag) VALUES ('$is_id', '$file','$c','1')";
     $query = $this->db->query($sql);  
    if($query){
      return true;
