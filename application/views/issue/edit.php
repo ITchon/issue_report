@@ -326,7 +326,6 @@ if(button.value == 'delete all'){
           data: { file: name },
           dataType: 'html'
         });
-        alert(name);
         // remove the thumbnail
         var previewElement;
         return (previewElement = file.previewElement) != null ? (previewElement.parentNode.removeChild(file.previewElement)) : (void 0);
@@ -369,7 +368,6 @@ if(button.value == 'delete all'){
             },
           dataType: 'html',
         success : function(data) {   
-            alert('success');
         },
       });
   });
