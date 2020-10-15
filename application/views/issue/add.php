@@ -254,6 +254,7 @@ label{
     Dropzone.autoDiscover = false;
 
     var myDropzone = new Dropzone(".dropzone", {
+      acceptedFiles: ".jpeg,.jpg,.png",
       autoProcessQueue: false,
       url: "<?php echo site_url("issue/upload") ?>",
       addRemoveLinks: true,

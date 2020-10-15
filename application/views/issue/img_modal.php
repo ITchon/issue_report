@@ -25,7 +25,7 @@
             </div>
             <div class="modal-body form text-center">
          
-                                <div id="show_data" ></div>
+                                <div id="show_data"></div>
           
          
         </div><!-- /.modal-content -->
