@@ -360,7 +360,6 @@ label{
           'note':note
         },
         success : function(data) {   
-            alert('success');
         }
     });
   };
